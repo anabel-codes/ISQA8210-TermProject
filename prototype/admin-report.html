@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Search report | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/tom-select.css">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="report">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <p class="print-head" id="printHead"></p>
+      <section class="card r-bar">
+        <div class="r-mon">
+          <button type="button" class="rbtn" id="rPrev" aria-label="Previous month"><i data-ic="chevR" class="rev"></i></button>
+          <label class="t-sel r-sel"><i data-ic="cal"></i><span class="sr">Report month</span><select id="rMonth"></select></label>
+          <button type="button" class="rbtn" id="rNext" aria-label="Next month"><i data-ic="chevR"></i></button>
+        </div>
+        <div class="r-tt"><h2 id="rTitle"></h2><small id="rRange"></small></div>
+        <div class="r-acts"><button type="button" class="pbtn ghost" id="rCsv"><i data-ic="download"></i>Download CSV</button><button type="button" class="pbtn dark" id="rPrint"><i data-ic="printer"></i>Print</button></div>
+      </section>
+      <div class="kpis four" id="rKpis"></div>
+      <div class="rg">
+        <section class="card hb-card rv"><div class="c-head"><div><h2>By home type</h2><small class="c-sub" id="rTypeSub"></small></div></div><ul class="hb" id="rType"></ul></section>
+        <section class="card hb-card rv"><div class="c-head"><div><h2>By neighborhood</h2><small class="c-sub" id="rHoodSub"></small></div></div><ul class="hb" id="rHood"></ul></section>
+        <section class="card r-def rv"><div class="c-head"><h2>What counts</h2></div>
+          <p><b>A completed search</b> is one where the visitor chose at least one filter (home type, neighborhood or price range), pressed <b>Show homes</b>, and the results page loaded. A search can use one, two or all three filters, so each breakdown counts the searches that used that filter.</p>
+          <p class="muted">Searches left out this month: <b id="rAband">0</b>. These had no filter chosen, were never submitted, or did not load.</p>
+          <p class="muted sm">Definition agreed with Paul (decision D5).</p></section>
+        <section class="card hb-card r-band rv"><div class="c-head"><div><h2>By price range</h2><small class="c-sub" id="rBandSub"></small></div></div><ul class="hb" id="rBand"></ul></section>
+        <section class="card r-daily rv"><div class="c-head"><div><h2>Completed searches by day</h2><small class="c-sub" id="rDailySub"></small></div></div><div class="dcs" id="rDaily" role="img" aria-label="Completed searches for each day of the month"></div></section>
+        <section class="card r-map rv"><div class="c-head"><div><h2>Searches on the map</h2><small class="c-sub">Bigger circles mean more searches used that neighborhood. Click one to find it in the list.</small></div></div><div class="map" id="rMap"></div></section>
+      </div>
+    </main>
+    <p class="sample-note pg-note">Sample data. The real report counts rows in the search log for the month you pick.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/tom-select.complete.min.js" defer></script>
+<script src="vendor/leaflet/leaflet.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

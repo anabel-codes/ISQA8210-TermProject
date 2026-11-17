@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/tom-select.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="dashboard">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <div class="dg">
+
+        <!-- goals -->
+        <section class="card c-goals rv">
+          <div class="c-head"><h2>Sales at a glance</h2><div class="c-tools"><span class="pchip" data-period-label></span><a class="rbtn" href="admin-listings.html" aria-label="Open listings"><i data-ic="arrowUR"></i></a></div></div>
+          <div class="goals">
+            <div class="g-col"><small>Homes sold</small><b><span data-k="soldValue">$0</span></b><em data-k="soldCountTxt"></em></div>
+            <div class="g-col"><small>Under contract (pending)</small><b><span data-k="pendValue">$0</span></b><em data-k="pendCountTxt"></em></div>
+          </div>
+          <div class="gbar"><i class="gbar-fill" id="gFill" tabindex="0"></i><i class="gbar-rest" tabindex="0"></i></div>
+          <p class="c-foot" data-k="goalFoot"></p>
+        </section>
+
+        <!-- report promo -->
+        <section class="card c-promo rv">
+          <div class="promo-tx">
+            <span class="eyebrow-a">Monthly report</span>
+            <h2>What visitors searched for</h2>
+            <p>See how often people searched each home type, neighborhood and price range, for any month you pick.</p>
+            <a class="pbtn dark" href="admin-report.html">Open the report <i data-ic="arrow"></i></a>
+          </div>
+          <div class="promo-art" aria-hidden="true">
+            <svg class="rays" viewBox="0 0 240 240"><g id="rays"></g></svg>
+            <div class="orbit"><span class="bub b-main"><i data-ic="bars"></i></span><span class="bub b-sm" style="--a:-150deg"><i data-ic="home"></i></span><span class="bub b-sm" style="--a:150deg"><i data-ic="pin"></i></span><span class="bub b-sm" style="--a:90deg"><i data-ic="tag"></i></span></div>
+          </div>
+        </section>
+
+        <!-- two gauges -->
+        <div class="stack">
+          <section class="card c-gauge rv">
+            <div class="c-head"><h2>Homes sold</h2><a class="rbtn" href="admin-listings.html?status=Sold" aria-label="Open sold listings"><i data-ic="arrowUR"></i></a></div>
+            <div class="gauge-row"><div><small data-period-label></small><b data-k="soldCount">0</b><em class="g-cmp" data-k="soldCmp"></em></div><div class="gauge" id="gSold"></div></div>
+          </section>
+          <section class="card c-gauge rv">
+            <div class="c-head"><h2>Visitor searches</h2><a class="rbtn" href="admin-report.html" aria-label="Open the search report"><i data-ic="arrowUR"></i></a></div>
+            <div class="gauge-row"><div><small data-period-label></small><b data-k="searches">0</b><em class="g-cmp" data-k="searchCmp"></em></div><div class="gauge" id="gSearch"></div></div>
+          </section>
+        </div>
+
+        <!-- featured -->
+        <section class="card c-feat rv" id="featCard">
+          <div class="c-head"><h2>Featured this week</h2><a class="rbtn light" href="admin-featured.html" aria-label="Change the featured home"><i data-ic="arrowUR"></i></a></div>
+          <h3 id="featName"></h3>
+          <div class="feat-st"><div><small>Days featured</small><b data-k="featDays">0</b></div><div><small>Searches in its area</small><b data-k="featSearch">0</b></div></div>
+          <div class="feat-art" id="featArt" aria-hidden="true"></div>
+          <a class="pbtn light sm" href="admin-featured.html">Change featured</a>
+        </section>
+
+        <!-- search activity bars -->
+        <section class="card c-chart rv">
+          <div class="c-head"><h2>Search activity</h2><div class="c-tools"><span class="pchip" data-period-label></span><a class="rbtn" href="admin-report.html" aria-label="Open the search report"><i data-ic="arrowUR"></i></a></div></div>
+          <div class="ch-sum"><small data-k="chartSub"></small><b data-k="searches2">0</b><span class="delta" data-k="chartDelta"></span><p class="ch-sel" data-k="chSel" aria-live="polite"></p></div>
+          <div class="bars" id="bars" role="img" aria-label="Visitor searches over the selected period"></div>
+          <div class="ch-legend"><span><i class="lg-cur"></i>Current</span><span><i class="lg-hi"></i>Above average</span><span><i class="lg-lo"></i>Below average</span><span><i class="lg-prev"></i>Same time last period</span></div>
+        </section>
+
+        <!-- top searches -->
+        <section class="card c-top rv">
+          <div class="c-head"><h2>Top searches</h2><div class="seg" id="topSeg" role="tablist" aria-label="Group searches by"><button role="tab" aria-selected="true" data-g="type">Type</button><button role="tab" aria-selected="false" data-g="hood">Area</button><button role="tab" aria-selected="false" data-g="band">Price</button></div></div>
+          <ol class="top-list" id="topList"></ol>
+        </section>
+
+        <!-- listings by status -->
+        <section class="card c-donut rv">
+          <div class="c-head"><h2>Listings by status</h2><a class="rbtn" href="admin-listings.html" aria-label="Open listings"><i data-ic="arrowUR"></i></a></div>
+          <div class="donut-wrap"><div class="donut" id="donut"></div><ul class="donut-key" id="donutKey"></ul></div>
+        </section>
+
+        <!-- recent activity -->
+        <section class="card c-act rv">
+          <div class="c-head"><h2>Recent activity</h2><div class="c-tools"><div class="seg" id="actSeg" role="tablist" aria-label="Show changes by"><button role="tab" aria-selected="true" data-w="">All</button><button role="tab" aria-selected="false" data-w="Carlos">Carlos</button><button role="tab" aria-selected="false" data-w="Janet">Janet</button></div><a class="rbtn" href="admin-activity.html" aria-label="Open the activity log"><i data-ic="arrowUR"></i></a></div></div>
+          <ul class="act-list" id="actList"></ul>
+        </section>
+
+        <!-- listings table -->
+        <section class="card c-table rv">
+          <div class="tbl-tools">
+            <label class="t-search"><i data-ic="search"></i><span class="sr">Search listings</span><input id="tSearch" data-search-target type="search" placeholder="Search by address"></label>
+            <label class="t-sel"><i data-ic="map"></i><span class="sr">Neighborhood</span><select id="tHood"><option value="">Neighborhood</option></select></label>
+            <label class="t-sel"><i data-ic="home"></i><span class="sr">Home type</span><select id="tType"><option value="">Home type</option></select></label>
+            <label class="t-sel"><i data-ic="tag"></i><span class="sr">Status</span><select id="tStatus"><option value="">Status</option><option>Available</option><option>Pending</option><option>Sold</option></select></label>
+            <label class="t-sel"><i data-ic="calc"></i><span class="sr">Price range</span><select id="tBand"><option value="">Price</option></select></label>
+            <button class="rbtn" id="tReset" type="button" aria-label="Clear filters" title="Clear filters"><i data-ic="close"></i></button>
+            <a class="rbtn" href="admin-listings.html" aria-label="Open all listings" title="Open all listings"><i data-ic="arrowUR"></i></a>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th class="ck"><input type="checkbox" id="tAll" aria-label="Select all listings"></th><th>Property</th><th>Home type</th><th>Neighborhood</th><th>Price</th><th>Listed</th><th>Status</th><th class="ac">Action</th></tr></thead>
+              <tbody id="tBody"></tbody>
+            </table>
+          </div>
+          <div class="tbl-pager">
+            <p class="tbl-info" id="tInfo" aria-live="polite"></p>
+            <label class="t-sel t-per"><i data-ic="list"></i><span class="sr">Rows per page</span><select id="tPer"><option value="5">5 per page</option><option value="10" selected>10 per page</option><option value="25">25 per page</option><option value="50">50 per page</option></select></label>
+            <nav class="pages" id="tPages" aria-label="Table pages"></nav>
+          </div>
+          <p class="tbl-foot" id="tFoot"></p>
+        </section>
+
+      </div>
+      <p class="sample-note">Figures on this page are sample data. The real dashboard reads them from the listings, search log and activity log.</p>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/tom-select.complete.min.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

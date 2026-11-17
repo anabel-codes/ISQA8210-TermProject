@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact | CK Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main" data-page="contact">
+
+<section class="page-hero">
+  <div class="hero-bg" aria-hidden="true"><div class="glow"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="sky" id="sky"></div></div>
+  <div class="wrap">
+    <nav class="crumbs fade-up" aria-label="Breadcrumb"><a href="index.html"><i data-ic="home"></i>Home</a><i data-ic="chevR" class="sep"></i><span aria-current="page">Contact</span></nav>
+    <h1 id="pageTitle">Write to <em>the CK office.</em></h1>
+    <p class="fade-up" style="animation-delay:.6s">Ask about buying, selling or a house you saw on the site. Your message goes to the office by email, and Carlos or Janet will reply.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="c-cards" data-stagger>
+    <div class="c-card"><span class="ci2"><i data-ic="building"></i></span><h3>Office</h3><p>CK Real Estate, [Office address], Omaha, NE</p><div class="copy-row"><i data-ic="pin"></i><span>[Office address]</span><button class="copy-btn" data-copy="[Office address], Omaha, NE" data-copy-label="Address" aria-label="Copy address"><i data-ic="copy"></i></button></div></div>
+    <div class="c-card"><span class="ci2"><i data-ic="mail"></i></span><h3>Email</h3><p>For questions about a listing, include its address so Carlos knows which house you mean.</p><div class="copy-row"><i data-ic="mail"></i><span>[Office email]</span><button class="copy-btn" data-copy="[Office email]" data-copy-label="Email address" aria-label="Copy email address"><i data-ic="copy"></i></button></div></div>
+    <div class="c-card"><span class="ci2"><i data-ic="phone"></i></span><h3>Phone</h3><p>[Office hours], Central Time.</p><div class="copy-row"><i data-ic="phone"></i><span>[Office phone]</span><button class="copy-btn" data-copy="[Office phone]" data-copy-label="Phone number" aria-label="Copy phone number"><i data-ic="copy"></i></button></div></div>
+  </div>
+</div>
+
+<section class="sec">
+  <div class="wrap contact-g">
+    <form class="form rv" id="contactForm" novalidate>
+      <h3>Send the office a message</h3>
+      <p class="muted" style="margin-top:-6px">All fields are required unless marked optional. We email your message to the office and don't keep a copy on the site.</p>
+      <div class="row">
+        <label>Full name<input id="cName" name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
+        <label>Email address<input id="cEmail" name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label>
+      </div>
+      <div class="row">
+        <label><span class="lab-top">I'm asking about</span><div class="cs" id="cTopic" data-name="topic" data-required data-placeholder="Choose a topic"></div></label>
+        <label><span class="lab-top">Phone number<span class="hint" id="phoneHint">Optional</span></span><input id="cPhone" name="phone" type="tel" autocomplete="tel" placeholder="(402) 555-0100"></label>
+      </div>
+      <div class="lab"><span class="lab-top">Best way to reach you</span><div class="seg" id="prefSeg"><span class="ink" aria-hidden="true"></span><button type="button" aria-pressed="true" data-v="Email"><i data-ic="mail"></i>Email</button><button type="button" aria-pressed="false" data-v="Phone"><i data-ic="phone"></i>Phone call</button></div></div>
+      <input type="hidden" name="pref" value="Email">
+      <label>Message<textarea id="cMsg" name="msg" required minlength="10" placeholder="Which neighborhood, your price range and when you'd like to move."></textarea></label>
+      <label class="check"><input type="checkbox" id="cConsent" name="consent" required>I agree that CK Real Estate may contact me about this message.</label>
+      <button class="btn btn-accent lg" type="submit">Send message <i data-ic="send" class="mv"></i></button>
+    </form>
+    <div>
+      <p class="eyebrow">Common questions</p>
+      <h2 class="title hl" data-split>Answers before you write</h2>
+      <p class="lead">If your question isn't here, use the form and the office will reply.</p>
+      <div class="faq" id="faq" style="margin-top:24px"></div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="app.js"></script>
+</body>
+</html>

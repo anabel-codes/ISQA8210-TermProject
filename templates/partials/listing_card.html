@@ -1,0 +1,26 @@
+{% load ck humanize %}{# One listing card (US-05). Lifted card, first two photos in a swipe carousel, then specs, price, name and area. #}
+{% with name=l.street_address %}
+<article class="card" style="--i:{{ forloop.counter0|default:0 }}" data-type="{{ l.property_type.name }}">
+  <div class="card-art">
+    <div class="c-track" tabindex="0" aria-label="Photos of {{ name }}. Swipe or use the arrow keys for the next photo.">
+      {% with photos=l.photos.all %}
+      {% if photos %}
+        {% for ph in photos|slice:":2" %}<div class="c-slide"{% if not forloop.first %} tabindex="-1"{% endif %}><img src="{{ ph.image_file.url }}" alt="{{ ph.alternative_text }}" loading="lazy" draggable="false"></div>{% endfor %}
+      {% else %}
+        <div class="c-slide" data-art="{% if l.property_type.name == 'Condominium' %}Apartment{% else %}Villa{% endif %}" data-art-id="{{ l.pk }}" data-art-seed="{{ l.art_seed }}" data-art-sfx="c{{ l.pk }}" data-art-name="{{ name }}" data-art-label="{{ name }}, photo 1 of 2 (drawing)"></div>
+        <div class="c-slide" tabindex="-1" data-art="{% if l.property_type.name == 'Condominium' %}Apartment{% else %}Villa{% endif %}" data-art-id="{{ l.pk }}" data-art-seed="{{ l.art_seed }}" data-art-sfx="d{{ l.pk }}" data-art-off="4211" data-art-name="{{ name }}" data-art-label="{{ name }}, photo 2 of 2 (drawing)"></div>
+      {% endif %}
+      {% endwith %}
+    </div>
+    {% if l.is_featured %}<span class="fbadge">{% icon 'star' %}Featured</span>{% endif %}
+    <span class="ptype">{% icon l.property_type|type_icon %}{{ l.property_type }} · {{ l.current_status }}</span>
+    <div class="c-dots" role="group" aria-label="Choose a photo"><button type="button" data-k="0" aria-label="Show photo 1" aria-current="true"></button><button type="button" data-k="1" aria-label="Show photo 2"></button></div>
+  </div>
+  <div class="card-body">
+    <ul class="specs"><li>{% icon 'bed' %}{{ l.bedrooms }} bed{{ l.bedrooms|pluralize }}</li><li>{% icon 'bath' %}{{ l.bathrooms|baths }} bath{% if l.bathrooms != 1 %}s{% endif %}</li><li>{% icon 'area' %}{{ l.square_feet|intcomma }} sqft</li></ul>
+    <b class="c-price">{{ l.price|money }}</b>
+    <h3 class="c-name">{{ name }}</h3>
+    <p class="addr">{% icon 'pin' %}<span>{{ l.neighborhood }}, {{ l.city }}, {{ l.state }} {{ l.zip_code }}</span></p>
+  </div>
+</article>
+{% endwith %}

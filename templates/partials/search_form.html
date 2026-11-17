@@ -1,0 +1,16 @@
+{% load ck %}{# Hero search: the three filters from the case (US-10 to US-12). Plain GET to /listings/. #}
+<form class="search{{ extra_class }}" id="searchForm" role="search" action="{% url 'public:listing_list' %}" method="get"{% if delay %} style="animation-delay:{{ delay }}"{% endif %}>
+  <div class="fld cs" data-cs data-label="Neighborhood"><select name="hood" aria-label="Neighborhood">
+    <option value="" data-ic="map">Any area</option>
+    {% for h in hoods %}<option value="{{ h.name }}" data-ic="pin"{% if filters.hood == h.name %} selected{% endif %}>{{ h.name }}</option>{% endfor %}
+  </select></div>
+  <div class="fld cs" data-cs data-label="Home type"><select name="type" aria-label="Home type">
+    <option value="" data-ic="grid">Any type</option>
+    {% for t in types %}<option value="{{ t.name }}" data-ic="{{ t|type_icon }}"{% if filters.type == t.name %} selected{% endif %}>{{ t.name }}</option>{% endfor %}
+  </select></div>
+  <div class="fld cs" data-cs data-label="Price range"><select name="band" aria-label="Price range">
+    <option value="" data-ic="tag">Any price</option>
+    {% for b in bands %}<option value="{{ b.pk }}" data-ic="tag"{% if filters.band == b.pk|stringformat:"s" %} selected{% endif %}>{{ b.name }}</option>{% endfor %}
+  </select></div>
+  <button class="btn btn-dark go" type="submit">{% icon 'search' %}Show homes</button>
+</form>

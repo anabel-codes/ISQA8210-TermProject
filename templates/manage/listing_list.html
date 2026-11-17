@@ -1,0 +1,73 @@
+{% extends "base_admin.html" %}
+{% load ck humanize %}
+{% block title %}All listings{% endblock %}
+{% block heading %}All listings{% endblock %}
+{% block subheading %}Every listing, on the site or hidden. Price and status changes come with US-07 and US-08.{% endblock %}
+{% block content %}
+<div class="kpis" id="kpis">
+  <a class="kpi rv{% if tab == 'active' and not filters.status %} on{% endif %}" href="?"><span class="kpi-ic">{% icon 'list' %}</span><span class="kpi-t"><small>Active listings</small><b>{{ counts.active }}</b><em>On the public site</em></span></a>
+  <a class="kpi rv{% if filters.status == 'Available' %} on{% endif %}" href="?status=Available"><span class="kpi-ic">{% icon 'home' %}</span><span class="kpi-t"><small>Available</small><b>{{ counts.available }}</b><em>Open to showings</em></span></a>
+  <a class="kpi rv{% if filters.status == 'Pending' %} on{% endif %}" href="?status=Pending"><span class="kpi-ic">{% icon 'clock' %}</span><span class="kpi-t"><small>Pending</small><b>{{ counts.pending }}</b><em>Under contract</em></span></a>
+  <a class="kpi rv{% if filters.status == 'Sold' %} on{% endif %}" href="?status=Sold"><span class="kpi-ic">{% icon 'check' %}</span><span class="kpi-t"><small>Sold</small><b>{{ counts.sold }}</b><em>Ready to hide</em></span></a>
+  <a class="kpi rv{% if tab == 'hidden' %} on{% endif %}" href="?tab=hidden"><span class="kpi-ic">{% icon 'eyeOff' %}</span><span class="kpi-t"><small>Hidden</small><b>{{ counts.hidden }}</b><em>Kept, not on the site</em></span></a>
+</div>
+<section class="card c-table pg-card">
+  <div class="tbl-top">
+    <div class="seg big" role="tablist" aria-label="Which listings">
+      <a role="tab" href="?" aria-selected="{% if tab == 'active' %}true{% else %}false{% endif %}">On the site <span class="n">{{ counts.active }}</span></a>
+      <a role="tab" href="?tab=hidden" aria-selected="{% if tab == 'hidden' %}true{% else %}false{% endif %}">Hidden <span class="n">{{ counts.hidden }}</span></a>
+    </div>
+    <a class="pbtn acc" href="{% url 'listings_admin:create' %}">{% icon 'plus' %}Add listing</a>
+  </div>
+  <form class="tbl-tools" id="filterForm" method="get" role="search">
+    {% if tab == 'hidden' %}<input type="hidden" name="tab" value="hidden">{% endif %}
+    <label class="t-search">{% icon 'search' %}<span class="sr">Search listings</span><input id="lSearch" name="q" value="{{ filters.q }}" type="search" placeholder="Search by address, area or ZIP"></label>
+    <label class="t-sel">{% icon 'map' %}<span class="sr">Neighborhood</span><select id="lHood" name="hood"><option value="">Neighborhood</option>{% for h in hoods %}<option{% if filters.hood == h.name %} selected{% endif %}>{{ h.name }}</option>{% endfor %}</select></label>
+    <label class="t-sel">{% icon 'home' %}<span class="sr">Home type</span><select id="lType" name="type"><option value="">Home type</option>{% for t in types %}<option{% if filters.type == t.name %} selected{% endif %}>{{ t.name }}</option>{% endfor %}</select></label>
+    <label class="t-sel">{% icon 'tag' %}<span class="sr">Status</span><select id="lStatus" name="status"><option value="">Status</option>{% for s in statuses %}<option{% if filters.status == s %} selected{% endif %}>{{ s }}</option>{% endfor %}</select></label>
+    <label class="t-sel">{% icon 'calc' %}<span class="sr">Price range</span><select id="lBand" name="band"><option value="">Price</option>{% for b in bands %}<option value="{{ b.pk }}"{% if filters.band == b.pk|stringformat:"s" %} selected{% endif %}>{{ b.name }}</option>{% endfor %}</select></label>
+    <label class="t-sel">{% icon 'list' %}<span class="sr">Sort by</span><select id="lSort" name="sort">{% for k, label in sorts %}<option value="{{ k }}"{% if filters.sort == k %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+    <input type="hidden" name="per" value="{{ filters.per }}">
+    <noscript><button class="pbtn ghost" type="submit">Apply</button></noscript>
+    <a class="rbtn" href="?{% if tab == 'hidden' %}tab=hidden{% endif %}" aria-label="Clear filters" title="Clear filters">{% icon 'close' %}</a>
+  </form>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr>
+        <th class="ck"><input type="checkbox" id="tAll" aria-label="Select all listings on this page"></th>
+        <th aria-sort="{{ heads.property.state }}"><a class="th-sort" href="?{{ keep_nosort }}{% if keep_nosort %}&{% endif %}sort={{ heads.property.sort }}">Property</a></th>
+        <th>Home type</th>
+        <th aria-sort="{{ heads.price.state }}"><a class="th-sort" href="?{{ keep_nosort }}{% if keep_nosort %}&{% endif %}sort={{ heads.price.sort }}">Price</a></th>
+        <th>Status</th><th class="cn">Featured</th>
+        <th aria-sort="{{ heads.changed.state }}"><a class="th-sort" href="?{{ keep_nosort }}{% if keep_nosort %}&{% endif %}sort={{ heads.changed.sort }}">Last change</a></th>
+      </tr></thead>
+      <tbody>
+      {% for l in page %}
+        <tr>
+          <td class="ck"><input type="checkbox" class="rck" aria-label="Select {{ l.street_address }}"></td>
+          <td><div class="prop"><span class="thumb" data-thumb="{{ l|thumb_seed }}"></span><span><b>{{ l.street_address }}</b><small>{{ l.neighborhood }}, Omaha, NE {{ l.zip_code }}</small></span></div></td>
+          <td>{{ l.property_type }}</td>
+          <td class="price">{{ l.price|money }}</td>
+          <td><span class="st {{ l.current_status|status_class }}">{{ l.current_status }}</span></td>
+          <td class="cn">{% if l.is_featured %}<span class="star-btn" aria-label="Featured" title="The featured home" aria-pressed="true">{% icon 'star' %}</span>{% else %}<span class="muted-cell" aria-label="Not featured">–</span>{% endif %}</td>
+          <td><span class="who"><span class="av sm{% if l.last_modified_by.username == 'janet' %} j{% endif %}">{{ l.last_modified_by|initials }}</span><span>{{ l.last_modified_by.first_name|default:l.last_modified_by.username|capfirst }}<small class="sub">{{ l.date_updated|naturaltime|capfirst }}</small></span></span></td>
+        </tr>
+      {% empty %}
+        <tr class="empty-row"><td colspan="7">{% if filtered %}No listings match these filters. <a href="?{% if tab == 'hidden' %}tab=hidden{% endif %}">Clear the filters</a>.{% elif tab == 'hidden' %}Nothing is hidden. Sold homes can be hidden once US-09 is built.{% else %}No listings yet. <a href="{% url 'listings_admin:create' %}">Add the first one</a>.{% endif %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="tbl-pager">
+    <p class="tbl-info" aria-live="polite">{% if page.paginator.count %}Showing {{ page.start_index }} to {{ page.end_index }} of {{ page.paginator.count }} listing{{ page.paginator.count|pluralize }}{% else %}No listings to show{% endif %}</p>
+    <form method="get" style="display:contents">{% for k, v in request.GET.items %}{% if k != 'per' and k != 'page' %}<input type="hidden" name="{{ k }}" value="{{ v }}">{% endif %}{% endfor %}
+      <label class="t-sel t-per">{% icon 'list' %}<span class="sr">Rows per page</span><select id="tPer" name="per">{% for n in per_page %}<option value="{{ n }}"{% if filters.per == n %} selected{% endif %}>{{ n }} per page</option>{% endfor %}</select></label>
+    </form>
+    <nav class="pages" aria-label="Table pages">
+      {% if page.has_previous %}<a class="pg" href="?{{ keep }}{% if keep %}&{% endif %}page={{ page.previous_page_number }}" aria-label="Previous page">{% icon 'chevR' 'rev' %}</a>{% else %}<span class="pg" aria-disabled="true">{% icon 'chevR' 'rev' %}</span>{% endif %}
+      {% for n in page.paginator.page_range %}<a class="pg{% if n == page.number %} on{% endif %}" href="?{{ keep }}{% if keep %}&{% endif %}page={{ n }}" aria-label="Page {{ n }}"{% if n == page.number %} aria-current="page"{% endif %}>{{ n }}</a>{% endfor %}
+      {% if page.has_next %}<a class="pg" href="?{{ keep }}{% if keep %}&{% endif %}page={{ page.next_page_number }}" aria-label="Next page">{% icon 'chevR' %}</a>{% else %}<span class="pg" aria-disabled="true">{% icon 'chevR' %}</span>{% endif %}
+    </nav>
+  </div>
+</section>
+{% endblock %}

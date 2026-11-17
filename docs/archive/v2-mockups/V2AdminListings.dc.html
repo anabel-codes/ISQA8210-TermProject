@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin listings v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F4}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="display:flex;flex-wrap:wrap;min-height:1200px;background:#F7F6F4;color:#000000;font-family:'Inter',sans-serif">
+
+<aside style="flex:1 1 240px;max-width:264px;background:#0B0B0B;color:#FFFFFF;padding:24px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;gap:10px;padding:0 8px"><svg width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg><span style="display:flex;flex-direction:column"><span style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1">CK Office</span><span style="font-size:11px;color:#BDBDBD">Admin area</span></span></div>
+<nav aria-label="Admin" style="display:flex;flex-direction:column;gap:4px;font-size:14px">
+<span style="padding:0 12px 6px;font-size:11px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">LISTINGS</span>
+<a href="V2AdminListings.dc.html" aria-current="page" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path></svg>All listings</a>
+<a href="V2AdminAdd.dc.html" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add a listing</a>
+<span style="padding:16px 12px 6px;font-size:11px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">INSIGHT</span>
+<a href="V2AdminReport.dc.html" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3v18h18M8 17V9M13 17V5M18 17v-4"></path></svg>Search report</a>
+<a href="V2AdminReport.dc.html" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 8v4l3 3M3 12a9 9 0 1 0 9-9"></path></svg>Activity log</a>
+<span style="padding:16px 12px 6px;font-size:11px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">SITE</span>
+<a href="V2AdminListings.dc.html" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Broker profile</a>
+<a href="V2AdminListings.dc.html" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0z"></path></svg>Local area links</a>
+</nav>
+<div style="margin-top:auto;border-top:1px solid #2A2A2A;padding:16px 8px 0;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:50%;background:#F3DDE0;color:#75000E;display:inline-flex;align-items:center;justify-content:center;font-weight:600">J</span><span style="display:flex;flex-direction:column;font-size:13px"><span style="font-weight:600">Janet</span><span style="color:#BDBDBD">Administrator</span></span></div>
+<form><button type="button" style="width:100%;min-height:44px;border-radius:999px;border:1px solid #5C5C5C;background:transparent;color:#FFFFFF;font:600 14px 'Inter',sans-serif;cursor:pointer">Log out</button></form>
+</div>
+</aside>
+
+<main style="flex:999 1 640px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">Good morning, Janet</span><h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:52px;line-height:1">Listings</h1></div>
+<a href="V2AdminAdd.dc.html" style="display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add a listing</a>
+</div>
+
+<div role="status" style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:#0B0B0B;color:#FFFFFF;font-size:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F3DDE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Price for 10230 Rockbrook Road changed to $359,000.</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;color:#5C5C5C">{{k.label}}</span><span style="display:inline-flex;width:34px;height:34px;border-radius:10px;background:{{k.tint}};align-items:center;justify-content:center;color:#75000E" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9.5 12 3l9 6.5V20H3z"></path></svg></span></div>
+<span style="font-family:'Instrument Serif',serif;font-size:44px;line-height:1">{{k.value}}</span>
+<span style="font-size:12px;color:#5C5C5C">{{k.note}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="background:#FFFFFF;border-radius:20px;overflow:hidden">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #EDEDED">
+<div role="tablist" aria-label="Listing visibility" style="display:flex;gap:4px;padding:4px;border-radius:999px;background:#F7F6F4">
+<button type="button" role="tab" aria-selected="{{tabActiveSel}}" onClick="{{showActive}}" style="min-height:38px;padding:0 16px;border-radius:999px;border:0;background:{{tabActiveBg}};color:{{tabActiveFg}};font:600 13px 'Inter',sans-serif;cursor:pointer">Active (18)</button>
+<button type="button" role="tab" aria-selected="{{tabHiddenSel}}" onClick="{{showHidden}}" style="min-height:38px;padding:0 16px;border-radius:999px;border:0;background:{{tabHiddenBg}};color:{{tabHiddenFg}};font:600 13px 'Inter',sans-serif;cursor:pointer">Hidden (3)</button>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:999px;background:#F7F6F4;min-width:240px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><label for="v2al-q" style="position:absolute;left:-9999px">Search listings</label><input id="v2al-q" placeholder="Search by address" style="border:0;background:transparent;font:400 14px 'Inter',sans-serif;flex:1"></div>
+</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:14px;min-width:860px">
+<thead><tr style="text-align:left;color:#5C5C5C;font-size:12px;letter-spacing:.08em"><th scope="col" style="padding:12px 20px;font-weight:600">HOME</th><th scope="col" style="padding:12px;font-weight:600">TYPE</th><th scope="col" style="padding:12px;font-weight:600">PRICE</th><th scope="col" style="padding:12px;font-weight:600">STATUS</th><th scope="col" style="padding:12px;font-weight:600">FEATURED</th><th scope="col" style="padding:12px 20px;font-weight:600;text-align:right">ACTIONS</th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<tr style="border-top:1px solid #EDEDED">
+<td style="padding:12px 20px"><div style="display:flex;align-items:center;gap:12px"><div style="width:56px;height:44px;border-radius:10px;background:{{r.thumb}}"></div><div style="display:flex;flex-direction:column"><span style="font-weight:600">{{r.address}}</span><span style="font-size:12px;color:#5C5C5C">{{r.hood}} · added {{r.added}}</span></div></div></td>
+<td style="padding:12px">{{r.type}}</td>
+<td style="padding:12px"><label for="{{r.pid}}" style="position:absolute;left:-9999px">Price for {{r.address}}</label><input id="{{r.pid}}" value="{{r.price}}" style="width:110px;height:38px;padding:0 10px;border-radius:8px;border:1px solid #EDEDED;font:500 14px 'Inter',sans-serif"></td>
+<td style="padding:12px"><label for="{{r.sid}}" style="position:absolute;left:-9999px">Status for {{r.address}}</label><select id="{{r.sid}}" style="height:38px;padding:0 10px;border-radius:999px;border:0;background:{{r.statusBg}};color:{{r.statusFg}};font:600 13px 'Inter',sans-serif"><option>{{r.status}}</option><option>Available</option><option>Pending</option><option>Sold</option></select></td>
+<td style="padding:12px"><button type="button" onClick="{{r.feature}}" aria-pressed="{{r.featPressed}}" aria-label="Feature {{r.address}}" style="width:40px;height:40px;border-radius:50%;border:0;background:{{r.featBg}};color:{{r.featFg}};cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg></button></td>
+<td style="padding:12px 20px;text-align:right;white-space:nowrap"><a href="V2AdminAdd.dc.html" style="display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #000000;color:#000000;text-decoration:none;font-size:13px;font-weight:600;margin-right:6px">Edit</a><button type="button" style="min-height:36px;padding:0 14px;border-radius:999px;border:0;background:#F7F6F4;font:600 13px 'Inter',sans-serif;cursor:pointer">{{r.hideLabel}}</button></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</div>
+<p style="margin:0;font-size:13px;color:#5C5C5C">Hidden listings stay in the database with their photos (US-09). Only Available homes can be featured, and only one at a time (US-15).</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1200}}'>
+class Component extends DCLogic {
+renderVals() {
+const tab = (this.state && this.state.tab) || 'active';
+const feat = (this.state && this.state.feat) || 1;
+const active = [
+{ id: 1, address: '4812 Underwood Ave', hood: 'Happy Hollow', added: 'Oct 28', type: 'Tudor', price: '425,000', status: 'Available', thumb: '#75000E' },
+{ id: 2, address: '6107 Maple Street', hood: 'Benson', added: 'Nov 3', type: 'Ranch', price: '289,000', status: 'Available', thumb: '#D3CFCA' },
+{ id: 3, address: '1450 Jones St, Unit 4', hood: 'Downtown', added: 'Nov 2', type: 'Condominium', price: '315,000', status: 'Available', thumb: '#2A2A2A' },
+{ id: 4, address: '10230 Rockbrook Road', hood: 'Rockbrook', added: 'Oct 30', type: 'Townhome', price: '359,000', status: 'Pending', thumb: '#BDBDBD' },
+{ id: 5, address: '6824 Binney Street', hood: 'Benson', added: 'Oct 21', type: 'Ranch', price: '304,000', status: 'Pending', thumb: '#5C5C5C' }
+];
+const hidden = [
+{ id: 9, address: '3310 Burt Street', hood: 'Downtown', added: 'Aug 14', type: 'Townhome', price: '279,000', status: 'Sold', thumb: '#5A000B' },
+{ id: 10, address: '9150 Pacific Street', hood: 'Rockbrook', added: 'Jul 2', type: 'Ranch', price: '332,000', status: 'Sold', thumb: '#A9A6A2' }
+];
+const src = tab === 'active' ? active : hidden;
+const rows = src.map((r) => {
+const isF = r.id === feat;
+const sb = r.status === 'Available' ? '#FFFFFF' : r.status === 'Pending' ? '#0B0B0B' : '#75000E';
+const sf = r.status === 'Available' ? '#000000' : '#FFFFFF';
+return { ...r, pid: 'p' + r.id, sid: 's' + r.id, statusBg: r.status === 'Available' ? '#F7F6F4' : sb, statusFg: sf,
+featBg: isF ? '#75000E' : '#F7F6F4', featFg: isF ? '#FFFFFF' : '#BDBDBD', featPressed: isF ? 'true' : 'false',
+hideLabel: tab === 'active' ? 'Hide' : 'Bring back',
+feature: () => { if (r.status === 'Available') this.setState({ feat: r.id }); } };
+});
+const on = (t) => tab === t;
+return {
+rows,
+kpis: [
+{ label: 'Active listings', value: '18', note: '+3 this month', tint: '#FBF3F4' },
+{ label: 'Pending', value: '4', note: 'Under contract', tint: '#EDEDED' },
+{ label: 'Sold this month', value: '2', note: 'November 2026', tint: '#F3DDE0' },
+{ label: 'Searches this month', value: '312', note: '+18% vs October', tint: '#FBF3F4' }
+],
+tabActiveBg: on('active') ? '#000000' : 'transparent', tabActiveFg: on('active') ? '#FFFFFF' : '#000000', tabActiveSel: on('active') ? 'true' : 'false',
+tabHiddenBg: on('hidden') ? '#000000' : 'transparent', tabHiddenFg: on('hidden') ? '#FFFFFF' : '#000000', tabHiddenSel: on('hidden') ? 'true' : 'false',
+showActive: () => this.setState({ tab: 'active' }), showHidden: () => this.setState({ tab: 'hidden' })
+};
+}
+}
+</script>
+</body>
+</html>

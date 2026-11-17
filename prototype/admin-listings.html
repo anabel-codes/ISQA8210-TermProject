@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>All listings | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/tom-select.css">
+<link rel="stylesheet" href="vendor/flatpickr.min.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="listings">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <div class="kpis" id="kpis"></div>
+      <section class="card c-table pg-card">
+        <div class="tbl-top">
+          <div class="seg big" id="lTabs" role="tablist" aria-label="Which listings"><button role="tab" id="tabA" data-tab="active" aria-selected="true">On the site <span class="n"></span></button><button role="tab" id="tabH" data-tab="hidden" aria-selected="false">Hidden <span class="n"></span></button></div>
+          <a class="pbtn acc" href="admin-add.html"><i data-ic="plus"></i>Add listing</a>
+        </div>
+        <div class="tbl-tools">
+          <label class="t-search"><i data-ic="search"></i><span class="sr">Search listings</span><input id="lSearch" data-search-target type="search" placeholder="Search by address, area or ZIP"></label>
+          <label class="t-sel"><i data-ic="map"></i><span class="sr">Neighborhood</span><select id="lHood"><option value="">Neighborhood</option></select></label>
+          <label class="t-sel"><i data-ic="home"></i><span class="sr">Home type</span><select id="lType"><option value="">Home type</option></select></label>
+          <label class="t-sel" id="lStatusWrap"><i data-ic="tag"></i><span class="sr">Status</span><select id="lStatus"><option value="">Status</option><option>Available</option><option>Pending</option><option>Sold</option></select></label>
+          <label class="t-sel"><i data-ic="calc"></i><span class="sr">Price range</span><select id="lBand"><option value="">Price</option></select></label>
+          <label class="t-sel"><i data-ic="list"></i><span class="sr">Sort by</span><select id="lSort"><option value="updated">Recently changed</option><option value="newest">Newest listed</option><option value="hi">Price, high to low</option><option value="lo">Price, low to high</option><option value="addr">Address, A to Z</option></select></label>
+          <button class="rbtn" id="tReset" type="button" aria-label="Clear filters" title="Clear filters"><i data-ic="close"></i></button>
+        </div>
+        <div class="bulk" id="bulk" hidden aria-live="polite"></div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead id="lHead"></thead>
+            <tbody id="lBody"></tbody>
+          </table>
+        </div>
+        <div class="tbl-pager">
+            <p class="tbl-info" id="tInfo" aria-live="polite"></p>
+            <label class="t-sel t-per"><i data-ic="list"></i><span class="sr">Rows per page</span><select id="tPer"><option value="5">5 per page</option><option value="10" selected>10 per page</option><option value="25">25 per page</option><option value="50">50 per page</option></select></label>
+            <nav class="pages" id="tPages" aria-label="Table pages"></nav>
+          </div>
+      </section>
+    </main>
+    <p class="sample-note pg-note">Sample data. Changes you make here are kept for this browser tab only. In the real site they save to the listings table and show on the public site right away.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/tom-select.complete.min.js" defer></script>
+<script src="vendor/flatpickr.min.js" defer></script>
+<script src="vendor/imask.min.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

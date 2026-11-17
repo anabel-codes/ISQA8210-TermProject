@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Local area links | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/tom-select.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="local">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <div class="lc-top">
+        <div class="seg big" id="lcTabs" role="tablist" aria-label="Category"></div>
+        <div class="lc-btns"><a class="pbtn ghost" href="local.html" target="_blank" rel="noopener"><i data-ic="ext"></i>View the page</a><button type="button" class="pbtn acc" id="lcAdd"><i data-ic="plus"></i>Add a link</button></div>
+      </div>
+      <div class="lc-list" id="lcList"></div>
+    </main>
+    <p class="sample-note pg-note">Sample data. In the prototype these changes stay in the admin area. On the real site visitors see them right away.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/tom-select.complete.min.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

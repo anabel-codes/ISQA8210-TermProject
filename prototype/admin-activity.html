@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Activity log | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/tom-select.css">
+<link rel="stylesheet" href="vendor/flatpickr.min.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="log">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <div class="banner info" id="aFor" hidden></div>
+      <section class="card c-table pg-card">
+        <div class="tbl-top">
+          <div class="a-sum" id="aSum"></div>
+          <div class="ro"><i data-ic="lock"></i>Read only. Records can't be edited or deleted.</div>
+        </div>
+        <div class="tbl-tools">
+          <label class="t-search"><i data-ic="search"></i><span class="sr">Search the log</span><input id="aSearch" data-search-target type="search" placeholder="Search by address or change"></label>
+          <label class="t-sel"><i data-ic="user"></i><span class="sr">Administrator</span><select id="aWho"><option value="">Administrator</option><option>Carlos</option><option>Janet</option></select></label>
+          <label class="t-sel"><i data-ic="activity"></i><span class="sr">Type of change</span><select id="aAct"><option value="">Type of change</option></select></label>
+          <label class="t-sel"><i data-ic="cal"></i><span class="sr">When</span><select id="aWhen"><option value="">When</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="month">This month</option></select></label>
+          <label class="t-search a-range" id="aRangeWrap" hidden><i data-ic="cal"></i><span class="sr">Date range</span><input id="aRange" placeholder="Pick a start and end date" readonly></label>
+          <button class="rbtn" id="tReset" type="button" aria-label="Clear filters" title="Clear filters"><i data-ic="close"></i></button>
+          <button class="rbtn" id="aCsv" type="button" aria-label="Download the log as CSV" title="Download CSV"><i data-ic="download"></i></button>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl log">
+            <thead><tr><th>When</th><th>Who</th><th>Change</th><th>Item</th><th>What changed</th></tr></thead>
+            <tbody id="aBody"></tbody>
+          </table>
+        </div>
+        <div class="tbl-pager">
+            <p class="tbl-info" id="tInfo" aria-live="polite"></p>
+            <label class="t-sel t-per"><i data-ic="list"></i><span class="sr">Rows per page</span><select id="tPer"><option value="5">5 per page</option><option value="10" selected>10 per page</option><option value="25">25 per page</option><option value="50">50 per page</option></select></label>
+            <nav class="pages" id="tPages" aria-label="Table pages"></nav>
+          </div>
+      </section>
+    </main>
+    <p class="sample-note pg-note">Sample data. The real log is written by the site every time Carlos or Janet changes a listing or page content.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/tom-select.complete.min.js" defer></script>
+<script src="vendor/flatpickr.min.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

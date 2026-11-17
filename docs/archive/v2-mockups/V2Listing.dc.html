@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Listing details v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F4}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="background:#F7F6F4;color:#000000;font-family:'Inter',sans-serif">
+
+<header style="background:#FFFFFF;border-bottom:1px solid #EDEDED">
+<div style="max-width:1240px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<a href="V2Home.dc.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#000000">
+<svg width="40" height="40" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg>
+<span style="display:flex;flex-direction:column"><span style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1">CK</span><span style="font-size:10px;font-weight:600;letter-spacing:.3em">REAL ESTATE</span></span>
+</a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;padding:5px;border-radius:999px;background:#F7F6F4;font-size:14px;font-weight:500">
+<a href="V2Home.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Home</a>
+<a href="V2Browse.dc.html" aria-current="page" style="color:#FFFFFF;background:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Browse homes</a>
+<a href="V2Local.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Local area</a>
+<a href="V2Broker.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">About Carlos</a>
+</nav>
+<a href="V2Broker.dc.html" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px">Call the office</a>
+</div>
+</header>
+
+<div style="max-width:1240px;margin:0 auto;padding:24px 24px 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font-size:14px">
+<nav aria-label="Breadcrumb" style="display:flex;gap:8px;color:#5C5C5C"><a href="V2Home.dc.html" style="color:#5C5C5C">Home</a><span aria-hidden="true">/</span><a href="V2Browse.dc.html" style="color:#5C5C5C">Browse</a><span aria-hidden="true">/</span><span style="color:#000000">4812 Underwood Avenue</span></nav>
+<a href="V2Browse.dc.html" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#000000;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to results</a>
+</div>
+
+<section aria-label="Photos" style="max-width:1240px;margin:0 auto;padding:20px 24px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:220px 220px;gap:12px">
+<div style="grid-column:span 2;grid-row:span 2;border-radius:28px 8px 8px 28px;overflow:hidden;position:relative;background:#D9D3CC">
+<svg width="100%" height="100%" viewBox="0 0 640 452" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo 1 of 4 stand-in: brick Tudor exterior"><rect width="640" height="452" fill="#D9D3CC"></rect><rect y="340" width="640" height="112" fill="#8E8A85"></rect><polygon points="150,190 320,70 490,190" fill="#2A2A2A"></polygon><rect x="170" y="190" width="300" height="152" fill="#75000E" opacity=".78"></rect><polygon points="300,190 380,120 460,190" fill="#0B0B0B"></polygon><rect x="200" y="220" width="60" height="60" fill="#F7F6F4"></rect><rect x="380" y="220" width="60" height="60" fill="#F7F6F4"></rect><rect x="296" y="260" width="48" height="82" fill="#0B0B0B"></rect><rect x="410" y="90" width="22" height="70" fill="#5A000B"></rect><circle cx="80" cy="310" r="70" fill="#5C5C5C"></circle><circle cx="580" cy="320" r="60" fill="#6E6E6E"></circle></svg>
+<span style="position:absolute;top:16px;left:16px;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:#75000E;color:#FFFFFF;font-size:12px;font-weight:600"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"></path></svg>Featured home</span>
+</div>
+<div style="grid-column:span 2;border-radius:8px 28px 8px 8px;overflow:hidden;background:#E9E7E4"><svg width="100%" height="100%" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo 2 of 4 stand-in: kitchen"><rect width="600" height="220" fill="#EDEBE8"></rect><rect y="150" width="600" height="70" fill="#FFFFFF"></rect><rect x="60" y="40" width="200" height="60" fill="#FFFFFF"></rect><rect x="300" y="40" width="240" height="60" fill="#FFFFFF"></rect><rect x="40" y="130" width="520" height="24" fill="#0B0B0B"></rect><rect x="250" y="160" width="120" height="60" fill="#75000E" opacity=".7"></rect><circle cx="280" cy="30" r="10" fill="#0B0B0B"></circle><circle cx="340" cy="30" r="10" fill="#0B0B0B"></circle></svg></div>
+<div style="border-radius:8px;overflow:hidden;background:#E4E1DD"><svg width="100%" height="100%" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo 3 of 4 stand-in: living room"><rect width="300" height="220" fill="#E4E1DD"></rect><rect x="40" y="40" width="120" height="90" fill="#FFFFFF"></rect><rect x="30" y="140" width="200" height="50" rx="10" fill="#2A2A2A"></rect><rect x="200" y="60" width="60" height="80" fill="#75000E" opacity=".5"></rect></svg></div>
+<div style="border-radius:8px 8px 28px 8px;overflow:hidden;position:relative;background:#DCD8D3"><svg width="100%" height="100%" viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo 4 of 4 stand-in: back yard"><rect width="300" height="220" fill="#DCD8D3"></rect><rect y="140" width="300" height="80" fill="#9A9690"></rect><circle cx="80" cy="110" r="50" fill="#5C5C5C"></circle><circle cx="220" cy="120" r="40" fill="#6E6E6E"></circle></svg>
+<a href="V2Listing.dc.html" style="position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);color:#000000;text-decoration:none;font-size:13px;font-weight:600">View all 4 photos</a>
+</div>
+</section>
+
+<div style="max-width:1240px;margin:0 auto;padding:32px 24px 72px;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+<main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:8px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#FFFFFF;border:1px solid #000000;font-size:12px;font-weight:600"><span style="width:7px;height:7px;border-radius:50%;background:#000000"></span>Available</span><span style="padding:6px 12px;border-radius:999px;background:#FFFFFF;font-size:12px;font-weight:600">Tudor</span><span style="padding:6px 12px;border-radius:999px;background:#FFFFFF;font-size:12px;font-weight:600">Happy Hollow</span></div>
+<h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:64px;line-height:1">4812 Underwood <em style="color:#75000E">Avenue</em></h1>
+<span style="font-size:16px;color:#5C5C5C">Omaha, NE 68132</span>
+</div>
+
+<div style="background:#FFFFFF;border-radius:20px;padding:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+<sc-for list="{{specs}}" as="s" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:6px;padding:16px">
+<span style="display:inline-flex;width:36px;height:36px;border-radius:10px;background:#FBF3F4;color:#75000E;align-items:center;justify-content:center" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.icon}}"></path></svg></span>
+<span style="font-size:22px;font-weight:600">{{s.value}}</span><span style="font-size:13px;color:#5C5C5C">{{s.label}}</span>
+</div>
+</sc-for>
+</div>
+
+<div role="tablist" aria-label="Listing sections" style="display:flex;gap:4px;padding:5px;border-radius:999px;background:#FFFFFF;align-self:flex-start">
+<button type="button" role="tab" aria-selected="true" style="min-height:40px;padding:0 18px;border-radius:999px;border:0;background:#000000;color:#FFFFFF;font:600 14px 'Inter',sans-serif">Overview</button>
+<button type="button" role="tab" aria-selected="false" style="min-height:40px;padding:0 18px;border-radius:999px;border:0;background:transparent;color:#000000;font:500 14px 'Inter',sans-serif">Features</button>
+<button type="button" role="tab" aria-selected="false" style="min-height:40px;padding:0 18px;border-radius:999px;border:0;background:transparent;color:#000000;font:500 14px 'Inter',sans-serif">Neighborhood</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.7">
+<p style="margin:0">A brick Tudor two blocks from Memorial Park. The original arched front door and plaster ceilings are still here, and the kitchen was redone in 2023 with quartz counters and a gas range.</p>
+<p style="margin:0;color:#5C5C5C">Upstairs has four bedrooms and a full bath. The finished basement adds a family room and laundry. A detached two-car garage opens onto the alley.</p>
+</div>
+
+<section aria-labelledby="anat-h" style="background:#FFFFFF;border-radius:28px;padding:32px;display:flex;flex-wrap:wrap;gap:28px;align-items:center">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#75000E">ANATOMY OF THIS HOME</span>
+<h2 id="anat-h" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:40px;line-height:1">Floor by <em style="color:#75000E">floor</em></h2>
+<div style="display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{layers}}" as="l" hint-placeholder-count="4">
+<button type="button" onClick="{{l.pick}}" aria-pressed="{{l.on}}" style="display:flex;justify-content:space-between;align-items:center;min-height:48px;padding:0 16px;border-radius:12px;border:0;background:{{l.bg}};color:{{l.fg}};font:500 15px 'Inter',sans-serif;cursor:pointer;text-align:left"><span>{{l.name}}</span><span style="font-size:13px;opacity:.85">{{l.fact}}</span></button>
+</sc-for>
+</div>
+<p style="margin:0;font-size:13px;color:#5C5C5C">Drawn from this listing's own numbers. Not to scale; the photos show the real house.</p>
+</div>
+<figure style="flex:1 1 320px;margin:0;display:flex;justify-content:center">
+<svg width="100%" viewBox="0 0 360 440" role="img" aria-label="Exploded isometric house. The selected layer is drawn in red.">
+<g stroke="#000000" stroke-width="2.5" stroke-linejoin="round">
+<polygon points="60,350 180,410 300,350 180,290" fill="{{fFound}}" stroke-dasharray="6 5"></polygon>
+<polygon points="60,350 180,410 180,428 60,368" fill="#5C5C5C"></polygon>
+<polygon points="180,410 300,350 300,368 180,428" fill="#0B0B0B"></polygon>
+<polygon points="60,250 180,310 180,370 60,310" fill="{{fGround}}"></polygon>
+<polygon points="180,310 300,250 300,310 180,370" fill="#FFFFFF"></polygon>
+<polygon points="85,275 115,290 115,320 85,305" fill="#0B0B0B"></polygon>
+<polygon points="215,312 245,297 245,345 215,360" fill="#75000E"></polygon>
+<polygon points="60,150 180,210 180,270 60,210" fill="{{fUpper}}"></polygon>
+<polygon points="180,210 300,150 300,210 180,270" fill="#FFFFFF"></polygon>
+<polygon points="85,175 115,190 115,220 85,205" fill="#0B0B0B"></polygon>
+<polygon points="210,215 240,200 240,230 210,245" fill="#0B0B0B"></polygon>
+<polygon points="255,192 285,177 285,207 255,222" fill="#0B0B0B"></polygon>
+<polygon points="60,110 180,170 180,20" fill="{{fRoof}}"></polygon>
+<polygon points="180,170 300,110 180,20" fill="#5A000B"></polygon>
+<rect x="232" y="45" width="16" height="40" fill="#0B0B0B"></rect>
+</g>
+</svg>
+</figure>
+</section>
+</main>
+
+<aside aria-label="Ask about this home" style="flex:1 1 340px;max-width:400px;background:#FFFFFF;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 12px 40px rgba(0,0,0,.08)">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;color:#5C5C5C">Asking price</span><span style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1;color:#75000E">$425,000</span><span style="font-size:13px;color:#5C5C5C">$400,000 to $450,000 band</span></div>
+<div style="display:flex;gap:12px;align-items:center;border-top:1px solid #EDEDED;padding-top:18px"><div style="width:48px;height:48px;border-radius:50%;background:#EDEDED;display:flex;align-items:center;justify-content:center;font-size:11px;color:#5C5C5C">[CK]</div><div style="display:flex;flex-direction:column"><span style="font-weight:600">Carlos Kosala</span><span style="font-size:13px;color:#5C5C5C">Broker · replies within a day</span></div></div>
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:16px;background:#FBF3F4">
+<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:#75000E;color:#FFFFFF;align-items:center;justify-content:center" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+<span style="font-family:'Instrument Serif',serif;font-size:28px;line-height:1.1">Sent. Carlos will be in touch.</span>
+<span style="font-size:14px;color:#5C5C5C">Your message went to the office by email with a link to this home. We don't keep a copy on the site.</span>
+<button type="button" onClick="{{reset}}" style="align-self:flex-start;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid #000000;background:#FFFFFF;font:600 14px 'Inter',sans-serif;cursor:pointer">Send another</button>
+</div>
+</sc-if>
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<form style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:6px"><label for="v2l-name" style="font-size:14px;font-weight:500">Your name</label><input id="v2l-name" autocomplete="name" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="v2l-email" style="font-size:14px;font-weight:500">Email</label><input id="v2l-email" type="email" autocomplete="email" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="v2l-phone" style="font-size:14px;font-weight:500">Phone <span style="color:#5C5C5C;font-weight:400">(optional)</span></label><input id="v2l-phone" type="tel" autocomplete="tel" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="v2l-msg" style="font-size:14px;font-weight:500">Message</label><textarea id="v2l-msg" rows="4" style="padding:12px 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif;resize:vertical">I'd like to see 4812 Underwood Avenue. Is Saturday morning possible?</textarea></div>
+<button type="button" onClick="{{send}}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:999px;border:0;background:#75000E;color:#FFFFFF;font:600 16px 'Inter',sans-serif;cursor:pointer">Ask about this home</button>
+<span style="font-size:12px;color:#5C5C5C;text-align:center">Emailed to the office. Never stored on the site.</span>
+</form>
+</sc-if>
+</aside>
+</div>
+
+<footer style="background:#0B0B0B;color:#FFFFFF">
+<div style="max-width:1240px;margin:0 auto;padding:36px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Instrument Serif',serif;font-size:24px">CK Real Estate</span><span style="color:#BDBDBD">[Office address] · [Office phone] · [Office email]</span></div>
+<nav aria-label="Footer" style="display:flex;gap:24px;flex-wrap:wrap"><a href="V2Browse.dc.html" style="color:#FFFFFF">Browse homes</a><a href="V2Local.dc.html" style="color:#FFFFFF">Local area</a><a href="V2Broker.dc.html" style="color:#FFFFFF">About Carlos</a><a href="V2AdminLogin.dc.html" style="color:#BDBDBD">Admin log in</a></nav>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2000}}'>
+class Component extends DCLogic {
+renderVals() {
+const sel = (this.state && this.state.layer) || 'upper';
+const sent = !!(this.state && this.state.sent);
+const defs = [
+{ id: 'roof', name: 'Roof', fact: 'Built 1928, steep gable' },
+{ id: 'upper', name: 'Upper floor', fact: '4 bedrooms · 1 full bath' },
+{ id: 'ground', name: 'Ground floor', fact: '2,340 sq ft · half bath' },
+{ id: 'found', name: 'Foundation', fact: '7,800 sq ft lot · basement' }
+];
+const layers = defs.map((d) => ({ ...d, on: sel === d.id ? 'true' : 'false', bg: sel === d.id ? '#75000E' : '#F7F6F4', fg: sel === d.id ? '#FFFFFF' : '#000000', pick: () => this.setState({ layer: d.id }) }));
+const red = '#75000E';
+return {
+layers,
+fRoof: sel === 'roof' ? red : '#75000E',
+fUpper: sel === 'upper' ? '#F3DDE0' : '#F7F6F4',
+fGround: sel === 'ground' ? '#F3DDE0' : '#F7F6F4',
+fFound: sel === 'found' ? '#F3DDE0' : '#EDEDED',
+sent, notSent: !sent,
+send: () => this.setState({ sent: true }),
+reset: () => this.setState({ sent: false }),
+specs: [
+{ value: '4', label: 'Bedrooms', icon: 'M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M2 18h20' },
+{ value: '2.5', label: 'Bathrooms', icon: 'M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.7 3 4 3.7 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5M2 12h20' },
+{ value: '2,340', label: 'Square feet', icon: 'M3 3h18v18H3zM3 9h18M9 3v18' },
+{ value: '2', label: 'Garage spaces', icon: 'M3 21V8l9-5 9 5v13M7 21v-8h10v8M7 17h10' },
+{ value: '7,800', label: 'Lot, sq ft', icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' },
+{ value: '1928', label: 'Year built', icon: 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

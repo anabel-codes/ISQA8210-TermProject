@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load ck %}
+{% block title %}Homes for sale | CK Real Estate{% endblock %}
+{% block page %}listings{% endblock %}
+{% block content %}
+<section class="sec" id="listings" style="padding-top:clamp(110px,14vw,150px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">For sale</p><h1 class="title hl" data-split>{% if filtered %}Homes that match your search{% else %}Homes for sale in Omaha{% endif %}</h1>
+        <p class="lead">{% if filtered %}{% if filters.type %}{{ filters.type }} homes{% else %}All home types{% endif %}{% if filters.hood %} in {{ filters.hood }}{% endif %}{% if chosen_band %}, {{ chosen_band.name|lower }}{% endif %}.{% else %}Every home Carlos has on the market, with the full address, the price and the details buyers ask about first.{% endif %}</p></div>
+    </div>
+    {% include "partials/search_form.html" with extra_class=" search-inline" %}
+    <div class="count-row"><p id="saleCount" aria-live="polite">{{ listings|length }} home{{ listings|length|pluralize }}{% if filtered %} match{{ listings|length|pluralize:"es," }}{% else %} for sale{% endif %}</p>{% if filtered %}<a class="link" href="{% url 'public:listing_list' %}">Clear search</a>{% endif %}</div>
+    {% if listings %}
+    <div class="grid" id="saleGrid">
+      {% for l in listings %}{% include "partials/listing_card.html" %}{% endfor %}
+    </div>
+    {% else %}
+    <div class="empty"><div class="ei">{% icon 'search' %}</div>
+      {% if filtered %}<h3>No homes match those filters right now</h3><p>Try a wider price range or another neighborhood.</p><a class="btn btn-accent" href="{% url 'public:listing_list' %}">Clear search</a>
+      {% else %}<h3>No homes listed yet</h3><p>New listings show up here the day Carlos adds them.</p>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile screens v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EDEDED}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width:1400px;height:1000px;box-sizing:border-box;padding:48px;background:#EDEDED;font-family:'Inter',sans-serif;color:#000000;display:flex;gap:48px;justify-content:center;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">HOME · 390 PX</span>
+<div style="width:390px;height:844px;border-radius:40px;overflow:hidden;background:#F7F6F4;position:relative;border:8px solid #0B0B0B;box-sizing:content-box">
+<div style="height:500px;position:relative;background:#1C1A1A;color:#FFFFFF">
+<svg width="100%" height="100%" viewBox="0 0 390 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute;inset:0"><rect width="390" height="500" fill="#1C1A1A"></rect><rect y="380" width="390" height="120" fill="#0F0F0F"></rect><rect x="150" y="250" width="240" height="132" fill="#2A2A2A"></rect><rect x="120" y="190" width="200" height="70" fill="#333333"></rect><rect x="112" y="182" width="216" height="10" fill="#0B0B0B"></rect><rect x="170" y="275" width="100" height="100" fill="#F3DDE0" opacity=".8"></rect><rect x="130" y="205" width="150" height="40" fill="#F3DDE0" opacity=".65"></rect><rect width="390" height="500" fill="#000" opacity=".3"></rect></svg>
+<div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:20px 18px">
+<svg width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg>
+<button type="button" aria-label="Open menu" aria-expanded="false" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.45);backdrop-filter:blur(14px);color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div style="position:relative;padding:60px 18px 0;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;font-weight:600;letter-spacing:.18em">OMAHA, NEBRASKA</span>
+<h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:46px;line-height:.98">Find the place you'll love to come <em style="color:#F3DDE0">home</em> to.</h1>
+</div>
+</div>
+<div style="margin:-56px 14px 0;position:relative;background:#FFFFFF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 12px 40px rgba(0,0,0,.14)">
+<label for="m-type" style="position:absolute;left:-9999px">Home type</label><select id="m-type" style="height:48px;padding:0 12px;border-radius:12px;border:1px solid #EDEDED;background:#F7F6F4;font:500 15px 'Inter',sans-serif"><option>Any home type</option></select>
+<label for="m-hood" style="position:absolute;left:-9999px">Neighborhood</label><select id="m-hood" style="height:48px;padding:0 12px;border-radius:12px;border:1px solid #EDEDED;background:#F7F6F4;font:500 15px 'Inter',sans-serif"><option>Anywhere in Omaha</option></select>
+<a href="V2Browse.dc.html" style="display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600">Show homes</a>
+</div>
+<div style="padding:22px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px"><div><span style="font-family:'Instrument Serif',serif;font-size:36px;line-height:1">[18]</span><div style="font-size:12px;color:#5C5C5C">Years in Omaha</div></div><div><span style="font-family:'Instrument Serif',serif;font-size:36px;line-height:1">4</span><div style="font-size:12px;color:#5C5C5C">Neighborhoods</div></div></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">BROWSE · 390 PX</span>
+<div style="width:390px;height:844px;border-radius:40px;overflow:hidden;background:#F7F6F4;border:8px solid #0B0B0B;box-sizing:content-box;display:flex;flex-direction:column">
+<div style="background:#FFFFFF;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #EDEDED"><span style="font-family:'Instrument Serif',serif;font-size:28px">Browse</span><button type="button" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:#000000;color:#FFFFFF;font:600 14px 'Inter',sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M7 12h10M10 18h4"></path></svg>Filters (2)</button></div>
+<div style="display:flex;gap:8px;padding:12px 18px;overflow-x:auto"><span style="flex:0 0 auto;padding:7px 12px;border-radius:999px;background:#F3DDE0;color:#75000E;font-size:13px;font-weight:600">Ranch ×</span><span style="flex:0 0 auto;padding:7px 12px;border-radius:999px;background:#F3DDE0;color:#75000E;font-size:13px;font-weight:600">Benson ×</span><span style="flex:0 0 auto;padding:7px 4px;font-size:13px;font-weight:600">3 homes</span></div>
+<div style="padding:0 18px;display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="2">
+<a href="V2Listing.dc.html" style="background:#FFFFFF;border-radius:16px;overflow:hidden;text-decoration:none;color:#000000;display:flex;flex-direction:column">
+<div style="height:200px;position:relative;background:{{c.bg}}"><span style="position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);font-size:12px;font-weight:600">{{c.status}}</span><span style="position:absolute;bottom:12px;left:12px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);font-family:'Instrument Serif',serif;font-size:22px;color:#75000E">{{c.price}}</span></div>
+<div style="padding:14px 16px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.05">{{c.address}}</span><span style="font-size:13px;color:#5C5C5C">{{c.meta}}</span></div>
+</a>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">LISTING · 390 PX</span>
+<div style="width:390px;height:844px;border-radius:40px;overflow:hidden;background:#F7F6F4;border:8px solid #0B0B0B;box-sizing:content-box;position:relative">
+<div style="height:300px;background:#75000E;position:relative"><svg width="100%" height="100%" viewBox="0 0 390 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="390" height="300" fill="#D9D3CC"></rect><rect y="230" width="390" height="70" fill="#8E8A85"></rect><polygon points="80,130 195,50 310,130" fill="#2A2A2A"></polygon><rect x="95" y="130" width="200" height="100" fill="#75000E" opacity=".78"></rect><rect x="180" y="170" width="32" height="60" fill="#0B0B0B"></rect></svg>
+<span style="position:absolute;bottom:14px;right:14px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);font-size:12px;font-weight:600">1 / 4</span>
+<a href="V2Browse.dc.html" aria-label="Back to results" style="position:absolute;top:16px;left:16px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);display:inline-flex;align-items:center;justify-content:center;color:#000000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></a></div>
+<div style="padding:18px;display:flex;flex-direction:column;gap:10px">
+<span style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:#FFFFFF;border:1px solid #000;font-size:12px;font-weight:600">Available</span>
+<h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:38px;line-height:1">4812 Underwood <em style="color:#75000E">Avenue</em></h1>
+<span style="font-size:14px;color:#5C5C5C">Happy Hollow · Tudor</span>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:#FFFFFF;border-radius:16px;padding:12px"><div><b style="font-size:18px">4</b><div style="font-size:12px;color:#5C5C5C">Beds</div></div><div><b style="font-size:18px">2.5</b><div style="font-size:12px;color:#5C5C5C">Baths</div></div><div><b style="font-size:18px">2,340</b><div style="font-size:12px;color:#5C5C5C">Sq ft</div></div></div>
+<p style="margin:0;font-size:15px;line-height:1.6">A brick Tudor two blocks from Memorial Park, with the original arched front door and a kitchen redone in 2023.</p>
+</div>
+<div style="position:absolute;left:12px;right:12px;bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 18px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:saturate(160%) blur(14px);border:1px solid rgba(255,255,255,.45);box-shadow:0 12px 40px rgba(0,0,0,.14)"><span style="font-family:'Instrument Serif',serif;font-size:26px;color:#75000E">$425,000</span><a href="V2Listing.dc.html" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px">Ask about this home</a></div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1400,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return { cards: [
+{ price: '$289,000', address: '6107 Maple Street', meta: 'Benson · Ranch · 3 bd · 2 ba', status: 'Available', bg: '#D3CFCA' },
+{ price: '$262,500', address: '5520 Military Ave', meta: 'Benson · Ranch · 2 bd · 1 ba', status: 'Available', bg: '#A9A6A2' }
+] };
+}
+}
+</script>
+</body>
+</html>

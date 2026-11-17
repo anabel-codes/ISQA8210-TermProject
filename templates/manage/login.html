@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load ck %}
+{% block title %}Log in | CK Real Estate{% endblock %}
+{% block description %}Log in.{% endblock %}
+{% block head %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+{% block page %}login{% endblock %}
+{% block content %}
+{# US-01. The page only says "Log in": no admin wording and no list of who may log in. #}
+<div class="auth">
+  <div class="auth-form">
+    <div class="auth-card">
+      <h1>Log in</h1>
+      <p>Enter your username and password.</p>
+      {% if form.non_field_errors %}
+        <div class="auth-note err" role="alert">{% icon 'alert' %}<span>That username and password don't match. Check them and try again.</span></div>
+      {% endif %}
+      <form class="form plain" id="loginForm" method="post" novalidate>
+        {% csrf_token %}
+        <label>Username<span class="in-ic">{% icon 'user' %}<input id="id_username" name="username" type="text" required autocomplete="username" autocapitalize="none" placeholder="Your username" value="{{ form.username.value|default:'' }}"{% if not form.username.value %} autofocus{% endif %}></span></label>
+        <label>Password<span class="in-ic pw">{% icon 'lock' %}<input id="id_password" name="password" type="password" required autocomplete="current-password" placeholder="Your password"{% if form.username.value %} autofocus{% endif %}><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false">{% icon 'eye' %}</button></span></label>
+        <div class="auth-row">
+          <span></span>
+          <button type="button" class="link" id="forgotBtn" aria-expanded="false" aria-controls="resetPanel">Forgot password?</button>
+        </div>
+        <div class="reset-panel" id="resetPanel"><div><div class="reset-in">
+          <b>Reset your password</b>
+          <p style="margin:0">Ask the site team to set a new password for your account. You can change it after you log in.</p>
+        </div></div></div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="btn btn-accent lg block" type="submit">{% icon 'login' %}Log in</button>
+      </form>
+    </div>
+  </div>
+  <div class="auth-art" id="authArt" aria-hidden="true"><div class="copy"><span class="eyebrow" style="color:#F0CFD4;margin:0">CK Real Estate</span><h2>Welcome back.</h2></div></div>
+</div>
+{% endblock %}

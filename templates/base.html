@@ -1,0 +1,83 @@
+{% load static ck %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% block title %}CK Real Estate{% endblock %}</title>
+<meta name="description" content="{% block description %}Homes for sale in Benson, Downtown, Happy Hollow and Rockbrook, Omaha, from broker Carlos Kosala.{% endblock %}">
+<link rel="icon" href="{% static 'img/logo.svg' %}" type="image/svg+xml">
+<script>try{if(JSON.parse(localStorage.getItem('ck-mode'))==='dark')document.documentElement.dataset.mode='dark'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="{% static 'css/ck.css' %}">
+{% block head %}{% endblock %}
+</head>
+<body>
+{% with page=request.resolver_match.url_name %}
+<a class="sr" href="#main">Skip to content</a>
+<header class="hdr" id="hdr"><div class="wrap hdr-in">
+  <a class="logo" href="{% url 'public:home' %}" aria-label="CK Real Estate, home">{% include "partials/logo_mark.html" %}</a>
+  <nav class="nav" aria-label="Primary"><ul>
+    <li><a href="{% url 'public:home' %}"{% if page == 'home' %} class="on" aria-current="page"{% endif %}>Home</a></li>
+    <li class="has-dd"><button type="button" class="dd-btn{% if page == 'listing_list' %} on{% endif %}" aria-expanded="false" aria-controls="ddListings">Listings {% icon 'chev' %}</button>
+      <div class="dd" id="ddListings">
+        <a href="{% url 'public:listing_list' %}"{% if page == 'listing_list' %} class="on" aria-current="page"{% endif %}><span class="di">{% icon 'tag' %}</span><span>Homes for sale<small>Every active listing</small></span></a>
+        <a href="{% url 'public:home' %}#cities"><span class="di">{% icon 'map' %}</span><span>Browse by neighborhood<small>Four Omaha neighborhoods</small></span></a>
+        <a href="{% url 'public:home' %}#featured"><span class="di">{% icon 'star' %}</span><span>Featured home<small>Carlos's current pick</small></span></a>
+      </div></li>
+    {# About, Local area and Contact join the menu when US-17, US-23 and US-18 are built (US-14). #}
+  </ul></nav>
+  <div class="hdr-act">
+    <button class="icon-btn" id="themeBtn" aria-label="Switch color theme">{% icon 'moon' %}</button>
+    <button class="icon-btn burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span><i></i><i></i><i></i></span></button>
+  </div>
+</div></header>
+<div class="drawer" id="drawer" hidden>
+  <div class="scrim" data-close-menu></div>
+  <aside class="panel" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="d-top"><a class="logo" href="{% url 'public:home' %}">{% include "partials/logo_mark.html" %}</a><button class="icon-btn" data-close-menu aria-label="Close menu">{% icon 'close' %}</button></div>
+    <nav class="d-nav" aria-label="Mobile">
+      <a href="{% url 'public:home' %}" style="--i:0"{% if page == 'home' %} class="on" aria-current="page"{% endif %}><span class="di">{% icon 'home' %}</span>Home{% icon 'arrow' 'go' %}</a>
+      <div class="d-grp" style="--i:1">
+        <button type="button" class="d-sub-btn{% if page == 'listing_list' %} on{% endif %}" aria-expanded="false" aria-controls="dSubListings"><span class="di">{% icon 'tag' %}</span>Listings{% icon 'chev' 'chv' %}</button>
+        <div class="d-sub" id="dSubListings"><div>
+          <a href="{% url 'public:listing_list' %}" style="--i:0"{% if page == 'listing_list' %} class="on" aria-current="page"{% endif %}><span class="di">{% icon 'grid' %}</span>Homes for sale{% icon 'arrow' 'go' %}</a>
+          <a href="{% url 'public:home' %}#cities" style="--i:0"><span class="di">{% icon 'map' %}</span>Browse by neighborhood{% icon 'arrow' 'go' %}</a>
+          <a href="{% url 'public:home' %}#featured" style="--i:0"><span class="di">{% icon 'star' %}</span>Featured home{% icon 'arrow' 'go' %}</a>
+        </div></div>
+      </div>
+    </nav>
+    <div class="d-foot">
+      <div class="d-contact"><span>{% icon 'phone' %}{{ office.phone }}</span><span>{% icon 'mail' %}{{ office.email }}</span><span>{% icon 'clock' %}{{ office.hours }}</span></div>
+    </div>
+  </aside>
+</div>
+{% endwith %}
+
+{% block main %}<main id="main" data-page="{% block page %}{% endblock %}">
+{% block content %}{% endblock %}
+</main>{% endblock %}
+
+{% block footer %}<footer>
+  <div class="foot"><div class="wrap">
+    <div class="foot-g">
+      <div><a class="logo" href="{% url 'public:home' %}">{% include "partials/logo_mark.html" %}</a><p>Carlos Kosala, broker. Homes for sale in Benson, Downtown, Happy Hollow and Rockbrook.</p></div>
+      <div><h4>Homes</h4><ul>
+        <li><a href="{% url 'public:listing_list' %}">{% icon 'chevR' %}Homes for sale</a></li>
+        <li><a href="{% url 'public:home' %}#cities">{% icon 'chevR' %}Neighborhoods</a></li>
+        <li><a href="{% url 'public:home' %}#featured">{% icon 'chevR' %}Featured home</a></li>
+      </ul></div>
+      <div><h4>CK Real Estate</h4><ul>
+        <li><a href="{% url 'accounts:login' %}">{% icon 'chevR' %}Log in</a></li>
+      </ul></div>
+      <div><h4>Office</h4><ul><li class="ci">{% icon 'mail' %}{{ office.email }}</li><li class="ci">{% icon 'phone' %}{{ office.phone }}</li><li class="ci">{% icon 'clock' %}{{ office.hours }}</li></ul></div>
+    </div>
+    <div class="foot-b"><span>&copy; {% now "Y" %} CK Real Estate. All rights reserved.</span><span>Pictures on this site are drawings until Carlos adds his own photos.</span></div>
+  </div></div>
+</footer>
+<button class="totop" id="toTop" aria-label="Back to top"><svg class="prog" viewBox="0 0 52 52" aria-hidden="true"><circle class="trk" cx="26" cy="26" r="23" pathLength="100"/><circle class="val" cx="26" cy="26" r="23" pathLength="100"/></svg>{% icon 'up' %}</button>{% endblock %}
+{% for message in messages %}<span hidden data-toast="{{ message }}"></span>{% endfor %}
+<script src="{% static 'js/ck.js' %}" defer></script>
+</body>
+</html>
