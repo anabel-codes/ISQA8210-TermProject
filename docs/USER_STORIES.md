@@ -1,0 +1,28 @@
+# User stories and acceptance criteria
+
+The original README is the source for the baseline functions. Detailed workflows below are implementation interpretations, not newly confirmed client requirements. Individual team contributions and sprint completion are not inferred.
+
+| Story                                                             | Acceptance criteria                                                                                                                                    | Implementation / verification                                                             |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| As a visitor, I want to discover properties without an account.   | Homepage renders; featured cards are published; direct detail URLs work; drafts are inaccessible.                                                      | Home/catalog/detail server pages; service and browser tests.                              |
+| As a visitor, I want to search by my preferences.                 | Location, price, beds, baths, type, status, area and featured filters reach the database; sort/pagination preserve URL state; invalid ranges are safe. | Search parser/query builder, catalog; unit/integration tests and browser filtered search. |
+| As a visitor, I want enough detail to compare homes.              | Images, status, price, available measurements, amenities and description display; unknown facts remain unavailable; thumbnails work.                   | Detail and gallery; desktop/mobile browser tests.                                         |
+| As a visitor, I want to contact the realtor.                      | General/property inquiries validate on client/server, persist with timestamp, show feedback, and cannot be publicly listed.                            | Inquiry API/form and transaction; component, service and browser tests.                   |
+| As an administrator, I want secure access.                        | Passwords are hashed; unauthenticated page/API access fails; logout works; inactive/revoked accounts fail authorization.                               | NextAuth, database authorization; service and browser tests.                              |
+| As an administrator, I want to manage inventory.                  | Create/edit/delete with confirmation; sale and publication states remain separate; published changes are visible; drafts stay private.                 | Listing service/editor/API; database and browser workflows.                               |
+| As an administrator, I want to present property photographs.      | Restricted files decode safely; uploaded media serves immediately; primary/reorder/remove controls work.                                               | Sharp upload and persistent media route; browser upload/read; manual ordering checklist.  |
+| As an administrator, I want to manage inquiries.                  | Search, date sort and status filters work; private notes/status save; inquiry survives listing deletion.                                               | Inquiry dashboard/API; browser workflow and database referential-integrity test.          |
+| As an administrator, I want useful search analytics.              | Actual events aggregate; retries dedupe; test events remain separate; empty states show without observations.                                          | Analytics service/API/dashboard; service and browser tests.                               |
+| As an administrator, I want to configure site content.            | Verified contact/profile/home content persists and renders; blank contact fields show confirmation state.                                              | Settings service/UI/API; browser save and manual public refresh.                          |
+| As an administrator, I want account control.                      | Create, activate/deactivate and reset passwords; cannot deactivate self; changes revoke sessions.                                                      | Protected Users API/UI; authorization tests and manual account lifecycle.                 |
+| As a mobile/keyboard visitor, I want usable navigation and forms. | Mobile menu works; representative layouts do not overflow; labels, focus, semantic content and feedback are provided.                                  | Responsive CSS, shared controls; mobile Chromium and manual accessibility checklist.      |
+| As the project team, we want stable, reproducible delivery.       | Install, migrate, seed, test and build commands are documented; CI is configured; retrospective remains a template.                                    | README, docs, lockfile, workflow, test suite. Remote CI results are not assumed.          |
+
+## Suggested backlog, not completed functionality
+
+- Confirm biography, credentials, authorized inventory sources, contact details and service area with the client.
+- Add email notifications with retry/delivery tracking while keeping inquiry persistence independent.
+- Add MFA, self-service recovery, fine-grained roles and an account-change audit log if operational needs justify them.
+- Validate a PostgreSQL/shared-object-storage deployment for multi-host operation.
+- Add authorized feed imports, maps, geocoding or appointment workflows only after scope/data rights are established.
+- Expand accessibility testing with actual assistive technologies and additional browser engines.
