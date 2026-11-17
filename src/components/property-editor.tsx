@@ -292,7 +292,7 @@ export function PropertyEditor({ property: p }: { property?: Editable }) {
         </label>
         <h2>Photographs</h2>
         <p className="full form-note">
-          Upload JPEG, PNG, or WebP files up to 8 MB. Images are re-encoded to remove metadata.
+          Upload JPEG, PNG, or WebP files up to 4 MB. Images are re-encoded to remove metadata.
           Provide descriptive alt text and select a primary image. Move images to change gallery
           order.
         </p>
