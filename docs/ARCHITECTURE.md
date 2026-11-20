@@ -47,7 +47,7 @@ The inquiry form performs client-side Zod validation, then POSTs to the server. 
 | `POST /api/admin/properties`        | Administrator; validated listing and nested images/features; returns ID.                                                 |
 | `PUT /api/admin/properties/[id]`    | Administrator; full validated edit in a transaction.                                                                     |
 | `DELETE /api/admin/properties/[id]` | Administrator; confirmation body must match record ID.                                                                   |
-| `POST /api/admin/upload`            | Administrator; JPEG/PNG/WebP, 4 MB file limit, 40 MP decode limit; re-encodes WebP with random filename.                 |
+| `POST /api/admin/upload`            | Administrator; JPEG/PNG/WebP, 8 MB file limit, 40 MP decode limit; re-encodes WebP with random filename.                 |
 | `PATCH /api/admin/inquiries/[id]`   | Administrator; status and internal notes.                                                                                |
 | `PUT /api/admin/settings`           | Administrator; validated known setting keys, transactional upserts.                                                      |
 | `POST /api/admin/users`             | Administrator; hashes password before account creation.                                                                  |

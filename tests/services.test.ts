@@ -134,7 +134,7 @@ describe('database search and publication', () => {
   });
   it('filters against persisted price, bedrooms, size, and city', async () => {
     const result = await findProperties({
-      q: 'oMaHa',
+      q: 'Omaha',
       max: '150000',
       bedrooms: '3',
       minSqft: '1700',

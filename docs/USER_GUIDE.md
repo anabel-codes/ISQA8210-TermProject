@@ -28,7 +28,7 @@ The project owner creates an account using the environment-based initialization 
 2. Choose **Add listing**, enter address, price, type, status and a description.
 3. Add optional facts only when known; empty fields remain unavailable.
 4. Enter features one per line.
-5. Upload JPEG/PNG/WebP photographs under 4 MB, then enter descriptive alt text.
+5. Upload JPEG/PNG/WebP photographs under 8 MB, then enter descriptive alt text.
 6. Use **Move up/down** to reorder, **Set primary** for the card image, and **Remove photograph** to detach an image.
 7. Choose **Demonstration sample** for fictional content. Leave **Published publicly** off to save a draft. Publication requires a photograph.
 8. Select **Featured on homepage** to include a published listing in the homepage's three newest featured records.

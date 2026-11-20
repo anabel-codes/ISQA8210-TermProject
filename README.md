@@ -19,7 +19,7 @@ This repository began with the team's project README. The baseline requirements 
 
 Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4 and custom design tokens, Lucide, Prisma 7 with its SQLite driver adapter, Zod, NextAuth credentials/JWT sessions, bcrypt, and Sharp. Vitest/React Testing Library and Playwright provide automated checks. Exact resolved versions are committed in `package-lock.json`.
 
-Server components read from services in `src/lib`; HTTP mutations validate input and authorize on the server. SQLite keeps local setup simple; a PostgreSQL profile and Supabase photo storage support a free hosted academic demo. Production can run on a persistent Node host; The free hosting workflow is documented separately. No hosting service or cloud account is required locally.
+Server components read from services in `src/lib`; HTTP mutations validate input and authorize on the server. SQLite keeps local setup simple. Production can run on a persistent Node host; PostgreSQL conversion steps are documented separately. No hosting service or cloud account is required locally.
 
 ## Local setup
 
@@ -92,7 +92,7 @@ Mutating JSON APIs live under `/api`; administration is under `/api/admin`. Uplo
 
 ## Deployment
 
-For a free academic demo, follow [Vercel Hobby + Supabase Free](docs/FREE_DEPLOYMENT.md). These free plans have usage limits and Supabase can pause inactive projects. For the SQLite profile, use a Node 22.12+ host with persistent database and media storage. Set production environment variables, run `npm ci`, `npm run db:migrate`, `npm run build`, initialize the first administrator, and `npm start` behind HTTPS. Do not seed production inventory automatically. SQLite deployment is single-host; the free serverless profile uses the included PostgreSQL and Supabase adapters. See [DEPLOYMENT](docs/DEPLOYMENT.md) for exact production and conversion steps.
+Use a Node 22.12+ host with persistent database and media storage. Set production environment variables, run `npm ci`, `npm run db:migrate`, `npm run build`, initialize the first administrator, and `npm start` behind HTTPS. Do not seed production inventory automatically. SQLite deployment is single-host; horizontally scaled/serverless deployment needs PostgreSQL and shared media storage. See [DEPLOYMENT](docs/DEPLOYMENT.md) for exact production and conversion steps.
 
 ## Documentation
 
@@ -110,7 +110,7 @@ GitHub Actions is configured to install, migrate, seed, format-check, type-check
 - Academic sample inventory, not licensed MLS/IDX integration. No verified brokerage profile or contact details.
 - Email delivery, appointment booking, maps/geocoding, and real estate feed imports are not implemented.
 - Uploaded files need a persistent writable volume. Removed images remain on disk for recovery; automatic orphan cleanup is not implemented.
-- SQLite is a local/single-host choice. The PostgreSQL/Supabase profile requires account setup and server-only environment variables; a live public deployment is not established by the code alone.
+- SQLite is a local/single-host choice. PostgreSQL and object storage require the documented adapter and schema changes; these deployment paths are not verified here.
 - Inquiries contain personal contact data; the operator must establish access, deletion, backup, and retention practices before collecting real customer information. No automated inquiry deletion is enabled.
 - Analytics summarize at most the latest 10,000 events in 30 days, use approximate browser-session deduplication, and do not represent unique visitors. Retention requires scheduling the prune command.
 - Authentication provides administrator-only roles, eight-hour sessions, and account revocation. MFA and self-service password recovery are not implemented.
