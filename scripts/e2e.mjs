@@ -6,9 +6,7 @@ import { randomBytes } from 'node:crypto';
 const dir = mkdtempSync(join(tmpdir(), 'ck-e2e-'));
 const env = {
   ...process.env,
-  DATABASE_URL: process.env.TEST_DATABASE_URL || `file:${dir}/test.db`,
-  DIRECT_URL: process.env.TEST_DATABASE_URL || `file:${dir}/test.db`,
-  MEDIA_STORAGE: 'local',
+  DATABASE_URL: `file:${dir}/test.db`,
   NEXTAUTH_URL: 'http://localhost:3100',
   NEXTAUTH_SECRET: randomBytes(48).toString('base64'),
   ADMIN_EMAIL: 'browser-admin@example.test',

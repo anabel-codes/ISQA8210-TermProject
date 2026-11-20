@@ -1,12 +1,8 @@
 # Deployment guide
 
-## Free academic deployment
-
-Use [Vercel Hobby plus Supabase Free](FREE_DEPLOYMENT.md) for the requested free hosted demo. The Render configuration below is an optional paid alternative; do not provision it when following the free workflow.
-
 ## Supported baseline
 
-The local and persistent-host profile targets Node.js 22.12+, SQLite, and a single host with writable storage. The free serverless profile uses PostgreSQL and Supabase object storage instead. Run it under a process supervisor behind an HTTPS reverse proxy. A static export cannot provide authentication, server search, inquiries, or administration. Ephemeral serverless filesystems cannot safely retain SQLite or uploaded media.
+The verified application targets Node.js 22.12+ with a persistent writable filesystem, SQLite, and a single host. Run it under a process supervisor behind an HTTPS reverse proxy. A static export cannot provide authentication, server search, inquiries, or administration. Ephemeral serverless filesystems cannot safely retain SQLite or uploaded media.
 
 No deployment or GitHub push has been performed by this implementation. These are operator instructions, not a claim of an existing production environment.
 
@@ -57,17 +53,35 @@ Back up both the database and media. Use SQLite's online backup API or the SQLit
 
 Media is re-encoded to WebP, capped at 2000 pixels wide, and given a random filename. The `/uploads/[file]` route reads only filenames matching that format. Removed/replaced photographs are detached from records but retained on disk. Automatic orphan garbage collection is not implemented. An operator can reconcile referenced `PropertyImage.url` values before deleting unreferenced files after a recovery period.
 
-## PostgreSQL profile and existing data
+## PostgreSQL conversion (documented path, not verified deployment)
 
-The free hosted demo uses the supported PostgreSQL profile in [FREE_DEPLOYMENT](FREE_DEPLOYMENT.md). `DATABASE_URL` selects the matching schema, generated Prisma client, runtime adapter, and migration directory. After switching providers locally, run `npm run db:generate` before running scripts or tests. Use the same provider at build and runtime. `DIRECT_URL` is used only for PostgreSQL migrations; runtime uses `DATABASE_URL`.
+For multiple application hosts, migrate the database and media together. A PostgreSQL URL alone does not switch the checked-in SQLite adapter.
 
-`prisma/schema.prisma` remains the source model definition; `npm run db:generate` refreshes the derived PostgreSQL schema. SQLite and PostgreSQL retain independent migration histories. New model changes require reviewed migrations for both providers. Do not apply SQLite SQL to PostgreSQL or mark unrelated migrations as applied.
+1. Back up existing data. Create a conversion branch and a new empty PostgreSQL database.
+2. Install matching Prisma adapters: `npm install @prisma/adapter-pg@7.10.1 pg` and `npm install -D @types/pg`. Keep Prisma CLI/client/adapter versions aligned.
+3. Change `datasource db` in `prisma/schema.prisma` to `provider = "postgresql"`. Keep `prisma.config.ts` reading `DATABASE_URL`; set it to the PostgreSQL connection URL in the deployment environment.
+4. Replace the SQLite adapter in `src/lib/db.ts`:
 
-The hosted setup creates a new empty database. It does not copy local inventory, administrator accounts, inquiries, analytics, or uploads. To transfer real existing data, first back up both stores, build and test an explicit export/import process with relationship/count checks, and retain a restore plan. That transfer is outside the new academic-demo setup. The optional seed adds fictional inventory only.
+```ts
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
+```
+
+Preserve the existing development singleton/export pattern. Use trusted TLS certificates and provider-recommended connection pooling.
+
+5. Archive the SQLite migration history outside the active PostgreSQL migration directory in this conversion branch. Generate a fresh initial PostgreSQL migration with `npx prisma migrate dev --name initial_postgresql` against a disposable development PostgreSQL instance. Do not apply SQLite SQL to PostgreSQL. Keep the SQLite history in Git history/documented archives.
+6. Export and validate source records, including timestamps/IDs, integer cents, and FK relationships. Import User and Property before dependent images/features/inquiries/events. Reconcile counts and orphan checks. A tested import utility is future work; do not manually improvise on a live database.
+7. Adapt database-backed tests to a temporary isolated PostgreSQL database/schema and rerun all authorization, publication, inquiry and browser workflows. Confirm case-insensitive location behavior deliberately; PostgreSQL contains matching differs from SQLite. Add `mode: 'insensitive'` where appropriate after generating the PostgreSQL client.
+8. Deploy migrations with `npm run db:migrate`, regenerate the client, build, and run acceptance checks before switching traffic. Retain the prior database and restore plan until cutover is accepted.
+
+No live PostgreSQL account or migration was configured in this task.
 
 ## Shared/object media
 
-Multiple nodes need shared persistent media or an object-storage adapter. The Supabase adapter in `src/lib/media.ts` stores and retrieves encoded images through the existing `/uploads` route. It keeps credentials server-only and uses a private bucket. Other object-storage providers would require a corresponding adapter. Validate object size/type, re-encode before storage, limit access, and keep storage credentials server-only. The default local profile still uses filesystem media. S3/R2 adapters are not included.
+Multiple nodes need shared persistent media or an object-storage adapter. Replace the upload writer and media resolver together; store only approved asset keys/URLs and update the Zod image URL allowlist and Next image policy. Validate object size/type, re-encode before storage, limit access, and keep storage credentials server-only. Existing code uses local media and does not claim an S3/R2 integration.
 
 ## Operational security and limitations
 

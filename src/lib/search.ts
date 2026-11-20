@@ -35,17 +35,16 @@ export function parseSearch(input: Query) {
 }
 export type Search = ReturnType<typeof parseSearch>;
 export function searchWhere(s: Search, admin = false): Prisma.PropertyWhereInput {
-  const text = {
-    contains: s.q,
-    ...(/^postgres(ql)?:/.test(process.env.DATABASE_URL || '')
-      ? { mode: 'insensitive' as const }
-      : {}),
-  };
   return {
     ...(admin ? {} : { published: true }),
     ...(s.q
       ? {
-          OR: [{ city: text }, { street: text }, { title: text }, { zip: text }],
+          OR: [
+            { city: { contains: s.q } },
+            { street: { contains: s.q } },
+            { title: { contains: s.q } },
+            { zip: { contains: s.q } },
+          ],
         }
       : {}),
     ...(s.type ? { type: s.type } : {}),
