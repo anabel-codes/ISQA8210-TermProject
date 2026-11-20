@@ -22,3 +22,6 @@ designs/template2/
 
 # Local tool caches
 .impeccable/
+
+# Local Claude instructions
+/CLAUDE.md

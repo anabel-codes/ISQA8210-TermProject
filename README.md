@@ -34,7 +34,7 @@ Reflect on successes, challenges, lessons learned, and process improvements iden
 ### Local development
 
 The app uses Django, SQLite, and plain JavaScript. No Node.js build is needed.
-Use Python 3.12 as specified in [BLUEPRINT.md](BLUEPRINT.md).
+Use Python 3.12 as specified in [BLUEPRINT.md](markdown/BLUEPRINT.md).
 
 Clone the development branch and install dependencies (Windows PowerShell):
 
@@ -93,7 +93,7 @@ git push -u origin <name>-development
 Commit only the files intended for your change. Use messages such as
 `feat(listings): add listing validation (US-03)` and open a pull request to `main`
 with a teammate as reviewer. Coordinate migrations with the team before creating
-them. Follow [CLAUDE.md](CLAUDE.md) and [BLUEPRINT.md](BLUEPRINT.md) for scope and
+them. Follow [BLUEPRINT.md](markdown/BLUEPRINT.md) for scope and
 project conventions; use the existing `<name>-development` branch names.
 
 `prototype/` is the HTML design reference. The running Django app uses

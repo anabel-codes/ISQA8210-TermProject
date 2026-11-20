@@ -4,7 +4,7 @@ ISQA 8210 Term Project · Team 3 · Version 2.0 · November 13, 2026
 Author of this blueprint: Twumasi Adomako (frontend, interface design, Kanban)
 Client: Carlos Kosala, Broker (second administrator: Janet) · Product Owner: Paul van Vliet
 
-This file is the single source of truth for building the site in Claude Code. Drop it at the root of the repo as `BLUEPRINT.md`. Claude Code should read it before every work session. Section 17 gives a ready `CLAUDE.md`, and section 18 gives the prompts to paste for each stage.
+This file is the single source of truth for building the site in Claude Code. Store it in the repo as `markdown/BLUEPRINT.md`. Claude Code should read it before every work session. Section 17 gives a ready `CLAUDE.md`, and section 18 gives the prompts to paste for each stage.
 
 Sources this blueprint is built from:
 - The term project case (Carlos Kosala and CK Real Estate)
@@ -191,7 +191,8 @@ Rules for the code:
 
 ```
 ISQA8210-TermProject/
-├── BLUEPRINT.md                 ← this file
+├── markdown/
+│   └── BLUEPRINT.md             ← this file
 ├── CLAUDE.md                    ← section 17
 ├── README.md
 ├── requirements.txt
@@ -1086,7 +1087,7 @@ Put this at the repo root. Every Claude Code session reads it.
 ```markdown
 # CK Real Estate (ISQA 8210, Team 3)
 
-Read BLUEPRINT.md first. It is the source of truth for scope, models, URLs, design and deploy.
+Read markdown/BLUEPRINT.md first. It is the source of truth for scope, models, URLs, design and deploy.
 The prototype/ folder is the design reference: copy its markup, classes and CSS, replace its sample data with real queries.
 
 ## Stack
@@ -1131,7 +1132,7 @@ Plain JavaScript plus the vendored libraries in static/vendor/ (Tom Select, Quil
 Paste these one at a time. Wait for the tests to pass before moving on.
 
 **Stage 0: scaffold**
-> Read BLUEPRINT.md and CLAUDE.md. Scaffold the Django project exactly as in section 4 (project `ckrealestate`; apps accounts, listings, inquiries, siteprofile, localarea, reports), with settings from section 5, `.env.example`, `.gitignore` and `requirements.txt`. Copy prototype/styles.css to static/css/ck.css, prototype/admin.css to static/css/admin.css and prototype/vendor/ to static/vendor/. Build `templates/base.html` from the prototype's public header and footer and `templates/base_admin.html` from the admin shell (side menu, top bar). Add `static/img/logo.svg` from section 10.3. Run the server and the (empty) test suite. Don't commit yet; show me the file tree.
+> Read markdown/BLUEPRINT.md and CLAUDE.md. Scaffold the Django project exactly as in section 4 (project `ckrealestate`; apps accounts, listings, inquiries, siteprofile, localarea, reports), with settings from section 5, `.env.example`, `.gitignore` and `requirements.txt`. Copy prototype/styles.css to static/css/ck.css, prototype/admin.css to static/css/admin.css and prototype/vendor/ to static/vendor/. Build `templates/base.html` from the prototype's public header and footer and `templates/base_admin.html` from the admin shell (side menu, top bar). Add `static/img/logo.svg` from section 10.3. Run the server and the (empty) test suite. Don't commit yet; show me the file tree.
 
 **Stage 1: US-01 and US-02**
 > Implement US-01 and US-02 from BLUEPRINT section 13: login and logout at /manage/, AdminRequiredMixin (login_required plus never_cache), a placeholder dashboard at /manage/, the Administrators group, a management command `create_admins` that makes the carlos and janet users with passwords read from env vars, and the user_logged_in / user_logged_out receivers that write AuditLog rows (create a minimal AuditLog model now). Login template from prototype/login.html. Write every test listed on the cards. Run the tests, then commit on my branch with message "feat(accounts): admin login and logout (US-01, US-02)".
