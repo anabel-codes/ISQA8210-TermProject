@@ -98,3 +98,9 @@ project conventions; use the existing `<name>-development` branch names.
 
 `prototype/` is the HTML design reference. The running Django app uses
 `templates/` and `static/`; mockup screenshots are in `docs/design/mockups/v3/`.
+
+Sprint 2 integration and deployment notes:
+
+- [Sprint 2 status and endpoints](markdown/SPRINT2_STATUS.md)
+- [Cole's data model and Django mapping](markdown/DATABASE_MAPPING.md)
+- [PythonAnywhere deployment](markdown/PYTHONANYWHERE.md)

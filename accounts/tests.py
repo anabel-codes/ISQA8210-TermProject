@@ -1,7 +1,7 @@
 """US-01 Administrator Log In and US-02 Administrator Log Out."""
 
 from django.contrib.auth.models import Group, User
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils.html import strip_tags
 
@@ -104,3 +104,43 @@ class US02LogoutTests(AdminAccountsMixin, TestCase):
     def test_logout_needs_post(self):
         response = self.client.get(LOGOUT)
         self.assertEqual(response.status_code, 405)
+
+
+class AdministratorAccessTests(AdminAccountsMixin, TestCase):
+    def test_regular_user_cannot_log_in_to_management(self):
+        User.objects.create_user("visitor", password="Visitor-test-123")
+        response = self.client.post(LOGIN, {"username": "visitor", "password": "Visitor-test-123"})
+        self.assertContains(response, "don't match")
+        self.assertNotIn("_auth_user_id", self.client.session)
+        self.assertFalse(AuditLog.objects.filter(action="login").exists())
+
+    def test_existing_regular_session_cannot_open_or_post_to_admin_pages(self):
+        visitor = User.objects.create_user("visitor", password="Visitor-test-123")
+        self.client.force_login(visitor)
+        for url in (DASHBOARD, ADMIN_HOME, reverse("listings_admin:create")):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url).status_code, 403)
+                self.assertEqual(self.client.post(url, {}).status_code, 403)
+
+    def test_inactive_administrator_cannot_log_in(self):
+        self.janet.is_active = False
+        self.janet.save(update_fields=["is_active"])
+        self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_team_superuser_can_use_management(self):
+        User.objects.create_superuser("team", password="Team-test-123")
+        response = self.client.post(LOGIN, {"username": "team", "password": "Team-test-123"})
+        self.assertRedirects(response, DASHBOARD)
+
+    def test_logout_and_create_require_csrf_tokens(self):
+        client = Client(enforce_csrf_checks=True)
+        client.force_login(self.janet)
+        for url in (LOGOUT, reverse("listings_admin:create")):
+            with self.subTest(url=url):
+                self.assertEqual(client.post(url, {}).status_code, 403)
+
+    def test_both_logout_controls_are_post_forms_without_javascript(self):
+        self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        html = self.client.get(DASHBOARD).content.decode()
+        self.assertEqual(html.count(f'method="post" action="{LOGOUT}"'), 2)

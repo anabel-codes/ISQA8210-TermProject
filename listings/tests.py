@@ -1,8 +1,9 @@
 """US-03 Add a New Property Listing."""
 
 from io import StringIO
+from unittest.mock import patch
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
@@ -20,6 +21,7 @@ class US03AddListingTests(TestCase):
     def setUpTestData(cls):
         call_command("seed_lookups", stdout=StringIO())
         cls.janet = User.objects.create_user("janet", password="Test-pass-456")
+        cls.janet.groups.add(Group.objects.get_or_create(name="Administrators")[0])
 
     def setUp(self):
         self.client.login(username="janet", password="Test-pass-456")
@@ -121,6 +123,42 @@ class US03AddListingTests(TestCase):
         self.client.post(CREATE, self.valid_data(price="350000"))
         self.assertEqual(Listing.objects.get().price_range.lower_value, 350000)
 
+    def test_nonfinite_prices_show_field_errors_instead_of_crashing(self):
+        for price in ("NaN", "sNaN", "Infinity", "-Infinity"):
+            with self.subTest(price=price):
+                response = self.client.post(CREATE, self.valid_data(price=price))
+                self.assertEqual(response.status_code, 200)
+                self.assertIn("price", response.context["form"].errors)
+        self.assertEqual(Listing.objects.count(), 0)
+
+    def test_listing_rolls_back_if_audit_write_fails(self):
+        with patch("listings.views_admin.record", side_effect=RuntimeError("audit unavailable")):
+            with self.assertRaises(RuntimeError):
+                self.client.post(CREATE, self.valid_data())
+        self.assertEqual(Listing.objects.count(), 0)
+
+    def test_validation_rejects_out_of_range_house_fields(self):
+        for name, value in {
+            "price": "999", "zip_code": "6813x", "bedrooms": "21", "bathrooms": "2.3",
+            "square_feet": "99", "lot_size": "99", "year_built": "1799", "garage_spaces": "11",
+        }.items():
+            with self.subTest(field=name):
+                response = self.client.post(CREATE, self.valid_data(**{name: value}))
+                self.assertEqual(response.status_code, 200)
+                self.assertIn(name, response.context["form"].errors)
+        self.assertEqual(Listing.objects.count(), 0)
+
+    def test_post_cannot_spoof_owner_status_or_featured_flag(self):
+        self.client.post(CREATE, self.valid_data(
+            administrator="9999", last_modified_by="9999", is_featured="on", is_active="",
+            current_status=ListingStatus.objects.get(name=ListingStatus.SOLD).pk,
+        ))
+        listing = Listing.objects.get()
+        self.assertEqual(listing.administrator, self.janet)
+        self.assertEqual(listing.current_status.name, ListingStatus.AVAILABLE)
+        self.assertTrue(listing.is_active)
+        self.assertFalse(listing.is_featured)
+
 
 class SeedLookupsTests(TestCase):
     def test_seed_is_idempotent(self):
@@ -176,6 +214,7 @@ class AdminListingTableTests(TestCase):
     def setUpTestData(cls):
         call_command("seed_lookups", stdout=StringIO())
         cls.janet = User.objects.create_user("janet", password="Test-pass-456")
+        cls.janet.groups.add(Group.objects.get_or_create(name="Administrators")[0])
         avail = ListingStatus.objects.get(name=ListingStatus.AVAILABLE)
         tudor = PropertyType.objects.get(name="Tudor")
         for street, hood, price in [

@@ -2,6 +2,7 @@
 
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db import transaction
 from django.db.models import Count, Q, Sum
 from django.shortcuts import redirect, render
 
@@ -150,11 +151,12 @@ def listing_create(request):
         listing.current_status = ListingStatus.objects.get(name=ListingStatus.AVAILABLE)
         listing.administrator = request.user
         listing.last_modified_by = request.user
-        listing.save()
-        record(
-            request.user, "created", "Listing", listing.pk,
-            f"Added {listing.street_address} at ${listing.price:,.0f}",
-        )
+        with transaction.atomic():
+            listing.save()
+            record(
+                request.user, "created", "Listing", listing.pk,
+                f"Added {listing.street_address} at ${listing.price:,.0f}",
+            )
         messages.success(request, "Listing saved. It is on the public site as Available.")
         return redirect("listings_admin:list")
     return render(request, "manage/listing_form.html", {

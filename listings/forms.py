@@ -106,6 +106,8 @@ class ListingForm(forms.ModelForm):
             value = Decimal(raw)
         except InvalidOperation:
             raise forms.ValidationError("Enter the price as a number, like 425,000.")
+        if not value.is_finite():
+            raise forms.ValidationError("Enter the price as a number, like 425,000.")
         if value < 1000:
             raise forms.ValidationError("Enter the asking price, at least $1,000.")
         if value > 50_000_000:

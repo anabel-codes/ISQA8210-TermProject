@@ -29,7 +29,7 @@
     </nav>
     <div class="sb-foot">
       <a class="sb-a" href="{% url 'public:home' %}" target="_blank" rel="noopener" data-tip="View public site"><span class="ib">{% icon 'globe' %}</span><span class="sb-lbl">View public site</span></a>
-      <button type="button" class="sb-a" data-logout-btn data-tip="Log out"><span class="ib">{% icon 'logout' %}</span><span class="sb-lbl">Log out</span></button>
+      <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit" class="sb-a" data-tip="Log out"><span class="ib">{% icon 'logout' %}</span><span class="sb-lbl">Log out</span></button></form>
     </div></div></aside>
   <div class="sb-scrim" id="sbScrim" hidden></div>
   <div class="main">
