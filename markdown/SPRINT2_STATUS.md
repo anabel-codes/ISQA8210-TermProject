@@ -7,7 +7,7 @@ Date: November 21, 2026.
 
 | Area | Implemented evidence | Verification / remaining work |
 | --- | --- | --- |
-| Frontend | Real Django login, dashboard, listing table and add form; public home and browse list; light/dark styles and responsive navigation | Browser-verified public home/listings/login and protected add form at 390 px, in light/dark modes, with no page-level horizontal overflow. Screenshots in docs/sprint2. |
+| Frontend | Real Django login, dashboard, listing table and add form; public home and browse list; light/dark styles and responsive navigation | Browser-verified public home/listings/login and protected add form at 390 px, in light/dark modes, with no page-level horizontal overflow. Screenshots in local, gitignored docs/sprint2. |
 | Backend | Administrator group/superuser guard, session login/logout, server form validation, sanitized rich text, forced Available status and owner, atomic listing/audit writes | accounts/tests.py and listings/tests.py cover required acceptance criteria and failure cases. |
 | HTTP/API layer | GET/POST login, POST logout, protected GET/POST new listing, protected dashboard/table, public GET home/listings | Session authentication and CSRF apply to writes. No standalone JSON API is specified by the blueprint; do not claim one exists. |
 | Database | Cole's SQLite reference merged; runtime Django migrations implement its entities with built-in Django authentication | See DATABASE_MAPPING.md. No pending migrations. Do not import the reference SQL into the migrated app database. |
@@ -51,20 +51,19 @@ test database. Final local tests passed after the frontend copy corrections.
   `next=/manage/listings/`.
 - An anonymous add-form request redirected to login; an invalid login displayed
   the generic error. No administrator session was created by that invalid attempt.
-- Eleven live HTTP checks passed; responses are saved in
-  [http-checks.json](../docs/sprint2/http-checks.json), including CSRF rejection,
+- Eleven live HTTP checks passed; responses are saved locally in
+  `docs/sprint2/http-checks.json`, including CSRF rejection,
   login redirects, POST-only logout and CSS/JavaScript availability.
 - Valid listing creation, ownership, Available status, sanitization and public
   visibility were tested in the server's disposable test database. Fictional homes
   were not added to the live database. The owner can add the first real listing.
-- [Desktop home](../docs/sprint2/home-desktop-light.jpg),
-  [mobile light](../docs/sprint2/home-mobile-light.jpg),
-  [mobile dark](../docs/sprint2/home-mobile-dark.jpg),
-  [dashboard](../docs/sprint2/dashboard-desktop-light.jpg),
-  [form validation](../docs/sprint2/add-listing-desktop-errors.jpg), and
-  [mobile form](../docs/sprint2/add-listing-mobile-dark.jpg) provide visual evidence.
+- Desktop/mobile home, light/dark, dashboard and form-validation screenshots
+  provide visual evidence in `docs/sprint2/` on the owner's machine.
   Management screenshots preceded the final removal of internal story labels;
   layout and behavior are unchanged.
+- The owner requested keeping QA evidence local. `docs/sprint2/` is excluded from
+  Git; screenshots, HTTP results and `deployment-record.json` are not published
+  in the repository. The implementation and this status summary are checked in.
 
 ## Remaining completion evidence
 
