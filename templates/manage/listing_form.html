@@ -13,7 +13,7 @@
   {% csrf_token %}
   {{ form.latitude.as_hidden }}{{ form.longitude.as_hidden }}
   <div class="add-main">
-    <div class="pg-intro"><h2 id="formTitle">New listing</h2><p id="formSub">Fill in the house details. It goes up on the public site as <b>Available</b>. The four photos are added in the next step (US-04).</p></div>
+    <div class="pg-intro"><h2 id="formTitle">New listing</h2><p id="formSub">Fill in the house details. It goes up on the public site as <b>Available</b>.</p></div>
     <div class="err-sum" id="errSum" role="alert" tabindex="-1"{% if not form.errors %} hidden{% endif %}>{% if form.errors %}<b>{% icon 'alert' %}Fix {{ form.errors|length }} thing{{ form.errors|length|pluralize }} before saving</b><ul>{% for name, errs in form.errors.items %}<li><a href="#{{ name|field_anchor }}">{{ errs.0 }}</a></li>{% endfor %}</ul>{% endif %}</div>
     <section class="card fs">
       <div class="fs-h"><span class="fs-n">1</span><div><h2>Where it is</h2><p>The city is always Omaha, NE.</p></div></div>
@@ -51,7 +51,7 @@
     </section>
     <section class="card fs" id="phSec">
       <div class="fs-h"><span class="fs-n">5</span><div><h2>Photos</h2><p>Exactly four, JPEG or PNG, up to 5 MB each. A floor plan can be one of the four.</p></div></div>
-      <p class="muted" style="margin:0">Photo upload is the next story (US-04). Until then the site shows a drawing in place of the photos.</p>
+      <p class="muted" style="margin:0">Photo uploads are not available yet. The site shows a drawing in place of the photos.</p>
     </section>
   </div>
   <aside class="add-side">

@@ -55,7 +55,7 @@
       <div class="feat-st"><div><small>Asking price</small><b>{{ featured.price|money }}</b></div><div><small>Neighborhood</small><b style="font-size:1.05rem">{{ featured.neighborhood }}</b></div></div>
     {% else %}
       <h3>No featured home yet</h3>
-      <div class="feat-st"><div><small>Picking one</small><b style="font-size:1rem;font-weight:600">Comes with the Featured home page (US-15)</b></div></div>
+      <p>No home is currently highlighted on the public site.</p>
     {% endif %}
     <div class="feat-art" data-thumb="7" data-big aria-hidden="true"></div>
   </section>
@@ -97,6 +97,5 @@
     </div>
     <p class="tbl-info" id="dashInfo" aria-live="polite"></p>
   </section>
-  <p class="dash-note">Search charts (visitor searches by period) come with the search report stories (US-21, US-22).</p>
 </div>
 {% endblock %}
