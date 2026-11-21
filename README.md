@@ -63,7 +63,9 @@ python manage.py runserver
 
 Open http://127.0.0.1:8000/ for the public site and `/django-admin/` for Django administration.
 The application login is `/manage/login/`. To create its administrator accounts,
-copy `seed/admins.example.json` to `seed/admins.json`, replace both placeholder
+run `python manage.py create_admins --interactive` and enter the new passwords
+privately. Existing passwords are preserved. For file-based local setup, copy
+`seed/admins.example.json` to `seed/admins.json`, replace both placeholder
 passwords, and run `python manage.py create_admins`.
 Optional local sample listings: `python manage.py seed_demo`.
 
