@@ -33,6 +33,7 @@ HEADER_SORTS = {
 
 
 def status_counts():
+    """Count active listings by status and report the separate hidden-listing total."""
     rows = Listing.objects.filter(is_active=True).values("current_status__name").annotate(n=Count("id"))
     counts = {r["current_status__name"]: r["n"] for r in rows}
     return {
@@ -80,6 +81,7 @@ def dashboard(request):
 
 @admin_required
 def admin_listing_list(request):
+    """Handle protected GET listing search, whitelisted sorting, filters and pagination."""
     tab = "hidden" if request.GET.get("tab") == "hidden" else "active"
     qs = Listing.objects.select_related("property_type", "neighborhood", "current_status")
     qs = qs.filter(is_active=(tab == "active"))
@@ -145,6 +147,7 @@ def admin_listing_list(request):
 
 @admin_required
 def listing_create(request):
+    """Render the protected form on GET; validate POST and atomically save the owner, Available status and audit event."""
     form = ListingForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         listing = form.save(commit=False)
@@ -159,6 +162,8 @@ def listing_create(request):
             )
         messages.success(request, "Listing saved. It is on the public site as Available.")
         return redirect("listings_admin:list")
+    if request.method == "POST" and form.errors:
+        messages.error(request, "The listing was not saved. Check the marked fields and try again.")
     return render(request, "manage/listing_form.html", {
         "form": form,
         "nav": "add",

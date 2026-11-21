@@ -130,6 +130,7 @@ TYPE_ICONS = {"Ranch": "home", "Tudor": "home", "Split-Entry": "layers", "Townho
 
 @register.filter
 def type_icon(property_type):
+    """Choose the existing icon name associated with a property type."""
     return TYPE_ICONS.get(str(property_type), "home")
 
 

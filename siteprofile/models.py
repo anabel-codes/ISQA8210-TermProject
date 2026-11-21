@@ -19,8 +19,10 @@ class SiteProfile(models.Model):
         db_table = "SITE_PROFILE"
 
     def __str__(self):
+        """Return the SiteProfile label displayed by Django forms and administration."""
         return self.broker_name
 
     @classmethod
     def load(cls):
+        """Return the first configured broker profile, or None when office details are still pending."""
         return cls.objects.first()

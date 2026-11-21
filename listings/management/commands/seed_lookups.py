@@ -14,6 +14,7 @@ CEILING = Decimal("1000000")  # 20 ranges, $0 to $1M (D6)
 
 
 def band_name(low, high):
+    """Format the human-readable label for a half-open $50,000 search band."""
     return f"Under ${high:,.0f}" if low == 0 else f"${low:,.0f} to ${high:,.0f}"
 
 
@@ -21,6 +22,7 @@ class Command(BaseCommand):
     help = "Create lookup rows for types, neighborhoods, statuses and $50k price bands."
 
     def handle(self, *args, **options):
+        """Create missing lookup values and price bands without duplicating existing rows."""
         for name in PROPERTY_TYPES:
             PropertyType.objects.get_or_create(name=name)
         for name in NEIGHBORHOODS:

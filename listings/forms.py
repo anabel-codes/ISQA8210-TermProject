@@ -39,6 +39,7 @@ def clean_rich_text(html):
 
 
 def plain_length(html):
+    """Count visible description characters after stripping markup and collapsing whitespace."""
     return len(" ".join(strip_tags(html or "").split()))
 
 
@@ -84,6 +85,7 @@ class ListingForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        """Set lookup prompts, optional garage defaults, and the listing form validation messages."""
         super().__init__(*args, **kwargs)
         self.fields["neighborhood"].empty_label = "Pick a neighborhood"
         self.fields["property_type"].empty_label = "Pick a home type"
@@ -95,12 +97,14 @@ class ListingForm(forms.ModelForm):
             self.initial["features"] = f"{FEATURE_SEPARATOR} ".join(self.initial["features"])
 
     def clean_street_address(self):
+        """Normalize whitespace and reject addresses shorter than five characters."""
         value = " ".join(self.cleaned_data["street_address"].split())
         if len(value) < 5:
             raise forms.ValidationError("Enter the full street address, like 4812 Underwood Avenue.")
         return value
 
     def clean_price(self):
+        """Parse a finite asking price from $1,000 to $50,000,000 and round to whole dollars."""
         raw = (self.cleaned_data.get("price") or "").replace(",", "").replace("$", "").strip()
         try:
             value = Decimal(raw)
@@ -115,36 +119,42 @@ class ListingForm(forms.ModelForm):
         return value.quantize(Decimal("1"))
 
     def clean_zip_code(self):
+        """Require the five-digit ZIP format used by Omaha listings."""
         value = self.cleaned_data["zip_code"].strip()
         if not ZIP_RE.match(value):
             raise forms.ValidationError("Use 5 digits, like 68132.")
         return value
 
     def clean_bedrooms(self):
+        """Keep the model field nonnegative and limit bedrooms to twenty."""
         value = self.cleaned_data["bedrooms"]
         if value is not None and value > 20:
             raise forms.ValidationError("Enter 0 to 20 bedrooms.")
         return value
 
     def clean_bathrooms(self):
+        """Accept zero to twenty bathrooms in whole or half-bath increments."""
         value = self.cleaned_data["bathrooms"]
         if value is not None and ((value * 2) % 1 != 0 or not 0 <= value <= 20):
             raise forms.ValidationError("Use whole or half baths, like 2 or 2.5.")
         return value
 
     def clean_square_feet(self):
+        """Reject finished floor areas below one hundred square feet."""
         value = self.cleaned_data["square_feet"]
         if value is not None and value < 100:
             raise forms.ValidationError("Enter the finished size, at least 100 sqft.")
         return value
 
     def clean_lot_size(self):
+        """Accept an optional lot area of at least one hundred square feet."""
         value = self.cleaned_data.get("lot_size")
         if value is not None and value < 100:
             raise forms.ValidationError("Enter the lot size in square feet, or leave it blank.")
         return value
 
     def clean_year_built(self):
+        """Accept an optional year between 1800 and the current calendar year."""
         value = self.cleaned_data.get("year_built")
         this_year = datetime.date.today().year
         if value is not None and not (1800 <= value <= this_year):
@@ -152,6 +162,7 @@ class ListingForm(forms.ModelForm):
         return value
 
     def clean_garage_spaces(self):
+        """Treat an omitted garage as zero spaces and reject more than ten."""
         value = self.cleaned_data.get("garage_spaces")
         if value is None:
             return 0
@@ -160,6 +171,7 @@ class ListingForm(forms.ModelForm):
         return value
 
     def clean_features(self):
+        """Normalize and deduplicate semicolon-separated features, enforcing count and length limits."""
         raw = self.cleaned_data.get("features") or ""
         items, seen = [], set()
         for part in raw.replace("\n", FEATURE_SEPARATOR).split(FEATURE_SEPARATOR):
@@ -177,6 +189,7 @@ class ListingForm(forms.ModelForm):
         return items
 
     def clean_description(self):
+        """Sanitize rich text, wrap plain paragraphs, and require forty visible characters."""
         html = clean_rich_text(self.cleaned_data.get("description"))
         if "<" not in html:  # plain text from a browser without the editor
             paragraphs = [p.strip() for p in html.split("\n\n") if p.strip()]
@@ -186,6 +199,7 @@ class ListingForm(forms.ModelForm):
         return html
 
     def _clean_coord(self, name, limit):
+        """Validate a geographic coordinate and preserve six decimal places."""
         value = self.cleaned_data.get(name)
         if value is None:
             return None
@@ -194,12 +208,15 @@ class ListingForm(forms.ModelForm):
         return value.quantize(SIX_PLACES, rounding=ROUND_HALF_UP)
 
     def clean_latitude(self):
+        """Validate the optional north/south coordinate within ninety degrees of the equator."""
         return self._clean_coord("latitude", 90)
 
     def clean_longitude(self):
+        """Validate the optional east/west coordinate within one hundred eighty degrees."""
         return self._clean_coord("longitude", 180)
 
     def clean(self):
+        """Discard a partial map pin so latitude and longitude are always stored together."""
         data = super().clean()
         if (data.get("latitude") is None) != (data.get("longitude") is None):
             data["latitude"] = data["longitude"] = None

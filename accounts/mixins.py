@@ -14,10 +14,12 @@ class AdminRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     """Use on class-based admin views."""
 
     def test_func(self):
+        """Apply the administrator role check to class-based management views."""
         return is_administrator(self.request.user)
 
 
 def is_administrator(user):
+    """Return whether an active user belongs to Administrators or is a team superuser."""
     return user.is_authenticated and user.is_active and (
         user.is_superuser or user.groups.filter(name="Administrators").exists()
     )
@@ -27,6 +29,7 @@ def admin_required(view_func):
     """Use on function-based admin views."""
     @wraps(view_func)
     def guarded(request, *args, **kwargs):
+        """Reject authenticated nonadministrators; login_required handles anonymous requests."""
         if not is_administrator(request.user):
             raise PermissionDenied
         return view_func(request, *args, **kwargs)

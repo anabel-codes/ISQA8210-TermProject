@@ -24,12 +24,14 @@ def ordered_types():
 
 
 def _cards():
+    """Load active listings with their lookup rows and photos, placing featured homes first."""
     return Listing.active.select_related(
         "property_type", "neighborhood", "current_status"
     ).prefetch_related("photos").order_by("-is_featured", "-date_created", "-pk")
 
 
 def _search_options():
+    """Return the neighborhood, property-type and price-band options for public search forms."""
     return {
         "hoods": Neighborhood.objects.all(),
         "types": ordered_types(),
@@ -38,6 +40,7 @@ def _search_options():
 
 
 def home(request):
+    """Handle GET / with featured and recent active listings and neighborhood listing counts."""
     listings = _cards()
     featured = listings.filter(is_featured=True).first()
     hoods = Neighborhood.objects.annotate(
@@ -52,6 +55,11 @@ def home(request):
         "hood_cards": hoods,
         **_search_options(),
     })
+
+
+def photo_credits(request):
+    """Render the stock-photo credits without implying that those homes are active listings."""
+    return render(request, "public/photo_credits.html")
 
 
 def listing_list(request):

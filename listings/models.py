@@ -16,6 +16,7 @@ class PropertyType(models.Model):
         ordering = ["name"]
 
     def __str__(self):
+        """Return the PropertyType label displayed by Django forms and administration."""
         return self.name
 
 
@@ -27,6 +28,7 @@ class Neighborhood(models.Model):
         ordering = ["name"]
 
     def __str__(self):
+        """Return the Neighborhood label displayed by Django forms and administration."""
         return self.name
 
 
@@ -39,6 +41,7 @@ class ListingStatus(models.Model):
         verbose_name_plural = "listing statuses"
 
     def __str__(self):
+        """Return the ListingStatus label displayed by Django forms and administration."""
         return self.name
 
 
@@ -54,15 +57,18 @@ class PriceRange(models.Model):
         ordering = ["lower_value"]
 
     def __str__(self):
+        """Return the PriceRange label displayed by Django forms and administration."""
         return self.name
 
     @classmethod
     def for_price(cls, price):
+        """Find the inclusive-lower, exclusive-upper price band; return None above the seeded ceiling."""
         return cls.objects.filter(lower_value__lte=price, upper_value__gt=price).first()
 
 
 class ActiveListingManager(models.Manager):
     def get_queryset(self):
+        """Limit public listing queries to records that have not been hidden."""
         return super().get_queryset().filter(is_active=True)
 
 
@@ -127,10 +133,12 @@ class Listing(models.Model):
         ]
 
     def __str__(self):
+        """Return the Listing label displayed by Django forms and administration."""
         return self.street_address
 
     def save(self, *args, **kwargs):
         # Keep the stored band in step with the price (fixes the stale-band risk, D3).
+        """Recalculate the price band before persisting a listing or its updated asking price."""
         self.price_range = PriceRange.for_price(self.price)
         super().save(*args, **kwargs)
 
@@ -141,6 +149,7 @@ class Listing(models.Model):
 
     @property
     def cover_photo(self):
+        """Return the first photo in display order, or None when property photos are pending."""
         return self.photos.order_by("display_order").first()
 
 
@@ -162,4 +171,5 @@ class ListingPhoto(models.Model):
         ]
 
     def __str__(self):
+        """Return the ListingPhoto label displayed by Django forms and administration."""
         return f"{self.listing} photo {self.display_order}"

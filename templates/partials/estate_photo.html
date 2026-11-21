@@ -1,0 +1,9 @@
+{% load static %}{% if secondary %}
+<span class="estate-photo">
+  <img class="estate-day" src="{% static 'img/estates/neighborhood-day-small.webp' %}" srcset="{% static 'img/estates/neighborhood-day-small.webp' %} 800w, {% static 'img/estates/neighborhood-day.webp' %} 1800w" sizes="{{ sizes|default:'(max-width: 900px) 100vw, 50vw' }}" alt="Illustrative stock photo of a home in daylight" loading="lazy" decoding="async">
+  <img class="estate-night" src="{% static 'img/estates/neighborhood-night-small.webp' %}" srcset="{% static 'img/estates/neighborhood-night-small.webp' %} 800w, {% static 'img/estates/neighborhood-night.webp' %} 1600w" sizes="{{ sizes|default:'(max-width: 900px) 100vw, 50vw' }}" alt="Illustrative stock photo of an estate in the evening" loading="lazy" decoding="async">
+</span>{% else %}
+<span class="estate-photo">
+  <img class="estate-day" src="{% static 'img/estates/day-small.webp' %}" srcset="{% static 'img/estates/day-small.webp' %} 800w, {% static 'img/estates/day.webp' %} 1800w" sizes="{{ sizes|default:'(max-width: 900px) 100vw, 60vw' }}" alt="Illustrative stock photo of a red house in bright sunshine"{% if eager %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async">
+  <img class="estate-night" src="{% static 'img/estates/night-small.webp' %}" srcset="{% static 'img/estates/night-small.webp' %} 800w, {% static 'img/estates/night.webp' %} 1600w" sizes="{{ sizes|default:'(max-width: 900px) 100vw, 60vw' }}" alt="Illustrative stock photo of a house with warm window lights at night"{% if eager %} loading="eager"{% else %} loading="lazy"{% endif %} decoding="async">
+</span>{% endif %}

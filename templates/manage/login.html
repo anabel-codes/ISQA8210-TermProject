@@ -31,6 +31,6 @@
       </form>
     </div>
   </div>
-  <div class="auth-art" id="authArt" aria-hidden="true"><div class="copy"><span class="eyebrow" style="color:#F0CFD4;margin:0">CK Real Estate</span><h2>Welcome back.</h2></div></div>
+  <div class="auth-art" id="authArt" aria-hidden="true">{% include "partials/estate_photo.html" with eager=True %}<div class="shade"></div><div class="copy"><span class="eyebrow" style="color:#F0CFD4;margin:0">CK Real Estate</span><h2>Welcome back.</h2></div></div>
 </div>
 {% endblock %}

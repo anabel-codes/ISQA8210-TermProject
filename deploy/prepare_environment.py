@@ -14,6 +14,7 @@ from dotenv import dotenv_values
 
 
 def main():
+    """Validate the PythonAnywhere checkout, create private configuration, and back up its database."""
     root = Path(__file__).resolve().parents[1]
     username = getpass.getuser()
     if root != Path("/home") / username / "ISQA8210-TermProject":

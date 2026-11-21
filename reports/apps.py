@@ -6,4 +6,5 @@ class ReportsConfig(AppConfig):
     name = "reports"
 
     def ready(self):
+        """Register the authentication audit receivers once Django has loaded the application."""
         from . import signals  # noqa: F401  (connects the login and logout receivers)

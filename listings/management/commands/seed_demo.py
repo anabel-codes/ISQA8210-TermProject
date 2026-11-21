@@ -45,6 +45,7 @@ class Command(BaseCommand):
     help = "Add 11 sample listings for local development (never on the live site)."
 
     def handle(self, *args, **options):
+        """Add fictional development listings for a local database while preserving existing addresses."""
         call_command("seed_lookups", stdout=self.stdout)
         admin = User.objects.filter(username="carlos").first() or User.objects.filter(is_superuser=True).first()
         if not admin:

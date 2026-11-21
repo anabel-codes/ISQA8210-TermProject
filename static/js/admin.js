@@ -90,8 +90,7 @@ const money = n => '$' + Math.round(n).toLocaleString('en-US');
 const moneyK = n => n >= 1e6 ? '$' + (n / 1e6).toFixed(n >= 1e7 ? 1 : 2).replace(/\.?0+$/, '') + 'M' : '$' + Math.round(n / 1000) + 'k';
 const rng = seed => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 const hash = s => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 2147483647, 7) || 7;
-let toastT;
-const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2600); };
+const toast = (message, level = 'info') => { if (window.CKFeedback) window.CKFeedback.toast(message, level); };
 
 /* ---------- extra icons for the admin pages ---------- */
 Object.assign(IC, {
@@ -151,6 +150,7 @@ function openDialog({title, body, foot = '', wide = false, onOpen}){
 }
 function closeDialog(v = false){ if (!dlg || !dlg.open) return; dlg.classList.remove('in'); const d = dlg; closeT = setTimeout(() => { d.close(); document.body.style.overflow = ''; }, reduce ? 0 : 160); if (dlgResolve){ const r = dlgResolve; dlgResolve = null; r(v); } }
 function confirmBox({title, text, ok = 'Confirm', danger = false, icon = 'alert'}){
+  if (window.CKFeedback) return window.CKFeedback.confirm({title, text, ok, danger});
   return new Promise(res => {
     openDialog({title, body:`<div class="cf"><span class="cf-ic${danger ? ' del' : ''}">${ico(icon)}</span><p>${text}</p></div>`,
       foot:`<button type="button" class="pbtn ghost" data-close>Cancel</button><button type="button" class="pbtn ${danger ? 'danger' : 'acc'}" id="cfOk">${ok}</button>`,
@@ -164,20 +164,8 @@ function confirmBox({title, text, ok = 'Confirm', danger = false, icon = 'alert'
 const fErr = (el, msg) => { const f = el.closest('.fld'); if (!f) return; f.classList.add('err'); let m = $('.f-err', f); if (!m){ m = document.createElement('small'); m.className = 'f-err'; m.id = (el.id || 'f' + Math.random().toString(36).slice(2)) + 'Err'; f.append(m); } m.innerHTML = ico('alert') + msg; el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', m.id); };
 const fOk = el => { const f = el.closest('.fld'); if (!f) return; f.classList.remove('err'); const m = $('.f-err', f); m && m.remove(); el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); };
 
-const houseThumb = (seed, big) => {
-  const r = rng(seed * 97 + 11), hue = ['#F7E4E7', '#F3EAE8', '#FBEDEF'][seed % 3], tall = seed % 4 === 2;
-  const w = big ? 220 : 120, h = big ? 240 : 80;
-  if (big){
-    /* tall building for the featured card, drawn in light tones on the red card */
-    let win = '';
-    for (let y = 0; y < 7; y++) for (let x = 0; x < 3; x++){ const lit = r() > .45; win += `<rect x="${86 + x * 30}" y="${58 + y * 24}" width="22" height="15" rx="2" fill="${lit ? '#FFE4B0' : 'rgba(255,255,255,.18)'}"/>`; }
-    return `<svg viewBox="0 0 ${w} ${h}"><path d="M70 40 L180 22 L180 236 L70 236Z" fill="rgba(255,255,255,.12)"/><path d="M78 46 L172 30 L172 236 L78 236Z" fill="rgba(20,0,4,.35)"/>${win}<rect x="60" y="226" width="130" height="10" rx="2" fill="rgba(255,255,255,.35)"/><path d="M180 22 L206 40 L206 236 L180 236Z" fill="rgba(0,0,0,.28)"/><circle cx="40" cy="214" r="16" fill="rgba(255,255,255,.22)"/><rect x="38" y="214" width="4" height="22" fill="rgba(255,255,255,.35)"/></svg>`;
-  }
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice"><rect width="${w}" height="${h}" fill="${hue}"/><circle cx="${90 + r() * 18}" cy="18" r="9" fill="#F1B0BB"/><rect y="64" width="${w}" height="16" fill="#E9D3D6"/>
-    ${tall ? `<rect x="38" y="18" width="44" height="48" fill="#fff"/><rect x="38" y="14" width="44" height="6" fill="#1A0A0D"/>${[0,1,2].map(i => `<rect x="44" y="${24 + i * 13}" width="12" height="8" fill="#A5223A"/><rect x="64" y="${24 + i * 13}" width="12" height="8" fill="#A5223A"/>`).join('')}`
-    : `<path d="M28 40 L60 18 L92 40Z" fill="#1A0A0D"/><rect x="34" y="40" width="52" height="26" fill="#fff"/><rect x="40" y="46" width="14" height="10" fill="#A5223A"/><rect x="66" y="48" width="10" height="18" fill="#24050B"/><rect x="74" y="22" width="5" height="10" fill="#1A0A0D"/>`}
-    <circle cx="18" cy="58" r="7" fill="#8E1D2F"/><rect x="17" y="58" width="2" height="8" fill="#2A0A0F"/></svg>`;
-};
+// Empty photo slots use clearly labeled stock photography, never a fabricated property image.
+const houseThumb = () => `<span class="estate-photo"><img class="estate-day" src="${esc(document.body.dataset.estateDay)}" alt="Illustrative stock photo in daylight"><img class="estate-night" src="${esc(document.body.dataset.estateNight)}" alt="Illustrative stock photo at night"></span>`;
 
 const ANY = {tHood:'All neighborhoods', tType:'All home types', tStatus:'Any status', tBand:'Any price', lHood:'All neighborhoods', lType:'All home types', lStatus:'Any status', lBand:'Any price', aWho:'Anyone', aAct:'Any change', aWhen:'Any time'};
 function enhanceSelect(sel){
@@ -325,11 +313,18 @@ function bindShell(){
   paintTheme();
   tb.addEventListener('click', () => { const d = root.dataset.mode !== 'dark'; if (d) root.dataset.mode = 'dark'; else delete root.dataset.mode; store.set('ck-mode', d ? 'dark' : 'light'); paintTheme(); });
   /* the side-menu Log out is a POST form (Django 5): it looks like the other menu items */
-  $$('[data-logout-btn]').forEach(b => b.addEventListener('click', () => $('#logoutForm').requestSubmit()));
+  $$('form[action$="/logout/"]').forEach(form => form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (form.dataset.confirming === '1') return;
+    form.dataset.confirming = '1';
+    const accepted = await confirmBox({title:'Log out?', text:'You will need to log in again to manage listings. Unsaved form changes will be lost.', ok:'Log out', danger:true});
+    form.dataset.confirming = '0';
+    if (accepted){ document.dispatchEvent(new Event('ck:leaving')); form.submit(); }
+  }));
   /* house thumbnails stand in until a listing has photos */
   $$('[data-thumb]').forEach(el => { el.innerHTML = houseThumb(+el.dataset.thumb, 'big' in el.dataset); });
   /* Django messages */
-  const m = $('[data-flash]'); if (m) setTimeout(() => toast(m.dataset.flash), 300);
+  // admin-feedback.js presents every Django message, including its severity.
 }
 
 /* ---------- dashboard: listings by status donut ---------- */
@@ -444,6 +439,7 @@ function initAdd(){
   v('aType').addEventListener('change', () => { if (!featTS) return; const t = FEAT_BY_TYPE[typeName()] || []; const keep = [].concat(featTS.items); featTS.clearOptions(); featTS.addOptions([...new Set([...t, ...FEAT_SUGGEST, ...keep])].map(x => ({value:x, text:x}))); });
   $$('.t-sel select', f).forEach(enhanceSelect);
   let dirty = false;
+  document.addEventListener('ck:leaving', () => { dirty = false; });
   const num = el => el.value === '' ? null : +el.value;
   const price = () => +v('aPrice').value.replace(/[^\d]/g, '');
   const checks = () => [
@@ -496,14 +492,24 @@ function initAdd(){
     try{
       const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q=${encodeURIComponent(`${st}, Omaha, NE ${v('aZip').value}`)}`, {headers:{Accept:'application/json'}});
       const j = await r.json(); if (!j.length) throw new Error('none');
-      moved = true; dirty = true; place([+j[0].lat, +j[0].lon], 17); toast('Pin placed. Drag it if it is not on the house.');
-    }catch(e){ toast(e.message === 'none' ? 'That address was not found. Click the map to place the pin.' : 'The address lookup is not available here. Click the map to place the pin.'); }
+      moved = true; dirty = true; place([+j[0].lat, +j[0].lon], 17); toast('Pin placed. Drag it if it is not on the house.', 'info');
+    }catch(e){ toast(e.message === 'none' ? 'That address was not found. Click the map to place the pin.' : 'The address lookup is not available here. Click the map to place the pin.', 'warning'); }
     finally{ b.classList.remove('loading'); }
   });
   f.addEventListener('input', e => { dirty = true; if (e.target.matches('input,textarea,select')) fOk(e.target); preview(); });
   f.addEventListener('change', () => { dirty = true; preview(); });
   addEventListener('beforeunload', e => { if (dirty){ e.preventDefault(); e.returnValue = ''; } });
   $('#cancelBtn').addEventListener('click', async e => { if (!dirty) return; e.preventDefault(); const href = e.currentTarget.href; if (await confirmBox({title:'Leave without saving?', text:'What you entered on this form will be lost.', ok:'Leave the form', danger:true})){ dirty = false; location.href = href; } });
+  document.addEventListener('click', async event => {
+    const link = event.target.closest('a[href]');
+    if (!dirty || event.defaultPrevented || !link || link.target || link.hasAttribute('download') || event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+    const destination = new URL(link.href, location.href);
+    if (destination.pathname === location.pathname && destination.search === location.search) return;
+    event.preventDefault();
+    if (await confirmBox({title:'Leave without saving?', text:'What you entered on this form will be lost.', ok:'Leave the form', danger:true})){
+      dirty = false; location.href = destination.href;
+    }
+  });
   const summary = errs => {
     const sum = $('#errSum');
     if (!errs.length){ sum.hidden = true; return; }
@@ -532,11 +538,20 @@ function initAdd(){
     summary(errs);
     return !errs.length;
   };
-  f.addEventListener('submit', e => {
+  let publishing = false, approved = false;
+  f.addEventListener('submit', async event => {
+    if (approved) return;
+    event.preventDefault();
+    if (publishing) return;
     if (featTS) featEl.value = feats().join(SEP + ' ');
-    if (!validate()){ e.preventDefault(); return; }
-    dirty = false;
-    const b = $('#saveBtn'); b.classList.add('loading');
+    if (!validate()){ toast('Check the marked fields before saving.', 'error'); return; }
+    publishing = true;
+    const accepted = await confirmBox({title:'Publish this listing?', text:'It will appear on the public site as Available. Check the address and house details before publishing.', ok:'Publish listing'});
+    publishing = false;
+    if (!accepted) return;
+    approved = true; dirty = false;
+    $('#saveBtn').classList.add('loading');
+    f.requestSubmit();
   });
   /* errors from the server: same summary, linked to each field */
   const server = $$('.fld.err .f-err', f).map(m => [$('input:not([type=hidden]),select,textarea', m.closest('.fld')), m.textContent.trim()]).filter(x => x[0]);

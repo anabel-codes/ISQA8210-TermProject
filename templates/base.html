@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
 <link rel="stylesheet" href="{% static 'css/ck.css' %}">
+<link rel="stylesheet" href="{% static 'css/photography.css' %}">
 {% block head %}{% endblock %}
 </head>
 <body>
@@ -73,7 +74,7 @@
       </ul></div>
       <div><h4>Office</h4><ul><li class="ci">{% icon 'mail' %}{{ office.email }}</li><li class="ci">{% icon 'phone' %}{{ office.phone }}</li><li class="ci">{% icon 'clock' %}{{ office.hours }}</li></ul></div>
     </div>
-    <div class="foot-b"><span>&copy; {% now "Y" %} CK Real Estate. All rights reserved.</span><span>Pictures on this site are drawings until Carlos adds his own photos.</span></div>
+    <div class="foot-b"><span>&copy; {% now "Y" %} CK Real Estate. All rights reserved.</span><span>Stock photography is illustrative. <a href="{% url 'public:photo_credits' %}">Photo credits</a>.</span></div>
   </div></div>
 </footer>
 <button class="totop" id="toTop" aria-label="Back to top"><svg class="prog" viewBox="0 0 52 52" aria-hidden="true"><circle class="trk" cx="26" cy="26" r="23" pathLength="100"/><circle class="val" cx="26" cy="26" r="23" pathLength="100"/></svg>{% icon 'up' %}</button>{% endblock %}

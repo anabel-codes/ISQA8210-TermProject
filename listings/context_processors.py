@@ -8,6 +8,7 @@ PLACEHOLDER = {"email": "[Office email]", "phone": "[Office phone]", "hours": "[
 
 
 def site(request):
+    """Provide office contact details and the active-listing count used by management navigation."""
     extra = {}
     if request.path.startswith("/manage/") and request.user.is_authenticated:
         from .models import Listing

@@ -554,17 +554,8 @@ function initHome(){
   const steps = $('#steps');
   if (steps) scrollHooks.push(() => { const r = steps.getBoundingClientRect(); steps.style.setProperty('--p', Math.max(0, Math.min(1, (innerHeight * .75 - r.top) / (r.height + innerHeight * .1))).toFixed(3)); });
 }
-function authArt(){
-  const box = $('#authArt'); if (!box) return;
-  const p = {id:301, seed:8080, kind:'Villa', name:'A house'};
-  const r = rng(77); let stars = ''; for (let k = 0; k < 60; k++) stars += `<circle class="c-star" style="animation-delay:-${(r()*3).toFixed(1)}s" cx="${(r()*400).toFixed(0)}" cy="${(r()*300).toFixed(0)}" r="${(r()*1.1+.3).toFixed(1)}"/>`;
-  box.insertAdjacentHTML('afterbegin', `<svg class="stars-l" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${stars}</svg><div class="scene">${art(p, 'au', 0, 'A house')}</div><div class="shade"></div>`);
-  const sv = $('.scene svg', box), mq = matchMedia('(max-width:900px)');
-  const fit = () => sv && sv.setAttribute('preserveAspectRatio', mq.matches ? 'xMidYMax slice' : 'xMidYMax meet');
-  fit(); mq.addEventListener('change', fit);
-}
 function initLogin(){
-  authArt();
+  // The server renders the day/night stock photographs; the theme selector handles visibility.
   $$('.pw-toggle').forEach(b => b.addEventListener('click', () => { const i = b.parentElement.querySelector('input'); const show = i.type === 'password'; i.type = show ? 'text' : 'password'; b.innerHTML = ico(show ? 'eyeOff' : 'eye'); b.setAttribute('aria-label', show ? 'Hide password' : 'Show password'); b.setAttribute('aria-pressed', show); }));
   const fb = $('#forgotBtn');
   if (fb) fb.addEventListener('click', () => { const o = $('#resetPanel').classList.toggle('open'); fb.setAttribute('aria-expanded', o); });

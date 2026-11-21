@@ -8,10 +8,12 @@ from .audit import record, who
 
 @receiver(user_logged_in, dispatch_uid="ck_audit_login")
 def log_login(sender, request, user, **kwargs):
+    """Record a successful session login with the account id and human-readable name."""
     record(user, "login", "Account", user.pk, f"{who(user)} logged in")
 
 
 @receiver(user_logged_out, dispatch_uid="ck_audit_logout")
 def log_logout(sender, request, user, **kwargs):
+    """Record session termination when Django supplies an authenticated account."""
     if user is not None:  # logging out with no session sends user=None
         record(user, "logout", "Account", user.pk, f"{who(user)} logged out")

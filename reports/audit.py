@@ -4,10 +4,12 @@ from .models import AuditLog
 
 
 def who(user):
+    """Choose a readable account name for the audit log, falling back to the username."""
     return user.get_full_name() or user.first_name or user.username.title()
 
 
 def record(user, action, entity, entity_id, summary):
+    """Append a timestamped administrator action to AUDIT_LOG without changing earlier events."""
     return AuditLog.objects.create(
         administrator=user,
         action=action,

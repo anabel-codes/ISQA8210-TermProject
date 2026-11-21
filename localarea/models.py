@@ -12,6 +12,7 @@ class LocalAreaCategory(models.Model):
         verbose_name_plural = "local area categories"
 
     def __str__(self):
+        """Return the LocalAreaCategory label displayed by Django forms and administration."""
         return self.name
 
 
@@ -29,4 +30,5 @@ class LocalAreaEntry(models.Model):
         verbose_name_plural = "local area entries"
 
     def __str__(self):
+        """Return the LocalAreaEntry label displayed by Django forms and administration."""
         return self.title

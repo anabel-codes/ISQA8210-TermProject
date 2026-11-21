@@ -26,12 +26,14 @@ class Command(BaseCommand):
     help = "Create the Administrators group and the carlos and janet users."
 
     def add_arguments(self, parser):
+        """Expose the private interactive-password option for initial administrator provisioning."""
         parser.add_argument(
             "--interactive", action="store_true",
             help="Prompt privately for new accounts instead of reading passwords from a file.",
         )
 
     def handle(self, *args, **options):
+        """Create or reuse Carlos and Janet, validate prompted passwords, preserve existing hashes, and assign the administrator group."""
         seed_path = Path(settings.BASE_DIR) / "seed" / "admins.json"
         seeded = json.loads(seed_path.read_text()) if seed_path.exists() else {}
         group, _ = Group.objects.get_or_create(name="Administrators")
