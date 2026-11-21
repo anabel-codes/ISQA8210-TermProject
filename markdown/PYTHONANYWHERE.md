@@ -29,14 +29,16 @@ applies migrations, seeds lookup data and collects static assets. It preserves
 existing `.env` values and stops if production host/debug settings are wrong.
 It never loads demo homes or touches another project's files.
 
-The owner must set private Carlos and Janet passwords in `seed/admins.json`
-(copy the example and replace both placeholders), then run:
+The owner should create Carlos and Janet using private terminal prompts:
 
 ```bash
-.venv/bin/python manage.py create_admins
+.venv/bin/python manage.py create_admins --interactive
 ```
 
-Use `createsuperuser` interactively for a separate team account if needed.
+The command validates new passwords, stores only Django hashes, and preserves
+existing passwords. It does not save a plaintext seed file. The private JSON/env
+seed method remains available for local setup. Use `createsuperuser` interactively
+for a separate team account if needed.
 Never paste passwords or API tokens into chat or commit the server configuration.
 
 ## Activate after approval

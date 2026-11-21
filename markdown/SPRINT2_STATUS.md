@@ -11,7 +11,7 @@ has not yet been supplied. Date: November 21, 2026.
 | Backend | Administrator group/superuser guard, session login/logout, server form validation, sanitized rich text, forced Available status and owner, atomic listing/audit writes | accounts/tests.py and listings/tests.py cover required acceptance criteria and failure cases. |
 | HTTP/API layer | GET/POST login, POST logout, protected GET/POST new listing, protected dashboard/table, public GET home/listings | Session authentication and CSRF apply to writes. No standalone JSON API is specified by the blueprint; do not claim one exists. |
 | Database | Cole's SQLite reference merged; runtime Django migrations implement its entities with built-in Django authentication | See DATABASE_MAPPING.md. No pending migrations. Do not import the reference SQL into the migrated app database. |
-| Data | Repeatable lookup seed: 5 types, 4 neighborhoods, 3 statuses, 20 price bands; private admin seed; ownership and audit timestamps | Initialize server lookups and private owner credentials. Fictional sample listings stay local. |
+| Data | Repeatable lookup seed: 5 types, 4 neighborhoods, 3 statuses, 20 price bands; private admin seed; ownership and audit timestamps | Initialize server lookups and private owner credentials using `create_admins --interactive`. Fictional sample listings stay local. |
 | Deployment | PythonAnywhere WSGI template and repeatable preparation script; production env is created only on server | Active-site replacement requires owner approval. Team review/main merge and live verification remain. |
 
 ## Required endpoints
@@ -35,7 +35,7 @@ python manage.py test
 python manage.py makemigrations --check --dry-run
 ```
 
-The current suite has 52 passing tests. Newly covered cases include nonadministrator
+The current suite has 55 passing tests. Newly covered cases include nonadministrator
 access, inactive users, CSRF on writes, logout without JavaScript, invalid numeric
 inputs, spoofed owner/status fields, and rollback when an audit write fails.
 

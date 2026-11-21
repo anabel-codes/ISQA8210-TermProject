@@ -1,6 +1,11 @@
 """US-01 Administrator Log In and US-02 Administrator Log Out."""
 
+from io import StringIO
+from unittest.mock import patch
+
 from django.contrib.auth.models import Group, User
+from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils.html import strip_tags
@@ -144,3 +149,31 @@ class AdministratorAccessTests(AdminAccountsMixin, TestCase):
         self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
         html = self.client.get(DASHBOARD).content.decode()
         self.assertEqual(html.count(f'method="post" action="{LOGOUT}"'), 2)
+
+
+class InteractiveAdminSetupTests(TestCase):
+    def test_prompts_create_separate_administrators_with_hashed_passwords(self):
+        with patch("accounts.management.commands.create_admins.getpass", side_effect=[
+            "Private-C-test-9281", "Private-C-test-9281", "Private-J-test-3619", "Private-J-test-3619",
+        ]):
+            call_command("create_admins", interactive=True, stdout=StringIO())
+        for username, password in (("carlos", "Private-C-test-9281"), ("janet", "Private-J-test-3619")):
+            user = User.objects.get(username=username)
+            self.assertTrue(user.check_password(password))
+            self.assertTrue(user.groups.filter(name="Administrators").exists())
+        with patch("accounts.management.commands.create_admins.getpass") as prompt:
+            call_command("create_admins", interactive=True, stdout=StringIO())
+            prompt.assert_not_called()
+        self.assertTrue(User.objects.get(username="carlos").check_password("Private-C-test-9281"))
+
+    def test_mismatched_password_does_not_create_account(self):
+        with patch("accounts.management.commands.create_admins.getpass", side_effect=["first", "different"]):
+            with self.assertRaises(CommandError):
+                call_command("create_admins", interactive=True, stdout=StringIO())
+        self.assertFalse(User.objects.exists())
+
+    def test_weak_password_does_not_create_account(self):
+        with patch("accounts.management.commands.create_admins.getpass", return_value="123"):
+            with self.assertRaises(CommandError):
+                call_command("create_admins", interactive=True, stdout=StringIO())
+        self.assertFalse(User.objects.exists())
