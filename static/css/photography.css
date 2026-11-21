@@ -5,13 +5,18 @@
 :root[data-mode="dark"] .estate-photo .estate-day{display:none}
 :root[data-mode="dark"] .estate-photo .estate-night{display:block}
 .hero{background:var(--bg);padding-top:0}
-.hero-bg{left:43%;background:var(--surface)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg),transparent 32%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 25%,transparent),transparent 40%)}
-.hero-in{align-items:flex-start;text-align:left;gap:24px;padding-top:clamp(42px,5vw,76px);padding-bottom:72px;min-height:660px}
-.hero h1{width:54%;max-width:16ch;font-size:clamp(2.5rem,4.7vw,4.3rem)}
-.hero .sub{max-width:45ch;width:49%}
+.hero-bg{inset:0;background:var(--surface)}
+/* A full-image scrim keeps the centered copy readable without hiding either side of the estate. */
+.hero-bg::after{content:"";position:absolute;inset:0;background:rgba(10,2,4,.62)}
+:root[data-mode="dark"] .hero-bg::after{background:rgba(10,2,4,.55)}
+.hero-in{align-items:center;text-align:center;gap:24px;padding-top:clamp(54px,6vw,88px);padding-bottom:80px;min-height:660px;justify-content:center}
+.hero h1{width:100%;max-width:18ch;font-size:clamp(2.5rem,6.4vw,5rem);color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.hero h1 em{color:#FFBDCB}
+.hero h1 em::after{background:#FFBDCB}
+.hero .sub{max-width:58ch;width:100%;color:#fff}
 .hero .search{width:100%;max-width:950px}
 .hero .chips{max-width:100%}
+.hero .chips>span{color:#fff}
 .city .estate-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,2,4,.88),transparent 70%)}
 .city .estate-photo img{transition:transform .7s ease}
 .city:hover .estate-photo img{transform:scale(1.04)}
@@ -32,9 +37,7 @@
 .photo-credits p{margin-block:16px;color:var(--muted)}
 .photo-credits a{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){
-  .hero-bg{left:0;top:auto;bottom:0;height:310px}
-  .hero-bg::after{background:linear-gradient(180deg,var(--bg),transparent 35%)}
-  .hero-in{min-height:0;align-items:center;text-align:center;padding-top:32px;padding-bottom:340px;gap:20px}
+  .hero-in{min-height:660px;padding-top:48px;padding-bottom:48px;gap:20px}
   .hero h1{width:100%;max-width:17ch;font-size:clamp(2.2rem,7vw,3.6rem)}
   .hero .sub{width:100%;max-width:48ch}
   .hero .search{max-width:600px}

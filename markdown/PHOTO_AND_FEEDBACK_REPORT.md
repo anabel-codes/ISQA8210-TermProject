@@ -34,6 +34,10 @@ confirmation. I used an isolated local preview for management browser checks;
 I did not create a fictional listing in the live database.
 
 I kept screenshots and QA files in the ignored `docs/sprint2/` folder, as requested.
+After the owner's visual review, I restored the centered landing-page layout
+and extended the estate photograph across the whole hero. I added an even dark
+overlay with white text and a pale CK pink highlight, replacing the side fade.
+I checked both themes and the 390 px mobile layout in the browser.
 I also ran the seven new tests on PythonAnywhere's Python 3.13 environment; all
 passed. I collected the new static assets there and passed the Django system
 check. I versioned the changed page scripts so returning browsers fetch this
