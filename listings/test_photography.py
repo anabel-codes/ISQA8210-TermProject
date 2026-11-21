@@ -14,7 +14,7 @@ class PhotographyTests(TestCase):
     def setUpTestData(cls):
         call_command("seed_lookups", stdout=StringIO())
 
-    def test_home_and_login_offer_both_real_day_and_night_photographs(self):
+    def test_home_and_login_offer_day_and_night_photographs(self):
         for url in ("/", "/manage/login/"):
             with self.subTest(url=url):
                 response = self.client.get(url)
@@ -22,14 +22,17 @@ class PhotographyTests(TestCase):
                 self.assertContains(response, 'class="estate-night"')
                 self.assertContains(response, "img/estates/day")
                 self.assertContains(response, "img/estates/night")
+                self.assertContains(response, "night-kent")
                 self.assertNotContains(response, 'id="sky"')
                 self.assertNotContains(response, 'data-art="')
 
     def test_credit_page_explains_stock_use_and_names_each_photographer(self):
         response = self.client.get("/photo-credits/")
-        for name in ("Zac Gudakov", "Ryan Liu", "Marco Bianchetti"):
+        for name in ("Zac Gudakov", "Kent Rebman"):
             self.assertContains(response, name)
         self.assertContains(response, "different properties")
+        self.assertContains(response, "AI-edited")
+        self.assertContains(response, "AI-expanded")
         self.assertContains(response, "https://unsplash.com/license")
 
     def test_real_property_photo_is_preserved_when_available(self):

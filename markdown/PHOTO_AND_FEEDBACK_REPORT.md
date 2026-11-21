@@ -2,6 +2,13 @@
 
 November 21, 2026
 
+I later replaced the night scenes with an edited version of the Kent Rebman
+neighborhood photograph supplied by the owner. I changed the twilight sky to
+navy and added warm window lighting. I also widened the daytime banner framing
+to show the full roofline and more of the neighboring houses. Both variants
+were made with the built-in image editing tool. I disclosed the edits in the
+public credits and retained the centered text and full-image overlay.
+
 I replaced the generated estate illustrations on the landing page, login and
 missing-photo slots with real stock photography. I chose a sunny red house for
 the light theme and illuminated homes for the dark theme. I kept the CK colors

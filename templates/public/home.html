@@ -4,7 +4,7 @@
 {% block content %}
 <section class="hero" id="home">
   <div class="hero-bg" aria-hidden="true">
-    {% include "partials/estate_photo.html" with eager=True %}
+    {% include "partials/estate_photo.html" with eager=True banner=True sizes="100vw" %}
   </div>
   <div class="wrap hero-in">
     {% if featured %}<a class="pill-badge fade-up" href="#featured" style="animation-delay:.05s"><b>Featured</b><span>{{ featured.street_address }}, {{ featured.neighborhood }}</span>{% icon 'arrow' %}</a>{% endif %}
