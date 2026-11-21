@@ -5,6 +5,12 @@ listing), deployed to PythonAnywhere. US-04 photos and US-05/06 browsing/details
 are stretch goals. The owner confirmed using the repo blueprint as the rubric.
 Date: November 21, 2026.
 
+I added real day/night photography, themed management notifications, SweetAlert2
+confirmations and backend method documentation in a later update. I recorded
+those changes and their checks in [PHOTO_AND_FEEDBACK_REPORT.md](PHOTO_AND_FEEDBACK_REPORT.md).
+The current local suite has 62 passing tests. The live demonstration continues
+to use the owner's twumasi-development branch.
+
 | Area | Implemented evidence | Verification / remaining work |
 | --- | --- | --- |
 | Frontend | Real Django login, dashboard, listing table and add form; public home and browse list; light/dark styles and responsive navigation | Browser-verified public home/listings/login and protected add form at 390 px, in light/dark modes, with no page-level horizontal overflow. Screenshots in local, gitignored docs/sprint2. |
@@ -12,7 +18,7 @@ Date: November 21, 2026.
 | HTTP/API layer | GET/POST login, POST logout, protected GET/POST new listing, protected dashboard/table, public GET home/listings | Session authentication and CSRF apply to writes. No standalone JSON API is specified by the blueprint; do not claim one exists. |
 | Database | Cole's SQLite reference merged; runtime Django migrations implement its entities with built-in Django authentication | See DATABASE_MAPPING.md. No pending migrations. Do not import the reference SQL into the migrated app database. |
 | Data | Repeatable lookup seed: 5 types, 4 neighborhoods, 3 statuses, 20 price bands; private admin seed; ownership and audit timestamps | Live database counts match. Owner created Carlos and Janet with private prompts; Janet successfully logged in. Live database starts with zero listings. |
-| Deployment | PythonAnywhere WSGI template and repeatable preparation script; production env is created only on server | Live at https://gigson2.pythonanywhere.com/ with owner approval, from twumasi-development commit dd47162. Old project preserved; WSGI backup at /home/gigson2/wsgi-before-ck-20261121.py. Team review/main release remains. |
+| Deployment | PythonAnywhere WSGI template and repeatable preparation script; production env is created only on server | Live at https://gigson2.pythonanywhere.com/ with owner approval, from twumasi-development. Old project preserved; WSGI backup at /home/gigson2/wsgi-before-ck-20261121.py. Team review/main release remains. |
 
 ## Required endpoints
 
@@ -35,7 +41,7 @@ python manage.py test
 python manage.py makemigrations --check --dry-run
 ```
 
-The current suite has 55 passing tests. Newly covered cases include nonadministrator
+The original Sprint 2 verification had 55 passing tests. Those cases include nonadministrator
 access, inactive users, CSRF on writes, logout without JavaScript, invalid numeric
 inputs, spoofed owner/status fields, and rollback when an audit write fails.
 All 55 also passed on PythonAnywhere Python 3.13 (43.643 seconds), using a separate

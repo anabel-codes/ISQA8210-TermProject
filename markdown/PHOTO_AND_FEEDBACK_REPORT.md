@@ -34,6 +34,10 @@ confirmation. I used an isolated local preview for management browser checks;
 I did not create a fictional listing in the live database.
 
 I kept screenshots and QA files in the ignored `docs/sprint2/` folder, as requested.
+I also ran the seven new tests on PythonAnywhere's Python 3.13 environment; all
+passed. I collected the new static assets there and passed the Django system
+check. I versioned the changed page scripts so returning browsers fetch this
+update instead of reusing the previous illustration or notification code.
 The earlier Sprint 2 acceptance record remains in [SPRINT2_STATUS.md](SPRINT2_STATUS.md).
 Team review of [PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7)
 and the merge to main remain team actions.
