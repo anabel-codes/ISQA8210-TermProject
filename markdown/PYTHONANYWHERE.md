@@ -16,14 +16,21 @@ for the handoff and [SPRINT2_STATUS.md](SPRINT2_STATUS.md) for test evidence.
 merged into `main` as `f9eb1a4`. Ethan can deploy the merged release and record
 the exact commit used. Further changes should follow the team's review process.
 
+## Project environment reported by Ethan
+
+PR #9 records Python 3.12, the checkout `~/ck-real-estate`, and the virtual
+environment `~/.virtualenvs/ck-real-estate` for the project account. The earlier
+`gigson2` test environment uses Python 3.13 and `~/ISQA8210-TermProject/.venv`.
+Keep each account's settings, database and media separate.
+
 ## Prepare alongside the existing site
 
 In a new PythonAnywhere Bash console, clone the branch containing the release:
 
 ```bash
-git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git
-cd ~/ISQA8210-TermProject
-bash deploy/prepare_pythonanywhere.sh
+git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git ~/ck-real-estate
+cd ~/ck-real-estate
+CK_PYTHON=python3.12 CK_VENV="$HOME/.virtualenvs/ck-real-estate" bash deploy/prepare_pythonanywhere.sh
 ```
 
 For a preview of unmerged development work, clone with
@@ -31,16 +38,21 @@ For a preview of unmerged development work, clone with
 `git status` and pull its intended branch with `git pull --ff-only` before running
 the preparation script. Never reset a checkout with uncommitted work.
 
-The script creates a Python 3.13 virtualenv, installs the declared dependencies,
+The script reuses the configured virtual environment or creates it with the
+specified interpreter, installs the declared dependencies,
 creates a private server `.env` if absent, backs up an existing project database,
 applies migrations, seeds lookup data and collects static assets. It preserves
 existing `.env` values and stops if production host/debug settings are wrong.
 It never loads demo homes or touches another project's files.
+`CK_VENV` selects the environment that the Web tab actually uses. Without an
+override, the script reuses the checkout's `.venv` and defaults to Python 3.12
+when creating a new one. For a fresh gigson2 test environment, use
+`CK_PYTHON=python3.13 bash deploy/prepare_pythonanywhere.sh` from its checkout.
 
 The owner should create Carlos and Janet using private terminal prompts:
 
 ```bash
-.venv/bin/python manage.py create_admins --interactive
+$HOME/.virtualenvs/ck-real-estate/bin/python manage.py create_admins --interactive
 ```
 
 The command validates new passwords, stores only Django hashes, and preserves
@@ -60,21 +72,22 @@ On the Web tab:
 
 | Setting | Value |
 | --- | --- |
-| Python version | 3.13 |
-| Source code / working directory | /home/ejvincent10/ISQA8210-TermProject |
-| Virtualenv | /home/ejvincent10/ISQA8210-TermProject/.venv |
+| Python version | 3.12 |
+| Source code / working directory | /home/ejvincent10/ck-real-estate |
+| Virtualenv | /home/ejvincent10/.virtualenvs/ck-real-estate |
 | WSGI file contents | Contents of deploy/pythonanywhere_wsgi.py |
-| Static URL / directory | /static/ → /home/ejvincent10/ISQA8210-TermProject/staticfiles |
-| Media URL / directory | /media/ → /home/ejvincent10/ISQA8210-TermProject/media |
+| Static URL / directory | /static/ → /home/ejvincent10/ck-real-estate/staticfiles |
+| Media URL / directory | /media/ → /home/ejvincent10/ck-real-estate/media |
 | Force HTTPS | Enabled |
 
 Reload once all settings are saved. The server `.env` must have `DJANGO_DEBUG=0`,
 an independent random `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS=ejvincent10.pythonanywhere.com`,
 and `DJANGO_CSRF_TRUSTED_ORIGINS=https://ejvincent10.pythonanywhere.com`.
 The preparation script detects the signed-in account and generates these values
-for a fresh checkout. The WSGI template also uses the account's home directory.
-Create a fresh configuration and private administrator passwords in the project
-account; the test account's secrets and sessions are not part of the handoff.
+for a fresh checkout. The WSGI template selects `~/ck-real-estate` when it contains `manage.py`,
+with the earlier `~/ISQA8210-TermProject` checkout as a fallback.
+For a new account, create fresh configuration and private administrator passwords;
+preserve existing configuration and credentials on an account already deployed. In either case, the test account's secrets and sessions are not part of the handoff.
 The platform handles HTTP-to-HTTPS redirection; Django already sets secure session
 and CSRF cookies when debug is disabled. Inbound HTTPS works independently of
 the console email backend; visitor email is not part of US-01 to US-03.

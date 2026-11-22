@@ -2,7 +2,7 @@
 
 This is a website for broker Carlos Kosala's office in Omaha. Visitors browse homes for sale, and Carlos and his office administrator Janet manage the listings.
 
-The project was built by Team 3 for ISQA 8210 Management of Software Development at the University of Nebraska at Omaha in Fall 2026. The site runs on Django 5.2 with Python 3.13 and is hosted on PythonAnywhere.
+The project was built by Team 3 for ISQA 8210 Management of Software Development at the University of Nebraska at Omaha in Fall 2026. The site runs on Django 5.2 with Python 3.12 and is hosted on PythonAnywhere.
 
 ## Live links
 
@@ -47,7 +47,7 @@ All of the mockups are in [docs/design/mockups/v3](docs/design/mockups/v3/).
 
 | Part | Choice |
 | --- | --- |
-| Backend | Django 5.2 on Python 3.13 |
+| Backend | Django 5.2 on Python 3.12 |
 | Database | SQLite, built with Django migrations from Cole's data model |
 | Frontend | Django templates, two CSS files and plain JavaScript, with no build step |
 | Libraries | Tom Select, Quill, DOMPurify, Leaflet, IMask, flatpickr and FilePond, stored in `static/vendor/` |
@@ -77,14 +77,14 @@ tests/         JavaScript tests
 
 ## Run it locally
 
-You need Python 3.13 and Git on your computer. The commands below clone the project, create a virtual environment, install the requirements and copy the settings file.
+You need Python 3.12 and Git on your computer. The commands below clone the project, create a virtual environment, install the requirements and copy the settings file.
 
 On Windows (PowerShell):
 
 ```powershell
-git clone https://github.com/anabel-codes/ISQA8210-TermProject.git
+git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git
 cd ISQA8210-TermProject
-py -3.13 -m venv .venv
+py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 Copy-Item .env.example .env
@@ -93,9 +93,9 @@ Copy-Item .env.example .env
 On macOS or Linux:
 
 ```bash
-git clone https://github.com/anabel-codes/ISQA8210-TermProject.git
+git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git
 cd ISQA8210-TermProject
-python3.13 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 cp .env.example .env
@@ -151,7 +151,7 @@ python manage.py test
 python manage.py makemigrations --check --dry-run
 ```
 
-The tests cover every acceptance criterion for US-01 to US-03. They also cover security cases such as non-administrator accounts, CSRF protection, logging out without JavaScript and tampered form fields. The admin notification timers have a separate JavaScript test in the `tests/` folder.
+The tests cover every acceptance criterion for US-01 to US-03. They also cover security cases such as non-administrator accounts, CSRF protection, logging out without JavaScript and tampered form fields. The admin notification timers have a separate JavaScript test in the `tests/` folder: `node --test tests/admin-feedback.test.cjs`. Deployment helper checks run with `python -m unittest discover -s deploy -p "test_*.py"`.
 
 Every new story comes with its own tests, and all of the tests must pass before a merge.
 
@@ -162,12 +162,13 @@ Ethan deploys to the live site, and he deploys from `main` only. New work is tri
 On the server, an update looks like this:
 
 ```bash
-cd ~/ISQA8210-TermProject
-git pull --ff-only
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python manage.py migrate
-.venv/bin/python manage.py collectstatic --noinput
+cd ~/ck-real-estate
+git switch main
+git pull --ff-only origin main
+CK_PYTHON=python3.12 CK_VENV="$HOME/.virtualenvs/ck-real-estate" bash deploy/prepare_pythonanywhere.sh
 ```
+
+Ethan reports Python 3.12, `/home/ejvincent10/ck-real-estate` as the project directory, and `/home/ejvincent10/.virtualenvs/ck-real-estate` as the virtual environment. The testing account remains on Python 3.13. These environments have separate databases and administrator accounts. Creating a local administrator does not create a deployed account.
 
 After these steps, reload the web app from the PythonAnywhere Web tab. The database and the uploaded media exist only on the server, so back up `db.sqlite3` before running migrations. The full first-time setup is in [markdown/PYTHONANYWHERE.md](markdown/PYTHONANYWHERE.md).
 

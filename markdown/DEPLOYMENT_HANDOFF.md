@@ -61,8 +61,9 @@ contribution records or peer evaluations.
 
 1. Use the merged release on `main` and note the exact commit being deployed.
 2. Follow [PYTHONANYWHERE.md](PYTHONANYWHERE.md) in the `ejvincent10` account.
-   The preparation script and WSGI template already detect the account's home
-   directory, so the test account's paths do not need to be copied.
+   Use Ethan's Python 3.12 environment at `~/.virtualenvs/ck-real-estate` and
+   the project checkout at `~/ck-real-estate`. The testing account's Python
+   3.13 `.venv` and paths remain separate.
 3. Create private project settings and administrator credentials, run migrations,
    seed lookup data, collect static assets and reload the project app.
 4. Repeat the login, logout, add-listing, theme and notification checks on the

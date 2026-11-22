@@ -13,12 +13,18 @@ from pathlib import Path
 from dotenv import dotenv_values
 
 
+def validate_checkout(root, username):
+    """Accept the project and testing checkout names only within the signed-in account."""
+    account_home = Path("/home") / username
+    if root not in {account_home / "ck-real-estate", account_home / "ISQA8210-TermProject"}:
+        raise SystemExit("Run this from ~/ck-real-estate or ~/ISQA8210-TermProject on PythonAnywhere.")
+
+
 def main():
     """Validate the PythonAnywhere checkout, create private configuration, and back up its database."""
     root = Path(__file__).resolve().parents[1]
     username = getpass.getuser()
-    if root != Path("/home") / username / "ISQA8210-TermProject":
-        raise SystemExit("Run this from ~/ISQA8210-TermProject on PythonAnywhere.")
+    validate_checkout(root, username)
     env_path = root / ".env"
     host = f"{username}.pythonanywhere.com"
     if not env_path.exists():
