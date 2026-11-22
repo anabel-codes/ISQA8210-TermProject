@@ -103,6 +103,12 @@ project conventions; use the existing `<name>-development` branch names.
 
 Sprint 2 integration and deployment notes:
 
+I tested the integrated project successfully on my `gigson2` PythonAnywhere
+account and handed the implementation and deployment instructions to Ethan
+Vincent. Ethan owns deployment to the project's account, `ejvincent10`.
+Project deployment remains pending his setup and verification.
+
+- [Testing completion and deployment handoff](markdown/DEPLOYMENT_HANDOFF.md)
 - [Sprint 2 status and endpoints](markdown/SPRINT2_STATUS.md)
 - [Cole's data model and Django mapping](markdown/DATABASE_MAPPING.md)
 - [PythonAnywhere deployment](markdown/PYTHONANYWHERE.md)
