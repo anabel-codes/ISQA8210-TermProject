@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="{% static 'vendor/sweetalert2.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 <link rel="stylesheet" href="{% static 'css/photography.css' %}">
-<link rel="stylesheet" href="{% static 'css/admin-feedback.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-feedback.css' %}?v=20261121-timers">
 </head>
 <body data-estate-day="{% static 'img/estates/day-small.webp' %}" data-estate-night="{% static 'img/estates/night-kent-small.webp' %}">
 {% with name=user.first_name|default:user.username|capfirst %}
@@ -58,7 +58,7 @@
 {% endwith %}
 <div class="admin-toasts" id="adminToasts" aria-label="Notifications"></div>
 <script src="{% static 'vendor/sweetalert2.min.js' %}" defer></script>
-<script src="{% static 'js/admin-feedback.js' %}" defer></script>
+<script src="{% static 'js/admin-feedback.js' %}?v=20261121-timers" defer></script>
 <script src="{% static 'vendor/tom-select.complete.min.js' %}" defer></script>
 {% block vendor_js %}{% endblock %}
 <script src="{% static 'js/admin.js' %}?v=20261121-feedback" defer></script>

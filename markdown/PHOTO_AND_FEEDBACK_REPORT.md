@@ -17,10 +17,17 @@ and added a public credits page.
 
 I added management notifications for success, error, warning and information.
 Each message has a visible severity label and an accessible announcement role.
-Errors stay until dismissed. Other notifications pause their dismissal timer
-while hovered or focused. Server messages remain readable when JavaScript is
+I later added countdown text and a shrinking timer bar to every notification.
+Success closes after 1.5 seconds, error and danger after 2.5 seconds, warning
+after 3 seconds, and info or debug after 4 seconds. Unknown levels use info's
+4-second timer. Each notification has its own fixed deadline; hovering or
+focusing it does not extend the timeout. Server messages remain readable when JavaScript is
 unavailable. I added a welcome message after login and an error message when a
 listing fails server validation.
+
+I verified the timer deadlines, overlapping notifications, manual dismissal and
+fallback countdown in nine JavaScript tests. The three Django message tests also
+passed. I checked the countdown text and progress bars in the dashboard preview.
 
 I used SweetAlert2 for publishing a listing, leaving an edited form and logging
 out. The default focus stays on “Keep working.” Canceling preserves the form.
