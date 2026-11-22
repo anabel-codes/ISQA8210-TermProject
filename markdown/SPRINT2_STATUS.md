@@ -8,8 +8,14 @@ Date: November 21, 2026.
 I added real day/night photography, themed management notifications, SweetAlert2
 confirmations and backend method documentation in a later update. I recorded
 those changes and their checks in [PHOTO_AND_FEEDBACK_REPORT.md](PHOTO_AND_FEEDBACK_REPORT.md).
-The current local suite has 62 passing tests. The live demonstration continues
-to use the owner's twumasi-development branch.
+The current local suite has 62 passing tests, with nine additional JavaScript
+timer tests. I used `gigson2` for testing, and I have confirmed that the project
+worked in that environment. I have handed the implementation and deployment
+instructions to Ethan Vincent, who owns deployment to the project's account,
+`ejvincent10`. On November 22, 2026, I verified that the project's public home
+and login pages returned HTTP 200 and served CK Real Estate. Ethan owns the
+deployed commit record and protected workflow verification on that account.
+See [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
 
 | Area | Implemented evidence | Verification / remaining work |
 | --- | --- | --- |
@@ -18,7 +24,7 @@ to use the owner's twumasi-development branch.
 | HTTP/API layer | GET/POST login, POST logout, protected GET/POST new listing, protected dashboard/table, public GET home/listings | Session authentication and CSRF apply to writes. No standalone JSON API is specified by the blueprint; do not claim one exists. |
 | Database | Cole's SQLite reference merged; runtime Django migrations implement its entities with built-in Django authentication | See DATABASE_MAPPING.md. No pending migrations. Do not import the reference SQL into the migrated app database. |
 | Data | Repeatable lookup seed: 5 types, 4 neighborhoods, 3 statuses, 20 price bands; private admin seed; ownership and audit timestamps | Live database counts match. Owner created Carlos and Janet with private prompts; Janet successfully logged in. Live database starts with zero listings. |
-| Deployment | PythonAnywhere WSGI template and repeatable preparation script; production env is created only on server | Live at https://gigson2.pythonanywhere.com/ with owner approval, from twumasi-development. Old project preserved; WSGI backup at /home/gigson2/wsgi-before-ck-20261121.py. Team review/main release remains. |
+| Deployment | PythonAnywhere WSGI template and repeatable preparation script; private configuration is created on the target account | Testing completed at https://gigson2.pythonanywhere.com/ from twumasi-development, application commit f126e06. PR #7 is merged into main as f9eb1a4. The ejvincent10 public home and login pages were verified on November 22; Ethan owns the release record and protected workflow checks. |
 
 ## Required endpoints
 
@@ -47,7 +53,11 @@ inputs, spoofed owner/status fields, and rollback when an audit write fails.
 All 55 also passed on PythonAnywhere Python 3.13 (43.643 seconds), using a separate
 test database. Final local tests passed after the frontend copy corrections.
 
-## Live verification
+## Verification in the gigson2 test environment
+
+I completed my own PythonAnywhere testing and confirmed that the project worked.
+The checks below describe the test account. The later public-page check on
+`ejvincent10` does not establish its deployed commit or verify protected writes.
 
 - Janet reached the dashboard after the owner signed in privately.
 - The protected add form loaded its actual lookup options and rich-text controls.
@@ -73,9 +83,10 @@ test database. Final local tests passed after the frontend copy corrections.
 
 ## Remaining completion evidence
 
-- [PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7) needs team
-  review and merge to main. The owner-approved live demonstration currently uses
-  twumasi-development. After review, deploy main using PYTHONANYWHERE.md.
+- [PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7) is merged
+  into main as `f9eb1a4`. Ethan Vincent owns deployment of the merged release
+  to `ejvincent10` using [PYTHONANYWHERE.md](PYTHONANYWHERE.md), followed by checks
+  on that account. The deployment on `gigson2` is the completed testing record.
 - Product backlog and actual hours, cost-benefit analysis, meeting minutes,
   Gantt/Kanban evidence, retrospective and peer evaluations: team deliverables;
   no completion claim is made here.

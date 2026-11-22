@@ -1,38 +1,58 @@
 # PythonAnywhere deployment
 
-Deployment target discovered on November 21, 2026: `gigson2.pythonanywhere.com`,
-Python 3.13. The owner approved replacing the active `django-todo-readiness` site
-with CK Real Estate, preserving the old checkout and backing up its WSGI file
-before changing the Web tab. Live verification is recorded in SPRINT2_STATUS.md.
+Ethan Vincent owns deployment to the project's PythonAnywhere account,
+`ejvincent10`, at `https://ejvincent10.pythonanywhere.com/`.
+On November 22, 2026, I verified that the public home and login pages returned
+HTTP 200 and served CK Real Estate. Ethan remains responsible for recording the
+deployed commit and completing protected workflow verification on that account.
 
-The production release should be reviewed and merged into `main`. Until that
-review, the integrated work is on `twumasi-development`.
+I used `gigson2.pythonanywhere.com` as a temporary testing environment on
+Python 3.13. I completed the recorded checks there, and I confirmed in my own
+testing that the project worked. I have handed the implementation and setup
+instructions to Ethan for project deployment. See [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md)
+for the handoff and [SPRINT2_STATUS.md](SPRINT2_STATUS.md) for test evidence.
+
+[PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7) has been
+merged into `main` as `f9eb1a4`. Ethan can deploy the merged release and record
+the exact commit used. Further changes should follow the team's review process.
+
+## Project environment reported by Ethan
+
+PR #9 records Python 3.12, the checkout `~/ck-real-estate`, and the virtual
+environment `~/.virtualenvs/ck-real-estate` for the project account. The earlier
+`gigson2` test environment uses Python 3.13 and `~/ISQA8210-TermProject/.venv`.
+Keep each account's settings, database and media separate.
 
 ## Prepare alongside the existing site
 
 In a new PythonAnywhere Bash console, clone the branch containing the release:
 
 ```bash
-git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git
-cd ~/ISQA8210-TermProject
-bash deploy/prepare_pythonanywhere.sh
+git clone --branch main https://github.com/anabel-codes/ISQA8210-TermProject.git ~/ck-real-estate
+cd ~/ck-real-estate
+CK_PYTHON=python3.12 CK_VENV="$HOME/.virtualenvs/ck-real-estate" bash deploy/prepare_pythonanywhere.sh
 ```
 
-If reviewing the development branch before its PR is merged, clone with
+For a preview of unmerged development work, clone with
 `--branch twumasi-development` instead. For an existing checkout, inspect
 `git status` and pull its intended branch with `git pull --ff-only` before running
 the preparation script. Never reset a checkout with uncommitted work.
 
-The script creates a Python 3.13 virtualenv, installs the declared dependencies,
+The script reuses the configured virtual environment or creates it with the
+specified interpreter, installs the declared dependencies,
 creates a private server `.env` if absent, backs up an existing project database,
 applies migrations, seeds lookup data and collects static assets. It preserves
 existing `.env` values and stops if production host/debug settings are wrong.
 It never loads demo homes or touches another project's files.
+`CK_VENV` selects the environment that the Web tab actually uses. Without an
+override, the script reuses the checkout's `.venv` and defaults to Python 3.12
+when creating a new one. For a fresh gigson2 test environment, use
+`CK_PYTHON=python3.13 bash deploy/prepare_pythonanywhere.sh` from its checkout.
 
 The owner should create Carlos and Janet using private terminal prompts:
 
 ```bash
-.venv/bin/python manage.py create_admins --interactive
+$HOME/.virtualenvs/ck-real-estate/bin/python manage.py create_admins --interactive
 ```
 
 The command validates new passwords, stores only Django hashes, and preserves
@@ -41,26 +61,33 @@ seed method remains available for local setup. Use `createsuperuser` interactive
 for a separate team account if needed.
 Never paste passwords or API tokens into chat or commit the server configuration.
 
-## Activate after approval
+## Ethan's project account setup
 
-Back up `/var/www/gigson2_pythonanywhere_com_wsgi.py` to a timestamped file
-under `/home/gigson2/` first. Record the previous source, working-directory,
-virtualenv and static mappings so the old app can be restored.
+If the project account already hosts an app, back up
+`/var/www/ejvincent10_pythonanywhere_com_wsgi.py` to a timestamped file under
+`/home/ejvincent10/` first. Record its source, working-directory, virtualenv and
+static mappings so the previous configuration can be restored.
 
 On the Web tab:
 
 | Setting | Value |
 | --- | --- |
-| Python version | 3.13 |
-| Source code / working directory | /home/gigson2/ISQA8210-TermProject |
-| Virtualenv | /home/gigson2/ISQA8210-TermProject/.venv |
+| Python version | 3.12 |
+| Source code / working directory | /home/ejvincent10/ck-real-estate |
+| Virtualenv | /home/ejvincent10/.virtualenvs/ck-real-estate |
 | WSGI file contents | Contents of deploy/pythonanywhere_wsgi.py |
-| Static URL / directory | /static/ → /home/gigson2/ISQA8210-TermProject/staticfiles |
-| Media URL / directory | /media/ → /home/gigson2/ISQA8210-TermProject/media |
+| Static URL / directory | /static/ → /home/ejvincent10/ck-real-estate/staticfiles |
+| Media URL / directory | /media/ → /home/ejvincent10/ck-real-estate/media |
 | Force HTTPS | Enabled |
 
 Reload once all settings are saved. The server `.env` must have `DJANGO_DEBUG=0`,
-an independent random `DJANGO_SECRET_KEY`, and `DJANGO_ALLOWED_HOSTS=gigson2.pythonanywhere.com`.
+an independent random `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS=ejvincent10.pythonanywhere.com`,
+and `DJANGO_CSRF_TRUSTED_ORIGINS=https://ejvincent10.pythonanywhere.com`.
+The preparation script detects the signed-in account and generates these values
+for a fresh checkout. The WSGI template selects `~/ck-real-estate` when it contains `manage.py`,
+with the earlier `~/ISQA8210-TermProject` checkout as a fallback.
+For a new account, create fresh configuration and private administrator passwords;
+preserve existing configuration and credentials on an account already deployed. In either case, the test account's secrets and sessions are not part of the handoff.
 The platform handles HTTP-to-HTTPS redirection; Django already sets secure session
 and CSRF cookies when debug is disabled. Inbound HTTPS works independently of
 the console email backend; visitor email is not part of US-01 to US-03.
@@ -69,7 +96,7 @@ the console email backend; visitor email is not part of US-01 to US-03.
 
 1. Open the HTTPS home and `/listings/`; verify CSS and JavaScript load.
 2. Open `/manage/listings/` signed out; expect a login redirect.
-3. At `/manage/login/`, try an incorrect password and then the owner's valid account.
+3. At `/manage/login/`, try an incorrect password and then an authorized administrator account.
 4. Submit an incomplete listing; errors must identify the fields and retain input.
 5. Add an authorized real listing; it must be Available, attributed to the account,
    present in the public list and recorded in AUDIT_LOG. Use a local disposable
@@ -78,8 +105,10 @@ the console email backend; visitor email is not part of US-01 to US-03.
 7. Repeat the required screens at 390 px and in light/dark mode.
 8. Record the deployed commit, review PR, live URL and screenshots in SPRINT2_STATUS.md.
 
-The account currently expires December 11, 2026; confirm the current date shown
-on the Web tab and extend before expiry. No reminder has been scheduled.
+Ethan should check the expiry date shown on the project's Web tab and extend
+the app as needed. The December 11, 2026 date recorded during testing applies to
+`gigson2` only. The previous test site's WSGI backup remains at
+`/home/gigson2/wsgi-before-ck-20261121.py`. No reminder has been scheduled.
 
 For later releases, back up the database, pull the reviewed main branch, rerun
 the preparation script, then reload. To roll back the app configuration, restore
