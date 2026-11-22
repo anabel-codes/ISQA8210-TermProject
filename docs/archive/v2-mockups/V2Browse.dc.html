@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Browse homes v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F4}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="background:#F7F6F4;color:#000000;font-family:'Inter',sans-serif">
+
+<header style="background:#FFFFFF;border-bottom:1px solid #EDEDED">
+<div style="max-width:1240px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<a href="V2Home.dc.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#000000">
+<svg width="40" height="40" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg>
+<span style="display:flex;flex-direction:column"><span style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1">CK</span><span style="font-size:10px;font-weight:600;letter-spacing:.3em">REAL ESTATE</span></span>
+</a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;padding:5px;border-radius:999px;background:#F7F6F4;font-size:14px;font-weight:500">
+<a href="V2Home.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Home</a>
+<a href="V2Browse.dc.html" aria-current="page" style="color:#FFFFFF;background:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Browse homes</a>
+<a href="V2Local.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">Local area</a>
+<a href="V2Broker.dc.html" style="color:#000000;text-decoration:none;padding:9px 16px;border-radius:999px">About Carlos</a>
+</nav>
+<a href="V2Broker.dc.html" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:14px">Call the office</a>
+</div>
+</header>
+
+<section style="max-width:1240px;margin:0 auto;padding:48px 24px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#75000E">BROWSE</span><h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:64px;line-height:1">Homes for sale in <em style="color:#75000E">Omaha</em></h1></div>
+<p style="margin:0;font-size:16px;color:#5C5C5C;max-width:380px">Every active listing from CK Real Estate. Filter by type, neighborhood or a $50,000 price band.</p>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 24px">
+<form action="V2Browse.dc.html" style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+<div style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px"><label for="v2b-type" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:#5C5C5C">HOME TYPE</label><select id="v2b-type" style="height:48px;padding:0 12px;border-radius:12px;border:2px solid #75000E;background:#FFFFFF;font:500 15px 'Inter',sans-serif"><option>Ranch</option><option>Any type</option><option>Tudor</option><option>Townhome</option><option>Condominium</option></select></div>
+<div style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px"><label for="v2b-hood" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:#5C5C5C">NEIGHBORHOOD</label><select id="v2b-hood" style="height:48px;padding:0 12px;border-radius:12px;border:1px solid #EDEDED;background:#F7F6F4;font:500 15px 'Inter',sans-serif"><option>Benson</option><option>Anywhere</option><option>Downtown</option><option>Happy Hollow</option><option>Rockbrook</option></select></div>
+<div style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px"><label for="v2b-band" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:#5C5C5C">PRICE BAND</label><select id="v2b-band" style="height:48px;padding:0 12px;border-radius:12px;border:1px solid #EDEDED;background:#F7F6F4;font:500 15px 'Inter',sans-serif"><option>Any price</option><option>$250,000 to $300,000</option><option>$300,000 to $350,000</option></select></div>
+<div style="flex:1 1 160px;display:flex;flex-direction:column;gap:6px"><label for="v2b-sort" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:#5C5C5C">SORT</label><select id="v2b-sort" style="height:48px;padding:0 12px;border-radius:12px;border:1px solid #EDEDED;background:#F7F6F4;font:500 15px 'Inter',sans-serif"><option>Newest first</option><option>Price, low to high</option><option>Price, high to low</option></select></div>
+<a href="V2Browse.dc.html" style="flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600">Show homes</a>
+</form>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:18px 4px">
+<span style="font-size:15px;font-weight:600">3 homes match</span>
+<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 8px 7px 14px;border-radius:999px;background:#F3DDE0;color:#75000E;font-size:13px;font-weight:600">Ranch <a href="V2Browse.dc.html" aria-label="Remove Ranch filter" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#FFFFFF;align-items:center;justify-content:center;color:#75000E;text-decoration:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></a></span>
+<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 8px 7px 14px;border-radius:999px;background:#F3DDE0;color:#75000E;font-size:13px;font-weight:600">Benson <a href="V2Browse.dc.html" aria-label="Remove Benson filter" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#FFFFFF;align-items:center;justify-content:center;color:#75000E;text-decoration:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></a></span>
+<a href="V2Browse.dc.html" style="font-size:13px;font-weight:600;color:#000000">Clear all</a>
+</div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 24px 48px">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="6">
+<a href="V2Listing.dc.html" style="display:flex;flex-direction:column;background:#FFFFFF;border-radius:16px;overflow:hidden;text-decoration:none;color:#000000">
+<div style="height:220px;position:relative;background:#E9E7E4"><svg width="100%" height="100%" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="230" fill="{{c.sky}}"></rect><rect y="176" width="400" height="54" fill="#D3CFCA"></rect><polygon points="110,110 200,60 290,110" fill="#2A2A2A"></polygon><rect x="120" y="110" width="160" height="68" fill="#FFFFFF"></rect><rect x="140" y="126" width="40" height="34" fill="#2A2A2A"></rect><rect x="220" y="126" width="40" height="34" fill="#2A2A2A"></rect><rect x="186" y="140" width="28" height="38" fill="#75000E"></rect><rect x="280" y="130" width="70" height="48" fill="#F7F6F4"></rect><circle cx="56" cy="150" r="40" fill="#A9A6A2"></circle></svg>
+<span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);font-size:12px;font-weight:600"><span style="width:6px;height:6px;border-radius:50%;background:#000"></span>{{c.status}}</span>
+<span style="position:absolute;bottom:14px;left:14px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);font-family:'Instrument Serif',serif;font-size:24px;color:#75000E">{{c.price}}</span></div>
+<div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Instrument Serif',serif;font-size:28px;line-height:1.05">{{c.address}}</span><span style="font-size:14px;color:#5C5C5C">{{c.meta}}</span>
+<div style="display:flex;gap:18px;font-size:14px;border-top:1px solid #EDEDED;padding-top:12px;margin-top:8px"><span>{{c.beds}} bd</span><span>{{c.baths}} ba</span><span>{{c.sqft}} sq ft</span></div></div>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section style="max-width:1240px;margin:0 auto;padding:0 24px 72px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">EMPTY STATE (WHEN NO HOME MATCHES)</span>
+<div style="background:#FFFFFF;border-radius:28px;padding:40px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:center;text-align:left">
+<svg width="160" height="134" viewBox="0 0 360 300" aria-hidden="true"><g stroke="#000" stroke-width="3" stroke-linejoin="round"><polygon points="60,100 180,160 180,260 60,200" fill="#F7F6F4"></polygon><polygon points="180,160 300,100 300,200 180,260" fill="#FFFFFF"></polygon><polygon points="60,100 180,160 180,20" fill="#75000E"></polygon><polygon points="180,160 300,100 180,20" fill="#5A000B"></polygon><polygon points="90,140 125,157 125,190 90,173" fill="#0B0B0B"></polygon><polygon points="215,175 245,160 245,232 215,247" fill="#75000E"></polygon></g></svg>
+<div style="display:flex;flex-direction:column;gap:12px;max-width:440px"><h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:40px;line-height:1">No homes match <em style="color:#75000E">yet</em>.</h2><p style="margin:0;font-size:16px;line-height:1.6;color:#5C5C5C">Try a wider price band or another neighborhood. New listings show up here the day Carlos adds them.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="V2Browse.dc.html" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;background:#000000;color:#FFFFFF;text-decoration:none;font-weight:600">Clear filters</a><a href="V2Broker.dc.html" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;border:1.5px solid #000000;color:#000000;text-decoration:none;font-weight:600">Tell Carlos what you want</a></div></div>
+</div>
+</section>
+
+<footer style="background:#0B0B0B;color:#FFFFFF">
+<div style="max-width:1240px;margin:0 auto;padding:36px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:'Instrument Serif',serif;font-size:24px">CK Real Estate</span><span style="color:#BDBDBD">[Office address] · [Office phone] · [Office email]</span></div>
+<nav aria-label="Footer" style="display:flex;gap:24px;flex-wrap:wrap"><a href="V2Browse.dc.html" style="color:#FFFFFF">Browse homes</a><a href="V2Local.dc.html" style="color:#FFFFFF">Local area</a><a href="V2Broker.dc.html" style="color:#FFFFFF">About Carlos</a><a href="V2AdminLogin.dc.html" style="color:#BDBDBD">Admin log in</a></nav>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() {
+return { cards: [
+{ price: '$289,000', address: '6107 Maple Street', meta: 'Benson · Ranch', beds: 3, baths: 2, sqft: '1,480', status: 'Available', sky: '#E9E7E4' },
+{ price: '$262,500', address: '5520 Military Avenue', meta: 'Benson · Ranch', beds: 2, baths: 1, sqft: '1,060', status: 'Available', sky: '#EDEBE8' },
+{ price: '$304,000', address: '6824 Binney Street', meta: 'Benson · Ranch', beds: 3, baths: 1.5, sqft: '1,390', status: 'Pending', sky: '#E4E1DD' }
+] };
+}
+}
+</script>
+</body>
+</html>

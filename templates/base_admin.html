@@ -1,0 +1,66 @@
+{% load static ck %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% block title %}Admin{% endblock %} | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="{% static 'img/logo.svg' %}" type="image/svg+xml">
+<script>try{if(JSON.parse(localStorage.getItem('ck-mode'))==='dark')document.documentElement.dataset.mode='dark'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="{% static 'vendor/tom-select.css' %}">
+{% block vendor_css %}{% endblock %}
+<link rel="stylesheet" href="{% static 'vendor/sweetalert2.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/photography.css' %}">
+<link rel="stylesheet" href="{% static 'css/admin-feedback.css' %}?v=20261121-timers">
+</head>
+<body data-estate-day="{% static 'img/estates/day-small.webp' %}" data-estate-night="{% static 'img/estates/night-kent-small.webp' %}">
+{% with name=user.first_name|default:user.username|capfirst %}
+<div class="adm" id="adm" data-page="{{ nav }}">
+  <aside class="sb" id="sb" aria-label="Admin navigation"><div class="sb-in">
+    <div class="sb-top"><a class="sb-logo" href="{% url 'listings_admin:dashboard' %}" aria-label="CK Real Estate admin, dashboard"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="11" fill="var(--accent)"/><rect x="26.4" y="9" width="3.2" height="6" fill="#fff"/><path d="M8.5 20 L20 10.5 L31.5 20" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><text x="20" y="31.5" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="11.5" font-weight="800" fill="#fff">CK</text></svg><span class="w"><b>CK</b><small>Admin</small></span></a><button class="rbtn sb-x" id="sbClose" aria-label="Close menu">{% icon 'close' %}</button></div>
+    <nav class="sb-nav" aria-label="Admin">
+      <div class="sb-grp">Overview</div>
+      <a class="sb-a{% if nav == 'dashboard' %} on{% endif %}" href="{% url 'listings_admin:dashboard' %}" data-tip="Dashboard"{% if nav == 'dashboard' %} aria-current="page"{% endif %}><span class="ib">{% icon 'grid' %}</span><span class="sb-lbl">Dashboard</span></a>
+      <div class="sb-grp">Listings</div>
+      <a class="sb-a{% if nav == 'listings' %} on{% endif %}" href="{% url 'listings_admin:list' %}" data-tip="All listings"{% if nav == 'listings' %} aria-current="page"{% endif %}><span class="ib">{% icon 'list' %}</span><span class="sb-lbl">All listings</span>{% if sb_count %}<span class="cnt">{{ sb_count }}</span>{% endif %}</a>
+      <a class="sb-a{% if nav == 'add' %} on{% endif %}" href="{% url 'listings_admin:create' %}" data-tip="Add listing"{% if nav == 'add' %} aria-current="page"{% endif %}><span class="ib">{% icon 'plus' %}</span><span class="sb-lbl">Add listing</span></a>
+      {# Featured home, Search report, Activity log, Local area links and Profile join the menu as their stories are built. #}
+    </nav>
+    <div class="sb-foot">
+      <a class="sb-a" href="{% url 'public:home' %}" target="_blank" rel="noopener" data-tip="View public site"><span class="ib">{% icon 'globe' %}</span><span class="sb-lbl">View public site</span></a>
+      <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit" class="sb-a" data-tip="Log out"><span class="ib">{% icon 'logout' %}</span><span class="sb-lbl">Log out</span></button></form>
+    </div></div></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb">
+      <button class="rbtn tb-tog" id="tbTog" aria-label="Collapse menu" aria-expanded="true" aria-controls="sb">{% icon 'panel' %}</button>
+      <div class="tb-title"><h1>{% block heading %}{% endblock %}</h1><small>{% block subheading %}{% endblock %}</small></div>
+      <form class="tb-search" role="search" action="{% url 'listings_admin:list' %}" method="get"><label style="display:contents">{% icon 'search' %}<span class="sr">Search listings</span><input id="tbSearch" name="q" type="search" placeholder="Search listings" autocomplete="off"></label><kbd>/</kbd></form>
+      <div class="tb-r" style="display:flex;gap:8px;align-items:center">
+        <button class="rbtn" id="themeBtn" aria-label="Switch to dark mode">{% icon 'moon' %}</button>
+        <div class="has-pop" id="userMenu"><button class="u-btn" aria-label="Account menu" aria-expanded="false"><span class="av{% if user.username == 'janet' %} j{% endif %}">{{ user|initials }}</span><span class="nm" style="font-weight:700">{{ name }}</span>{% icon 'chev' %}</button>
+          <div class="pop" style="width:260px"><div class="pop-me"><b>{{ user.get_full_name|default:name }}</b><small>Administrator</small></div>
+            <a href="{% url 'public:home' %}" target="_blank" rel="noopener">{% icon 'ext' %}View public site</a>
+            <form id="logoutForm" method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit" class="pi">{% icon 'logout' %}Log out</button></form>
+          </div></div>
+      </div>
+    </header>
+    <main class="content" id="content">
+{% if messages %}<div class="server-notices" aria-label="Notifications">{% for message in messages %}<p class="server-notice" data-flash data-level="{{ message.level_tag }}" role="{% if message.level_tag == 'error' or message.level_tag == 'warning' %}alert{% else %}status{% endif %}">{{ message }}</p>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+{% endwith %}
+<div class="admin-toasts" id="adminToasts" aria-label="Notifications"></div>
+<script src="{% static 'vendor/sweetalert2.min.js' %}" defer></script>
+<script src="{% static 'js/admin-feedback.js' %}?v=20261121-timers" defer></script>
+<script src="{% static 'vendor/tom-select.complete.min.js' %}" defer></script>
+{% block vendor_js %}{% endblock %}
+<script src="{% static 'js/admin.js' %}?v=20261121-feedback" defer></script>
+</body>
+</html>

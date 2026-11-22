@@ -1,0 +1,30 @@
+.env
+db.sqlite3
+db.backup.*.sqlite3
+media/
+staticfiles/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+
+# Archived alternative design direction (not the build reference)
+docs/archive/ck-mockup-v3/
+
+seed/admins.json
+
+# Third-party HTML templates used only for inspiration (large, not our code)
+designs/template1/
+designs/template2/
+
+# Local tool caches
+.impeccable/
+
+# Local Claude instructions
+/CLAUDE.md
+
+#sprint2 folder under docs
+docs/sprint2/

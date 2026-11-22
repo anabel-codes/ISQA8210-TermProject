@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add a listing v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F4}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="display:flex;flex-wrap:wrap;min-height:1500px;background:#F7F6F4;color:#000000;font-family:'Inter',sans-serif">
+
+<aside style="flex:1 1 240px;max-width:264px;background:#0B0B0B;color:#FFFFFF;padding:24px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;gap:10px;padding:0 8px"><svg width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg><span style="display:flex;flex-direction:column"><span style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1">CK Office</span><span style="font-size:11px;color:#BDBDBD">Admin area</span></span></div>
+<nav aria-label="Admin" style="display:flex;flex-direction:column;gap:4px;font-size:14px">
+<a href="V2AdminListings.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">All listings</a>
+<a href="V2AdminAdd.dc.html" aria-current="page" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600">Add a listing</a>
+<a href="V2AdminReport.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">Search report</a>
+<a href="V2AdminReport.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">Activity log</a>
+</nav>
+<div style="margin-top:auto;border-top:1px solid #2A2A2A;padding:16px 8px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:13px;font-weight:600">Janet · Administrator</span><button type="button" style="min-height:44px;border-radius:999px;border:1px solid #5C5C5C;background:transparent;color:#FFFFFF;font:600 14px 'Inter',sans-serif">Log out</button></div>
+</aside>
+
+<main style="flex:999 1 640px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:6px"><nav aria-label="Breadcrumb" style="font-size:13px;color:#5C5C5C"><a href="V2AdminListings.dc.html" style="color:#5C5C5C">Listings</a> / Add a listing</nav><h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:52px;line-height:1">Add a listing</h1></div>
+
+<sc-if value="{{short}}" hint-placeholder-val="{{ true }}">
+<div role="alert" style="display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:14px;background:#FBF3F4;color:#75000E;font-size:14px;font-weight:500"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>Two things to fix: add a fourth photo, and enter a 5-digit ZIP code.</div>
+</sc-if>
+
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<form style="flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:20px">
+
+<fieldset style="margin:0;border:0;padding:24px;background:#FFFFFF;border-radius:20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<legend style="float:left;width:100%;padding:0 0 4px;font-family:'Instrument Serif',serif;font-size:28px">The home</legend>
+<div style="grid-column:span 2;display:flex;flex-direction:column;gap:6px"><label for="f-street" style="font-size:14px;font-weight:500">Street address</label><input id="f-street" value="4812 Underwood Avenue" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="f-city" style="font-size:14px;font-weight:500">City</label><input id="f-city" value="Omaha" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="f-zip" style="font-size:14px;font-weight:500">ZIP code</label><input id="f-zip" value="6813" aria-describedby="f-zip-err" style="height:48px;padding:0 14px;border-radius:8px;border:2px solid #75000E;font:400 16px 'Inter',sans-serif"><span id="f-zip-err" style="font-size:13px;font-weight:500;color:#75000E">Use 5 digits, like 68132.</span></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="f-type" style="font-size:14px;font-weight:500">Home type</label><select id="f-type" style="height:48px;padding:0 12px;border-radius:8px;border:1px solid #BDBDBD;background:#FFFFFF;font:400 16px 'Inter',sans-serif"><option>Tudor</option><option>Ranch</option><option>Townhome</option><option>Condominium</option></select></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="f-hood" style="font-size:14px;font-weight:500">Neighborhood</label><select id="f-hood" style="height:48px;padding:0 12px;border-radius:8px;border:1px solid #BDBDBD;background:#FFFFFF;font:400 16px 'Inter',sans-serif"><option>Happy Hollow</option><option>Benson</option><option>Downtown</option><option>Rockbrook</option></select></div>
+<div style="grid-column:span 2;display:flex;flex-direction:column;gap:6px"><label for="f-price" style="font-size:14px;font-weight:500">Price (USD)</label><input id="f-price" value="425,000" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"><span style="font-size:13px;color:#5C5C5C">Price band is set from this: $400,000 to $450,000. Status starts as Available.</span></div>
+</fieldset>
+
+<fieldset style="margin:0;border:0;padding:24px;background:#FFFFFF;border-radius:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+<legend style="float:left;width:100%;padding:0 0 4px;font-family:'Instrument Serif',serif;font-size:28px">Details</legend>
+<sc-for list="{{nums}}" as="n" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:6px"><label for="{{n.id}}" style="font-size:14px;font-weight:500">{{n.label}}</label><input id="{{n.id}}" value="{{n.value}}" inputmode="decimal" style="height:48px;padding:0 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif"></div>
+</sc-for>
+<div style="grid-column:span 3;display:flex;flex-direction:column;gap:6px"><label for="f-desc" style="font-size:14px;font-weight:500">Description</label><textarea id="f-desc" rows="4" style="padding:12px 14px;border-radius:8px;border:1px solid #BDBDBD;font:400 16px 'Inter',sans-serif;resize:vertical">A brick Tudor two blocks from Memorial Park, with the original arched front door and a kitchen redone in 2023.</textarea></div>
+</fieldset>
+
+<fieldset style="margin:0;border:0;padding:24px;background:#FFFFFF;border-radius:20px;display:flex;flex-direction:column;gap:16px">
+<legend style="float:left;width:100%;padding:0 0 4px;font-family:'Instrument Serif',serif;font-size:28px">Four photos</legend>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><span style="font-size:14px;color:#5C5C5C">JPEG or PNG, up to 5 MB each. Drag to reorder; photo 1 is the cover.</span><span style="padding:6px 12px;border-radius:999px;background:{{countBg}};color:{{countFg}};font-size:13px;font-weight:600">{{countLabel}}</span></div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+<sc-for list="{{slots}}" as="s" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-if value="{{s.filled}}" hint-placeholder-val="{{ true }}"><div style="position:relative;height:120px;border-radius:14px;background:{{s.bg}}"><span style="position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">{{s.n}}</span><button type="button" aria-label="Remove photo {{s.n}}" style="position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.72);cursor:pointer">×</button></div></sc-if>
+<sc-if value="{{s.empty}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{addPhoto}}" style="height:120px;border-radius:14px;border:2px dashed #75000E;background:#FBF3F4;color:#75000E;font:600 13px 'Inter',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add photo {{s.n}}</button></sc-if>
+<label for="{{s.altId}}" style="font-size:12px;font-weight:500">Alt text, photo {{s.n}}</label><input id="{{s.altId}}" value="{{s.alt}}" style="height:40px;padding:0 10px;border-radius:8px;border:1px solid #BDBDBD;font:400 14px 'Inter',sans-serif">
+</div>
+</sc-for>
+</div>
+</fieldset>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><button type="button" aria-disabled="{{short}}" style="min-height:52px;padding:0 28px;border-radius:999px;border:0;background:#75000E;color:#FFFFFF;font:600 16px 'Inter',sans-serif;opacity:{{saveOpacity}};cursor:pointer">Save listing</button><a href="V2AdminListings.dc.html" style="color:#000000;font-weight:600">Cancel</a><button type="button" onClick="{{resetPhotos}}" style="margin-left:auto;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #BDBDBD;background:#FFFFFF;font:500 13px 'Inter',sans-serif;cursor:pointer">Prototype: reset to 3 photos</button></div>
+</form>
+
+<aside aria-label="Live preview" style="flex:1 1 300px;max-width:340px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;font-weight:600;letter-spacing:.18em;color:#5C5C5C">LIVE PREVIEW</span>
+<div style="background:#FFFFFF;border-radius:16px;overflow:hidden">
+<div style="height:200px;position:relative;background:#75000E"><span style="position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.72);font-size:12px;font-weight:600"><span style="width:6px;height:6px;border-radius:50%;background:#000"></span>Available</span><span style="position:absolute;bottom:12px;left:12px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.72);font-family:'Instrument Serif',serif;font-size:22px;color:#75000E">$425,000</span></div>
+<div style="padding:16px 18px;display:flex;flex-direction:column;gap:6px"><span style="font-family:'Instrument Serif',serif;font-size:26px;line-height:1.05">4812 Underwood Avenue</span><span style="font-size:13px;color:#5C5C5C">Happy Hollow · Tudor</span><div style="display:flex;gap:14px;font-size:13px;border-top:1px solid #EDEDED;padding-top:10px;margin-top:4px"><span>4 bd</span><span>2.5 ba</span><span>2,340 sq ft</span></div></div>
+</div>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#5C5C5C">This is how the card will look on Browse and Home once it's saved.</p>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1500}}'>
+class Component extends DCLogic {
+renderVals() {
+const count = (this.state && this.state.count) || 3;
+const bgs = ['#75000E', '#D3CFCA', '#2A2A2A', '#A9A6A2'];
+const alts = ['Brick Tudor front with arched door', 'Kitchen with quartz counters', 'Living room with fireplace', ''];
+const slots = [1, 2, 3, 4].map((n) => ({ n, filled: n <= count, empty: n > count, bg: bgs[n - 1], altId: 'alt' + n, alt: n <= count ? alts[n - 1] : '' }));
+const short = count < 4;
+return {
+slots, short,
+countLabel: count + ' of 4 photos', countBg: short ? '#FBF3F4' : '#0B0B0B', countFg: short ? '#75000E' : '#FFFFFF',
+saveOpacity: short ? '.55' : '1',
+addPhoto: () => this.setState({ count: Math.min(4, count + 1) }),
+resetPhotos: () => this.setState({ count: 3 }),
+nums: [
+{ id: 'f-bed', label: 'Bedrooms', value: '4' }, { id: 'f-bath', label: 'Bathrooms', value: '2.5' }, { id: 'f-gar', label: 'Garage spaces', value: '2' },
+{ id: 'f-sqft', label: 'Square feet', value: '2,340' }, { id: 'f-lot', label: 'Lot size, sq ft', value: '7,800' }, { id: 'f-year', label: 'Year built', value: '1928' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

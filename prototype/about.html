@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About Carlos | CK Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main" data-page="about">
+
+<section class="page-hero">
+  <div class="hero-bg" aria-hidden="true"><div class="glow"></div><div class="cloud c1"></div><div class="cloud c3"></div><div class="sky" id="sky"></div></div>
+  <div class="wrap">
+    <nav class="crumbs fade-up" aria-label="Breadcrumb"><a href="index.html"><i data-ic="home"></i>Home</a><i data-ic="chevR" class="sep"></i><span aria-current="page">About Carlos</span></nav>
+    <h1 id="pageTitle">An Omaha broker who <em>answers his own messages.</em></h1>
+    <p class="fade-up" style="animation-delay:.6s">CK Real Estate is Carlos Kosala's brokerage for homes in Benson, Downtown, Happy Hollow and Rockbrook.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap ab-intro">
+    <div>
+      <p class="eyebrow">Carlos Kosala</p>
+      <h2 class="title hl" data-split>Broker and owner of CK Real Estate</h2>
+      <p class="lead">[Carlos's own bio goes here: how long he has sold homes in Omaha, which neighborhoods he knows best, and how he likes to work with buyers and sellers. He or Janet can edit this from the admin area.]</p>
+      <div class="copy-row" style="margin-top:22px"><i data-ic="pin"></i><span>[Office address], Omaha, NE</span><button class="copy-btn" data-copy="[Office address], Omaha, NE" data-copy-label="Address" aria-label="Copy office address"><i data-ic="copy"></i></button></div>
+      <div class="copy-row" style="margin-top:10px"><i data-ic="phone"></i><span>[Office phone]</span><button class="copy-btn" data-copy="[Office phone]" data-copy-label="Phone number" aria-label="Copy phone number"><i data-ic="copy"></i></button></div>
+      <div class="copy-row" style="margin-top:10px"><i data-ic="mail"></i><span>[Office email]</span><button class="copy-btn" data-copy="[Office email]" data-copy-label="Email address" aria-label="Copy email address"><i data-ic="copy"></i></button></div>
+      <div class="copy-row" style="margin-top:10px"><i data-ic="globe"></i><span>[Website]</span><button class="copy-btn" data-copy="[Website]" data-copy-label="Website" aria-label="Copy website address"><i data-ic="copy"></i></button></div>
+      <a class="btn btn-accent" href="#write" style="margin-top:22px">Email Carlos <i data-ic="arrow" class="mv"></i></a>
+    </div>
+    <div class="ab-art rv"><div id="abArt" style="position:absolute;inset:0"></div>
+      <div class="ab-badge"><span class="bi"><i data-ic="award"></i></span><div><b>Carlos Kosala</b><small>Licensed broker, Omaha</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="write">
+  <div class="wrap contact-g">
+    <form class="form rv" id="aboutForm" novalidate>
+      <h3>Email Carlos</h3>
+      <p class="muted" style="margin-top:-6px">Ask a question or request information. Your message goes straight to Carlos by email and isn't stored on the site.</p>
+      <div class="row">
+        <label>Full name<input id="aName" name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
+        <label>Email address<input id="aEmail" name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label>
+      </div>
+      <label><span class="lab-top">Phone number<span class="hint">Optional</span></span><input id="aPhone" name="phone" type="tel" autocomplete="tel" placeholder="(402) 555-0100"></label>
+      <label>Message<textarea id="aMsg" name="msg" required minlength="10" placeholder="What would you like to know?"></textarea></label>
+      <label class="check"><input type="checkbox" id="aConsent" name="consent" required>I agree that CK Real Estate may contact me about this message.</label>
+      <button class="btn btn-accent lg" type="submit">Send to Carlos <i data-ic="send" class="mv"></i></button>
+    </form>
+    <div>
+      <p class="eyebrow">Write to Carlos</p>
+      <h2 class="title hl" data-split>Questions go to him directly</h2>
+      <p class="lead">Ask about a neighborhood, a price range, or what selling your house would involve. Carlos reads these himself and writes back.</p>
+      <p class="lead">Asking about one particular house? Use the form on its listing page, so he knows which one you mean.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">Who we are</p><h2 class="title hl" data-split>A small office that knows its streets</h2></div>
+    <div class="vtabs">
+      <div class="vt-list" id="vtList" role="tablist" aria-label="About CK Real Estate" aria-orientation="vertical"></div>
+      <div class="vt-panel" id="vtPanel" role="tabpanel"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">How a listing works</p><h2 class="title hl" data-split>From the day it goes up to the day it sells</h2></div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<section class="band" aria-label="CK Real Estate at a glance">
+  <div class="wrap stats" data-counts>
+    <div class="stat rv"><b data-count="5">5</b><p>Home types: ranch, Tudor, split-entry, townhome and condo</p></div>
+    <div class="stat rv"><b data-count="4">4</b><p>Omaha neighborhoods covered</p></div>
+    <div class="stat rv"><b data-count="2">2</b><p>People who answer your messages: Carlos and Janet</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">How we can help</p><h2 class="title hl" data-split>What happens when you work with Carlos</h2></div>
+    <div class="steps" data-stagger>
+      <div class="step"><span class="step-n"><i data-ic="tag"></i></span><span class="step-ic"><i data-ic="home"></i></span><h3>Buy a home</h3><p>Tell Carlos your budget and the neighborhoods you like. He'll point you to listings that fit and set up showings.</p></div>
+      <div class="step"><span class="step-n"><i data-ic="plus"></i></span><span class="step-ic"><i data-ic="doc"></i></span><h3>Sell your home</h3><p>Carlos visits the house, helps you settle on a price and puts it online with four photos.</p></div>
+      <div class="step"><span class="step-n"><i data-ic="chat"></i></span><span class="step-ic"><i data-ic="mail"></i></span><h3>Ask a question</h3><p>Not ready yet? Send a message from any page. It goes to the office inbox and someone writes back.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">The office</p><h2 class="title hl" data-split>The two people you'll talk to</h2></div><a class="btn btn-ghost" href="contact.html">Contact the office <i data-ic="arrow" class="mv"></i></a></div>
+    <div class="team" id="team" data-stagger></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta rv">
+      <div><h2>Ready to start looking?</h2><p>Browse the homes for sale, or send Carlos a note about what you need.</p></div>
+      <div class="acts"><a class="btn btn-light lg" href="index.html#listings"><i data-ic="search"></i>Browse homes</a><a class="btn btn-outline-light lg" href="contact.html">Contact the office</a></div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="app.js"></script>
+</body>
+</html>

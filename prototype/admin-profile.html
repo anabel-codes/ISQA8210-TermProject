@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Profile and contact | CK Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="vendor/quill.snow.css">
+<link rel="stylesheet" href="vendor/filepond.min.css">
+<link rel="stylesheet" href="vendor/filepond-plugin-image-preview.min.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="adm" id="adm" data-page="profile">
+  <aside class="sb" id="sb" aria-label="Admin navigation"></aside>
+  <div class="sb-scrim" id="sbScrim" hidden></div>
+  <div class="main">
+    <header class="tb" id="tb"></header>
+    <main class="content" id="content">
+
+      <form class="pf" id="pfForm" novalidate>
+        <div class="pf-main">
+          <section class="card fs">
+            <div class="fs-h"><span class="fs-n">1</span><div><h2>About Carlos</h2><p>Shown at the top of the About page.</p></div></div>
+            <div class="pf-port" id="pfPort"><div class="pf-ph" id="pvPort2" aria-hidden="true"></div><div><b>Portrait</b><small>JPEG or PNG, up to 5 MB. A head-and-shoulders photo works best.</small><div class="pf-pb" id="pfPortBtns"></div></div></div>
+            <div class="fld"><label for="pfName">Broker name</label><input id="pfName" maxlength="100" autocomplete="name"></div>
+            <div class="fld"><label for="pfBio">Biography</label><textarea id="pfBio" rows="7"></textarea><small class="f-hint" id="bioCnt"></small></div>
+          </section>
+          <section class="card fs">
+            <div class="fs-h"><span class="fs-n">2</span><div><h2>Contact details</h2><p>Text in [brackets] is a placeholder still waiting for the real details.</p></div></div>
+            <div class="g2">
+              <div class="fld span2"><label for="pfAddr">Office address</label><input id="pfAddr" maxlength="200" autocomplete="street-address"></div>
+              <div class="fld"><label for="pfPhone">Phone</label><input id="pfPhone" type="tel" maxlength="20" autocomplete="tel"></div>
+              <div class="fld"><label for="pfEmail">Email</label><input id="pfEmail" type="email" maxlength="254" autocomplete="email"></div>
+              <div class="fld span2"><label for="pfWeb">Website<span class="u">optional</span></label><input id="pfWeb" type="url" maxlength="255" inputmode="url"></div>
+            </div>
+          </section>
+          <p class="muted sm" id="pfMeta"></p>
+        </div>
+        <aside class="add-side">
+          <div class="side-in">
+            <section class="card pv">
+              <p class="eyebrow-a">How it looks on the About page</p>
+              <div class="pv-prof"><div class="pv-port" id="pvPort"></div><h3 id="pvNm"></h3><p class="pv-bio" id="pvBio"></p><ul class="pv-rows" id="pvRows"></ul></div>
+              <a class="pbtn ghost sm" href="about.html" target="_blank" rel="noopener"><i data-ic="ext"></i>Open the About page</a>
+            </section>
+          </div>
+        </aside>
+        <div class="save-bar" id="saveBar" role="region" aria-label="Unsaved changes"><span><i data-ic="info"></i>You have unsaved changes.</span><button type="button" class="pbtn ghost sm" id="pfDiscard">Discard</button><button type="submit" class="pbtn acc sm">Save changes</button></div>
+      </form>
+    </main>
+    <p class="sample-note pg-note">Sample data. Changes are kept for this browser tab only.</p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/purify.min.js" defer></script>
+<script src="vendor/quill.js" defer></script>
+<script src="vendor/filepond-plugin-file-validate-type.min.js" defer></script>
+<script src="vendor/filepond-plugin-file-validate-size.min.js" defer></script>
+<script src="vendor/filepond-plugin-image-exif-orientation.min.js" defer></script>
+<script src="vendor/filepond-plugin-image-preview.min.js" defer></script>
+<script src="vendor/filepond-plugin-image-crop.min.js" defer></script>
+<script src="vendor/filepond.min.js" defer></script>
+<script src="vendor/imask.min.js" defer></script>
+<script src="admin.js" defer></script>
+</body>
+</html>

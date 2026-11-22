@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search report and activity v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F6F4}
+a{color:#75000E}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="display:flex;flex-wrap:wrap;min-height:1400px;background:#F7F6F4;color:#000000;font-family:'Inter',sans-serif">
+
+<aside style="flex:1 1 240px;max-width:264px;background:#0B0B0B;color:#FFFFFF;padding:24px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;gap:10px;padding:0 8px"><svg width="36" height="36" viewBox="0 0 64 64" role="img" aria-label="CK Real Estate"><rect width="64" height="64" rx="14" fill="#75000E"></rect><rect x="42" y="12" width="6" height="10" fill="#FFFFFF"></rect><path d="M10 30 L32 12 L54 30" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"></path><text x="32" y="53" text-anchor="middle" font-family="Instrument Serif, serif" font-size="27" fill="#FFFFFF">CK</text></svg><span style="display:flex;flex-direction:column"><span style="font-family:'Instrument Serif',serif;font-size:20px;line-height:1">CK Office</span><span style="font-size:11px;color:#BDBDBD">Admin area</span></span></div>
+<nav aria-label="Admin" style="display:flex;flex-direction:column;gap:4px;font-size:14px">
+<a href="V2AdminListings.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">All listings</a>
+<a href="V2AdminAdd.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">Add a listing</a>
+<a href="V2AdminReport.dc.html" aria-current="page" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;background:#75000E;color:#FFFFFF;text-decoration:none;font-weight:600">Search report</a>
+<a href="V2AdminReport.dc.html" style="display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:12px;color:#FFFFFF;text-decoration:none">Activity log</a>
+</nav>
+<div style="margin-top:auto;border-top:1px solid #2A2A2A;padding:16px 8px 0;display:flex;flex-direction:column;gap:12px"><span style="font-size:13px;font-weight:600">Carlos · Administrator</span><button type="button" style="min-height:44px;border-radius:999px;border:1px solid #5C5C5C;background:transparent;color:#FFFFFF;font:600 14px 'Inter',sans-serif">Log out</button></div>
+</aside>
+
+<main style="flex:999 1 640px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">What visitors searched for</span><h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:52px;line-height:1">Search report</h1></div>
+<form style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:6px"><label for="v2r-month" style="font-size:13px;font-weight:500">Month</label><input id="v2r-month" type="month" value="2026-10" style="height:46px;padding:0 12px;border-radius:999px;border:1px solid #BDBDBD;background:#FFFFFF;font:500 15px 'Inter',sans-serif"></div><button type="button" style="min-height:46px;padding:0 20px;border-radius:999px;border:0;background:#000000;color:#FFFFFF;font:600 14px 'Inter',sans-serif">Show report</button><button type="button" style="display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px;border-radius:999px;border:1px solid #000000;background:#FFFFFF;font:600 14px 'Inter',sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>Download CSV</button></form>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+<div style="background:#0B0B0B;color:#FFFFFF;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#BDBDBD">Completed searches, October 2026</span><span style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1">264</span><span style="font-size:12px;color:#F3DDE0">+18% vs September (224)</span></div>
+<div style="background:#FFFFFF;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">Most searched type</span><span style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1">Ranch</span><span style="font-size:12px;color:#5C5C5C">41% of searches with a type chosen</span></div>
+<div style="background:#FFFFFF;border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">Most searched neighborhood</span><span style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1">Benson</span><span style="font-size:12px;color:#5C5C5C">35% of searches with a neighborhood</span></div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<sc-for list="{{charts}}" as="ch" hint-placeholder-count="3">
+<section style="background:#FFFFFF;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:28px">{{ch.title}}</h2>
+<sc-for list="{{ch.rows}}" as="r" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;font-size:14px"><span>{{r.label}}</span><span style="font-weight:600">{{r.n}}</span></div><div style="height:10px;border-radius:999px;background:#F7F6F4"><div style="height:10px;border-radius:999px;background:{{r.color}};width:{{r.pct}}"></div></div></div>
+</sc-for>
+</section>
+</sc-for>
+</div>
+<p style="margin:-8px 0 0;font-size:13px;color:#5C5C5C">A completed search means the visitor pressed Show homes with at least one filter and the results loaded (D5). Searches with no type, neighborhood or band chosen are left out of that chart.</p>
+
+<section style="background:#FFFFFF;border-radius:20px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:18px 20px;border-bottom:1px solid #EDEDED"><h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:28px">Activity log</h2><span style="font-size:13px;color:#5C5C5C">Read only · who changed what (US-20)</span></div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:14px;min-width:720px">
+<thead><tr style="text-align:left;color:#5C5C5C;font-size:12px;letter-spacing:.08em"><th scope="col" style="padding:12px 20px;font-weight:600">WHEN</th><th scope="col" style="padding:12px;font-weight:600">WHO</th><th scope="col" style="padding:12px;font-weight:600">ACTION</th><th scope="col" style="padding:12px 20px;font-weight:600">WHAT CHANGED</th></tr></thead>
+<tbody>
+<sc-for list="{{log}}" as="l" hint-placeholder-count="5">
+<tr style="border-top:1px solid #EDEDED"><td style="padding:12px 20px;white-space:nowrap;color:#5C5C5C">{{l.when}}</td><td style="padding:12px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:28px;height:28px;border-radius:50%;background:#F3DDE0;color:#75000E;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">{{l.initial}}</span>{{l.who}}</span></td><td style="padding:12px"><span style="padding:5px 10px;border-radius:999px;background:#F7F6F4;font-size:12px;font-weight:600">{{l.action}}</span></td><td style="padding:12px 20px">{{l.what}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1400}}'>
+class Component extends DCLogic {
+renderVals() {
+const mk = (rows) => { const max = Math.max(...rows.map((r) => r[1])); return rows.map((r, i) => ({ label: r[0], n: r[1], pct: Math.round(r[1] / max * 100) + '%', color: i === 0 ? '#75000E' : '#0B0B0B' })); };
+return {
+charts: [
+{ title: 'By home type', rows: mk([['Ranch', 88], ['Townhome', 52], ['Tudor', 47], ['Condominium', 29]]) },
+{ title: 'By neighborhood', rows: mk([['Benson', 79], ['Happy Hollow', 64], ['Rockbrook', 41], ['Downtown', 40]]) },
+{ title: 'By price band', rows: mk([['$300k to $350k', 71], ['$250k to $300k', 66], ['$350k to $400k', 44], ['$400k to $450k', 23]]) }
+],
+log: [
+{ when: 'Nov 7, 9:14 AM', who: 'Janet', initial: 'J', action: 'Price changed', what: '10230 Rockbrook Road: $368,000 to $359,000' },
+{ when: 'Nov 6, 4:02 PM', who: 'Carlos', initial: 'C', action: 'Featured set', what: '4812 Underwood Ave is now the featured home' },
+{ when: 'Nov 3, 11:30 AM', who: 'Janet', initial: 'J', action: 'Created', what: '6107 Maple Street added with 4 photos' },
+{ when: 'Nov 1, 2:48 PM', who: 'Carlos', initial: 'C', action: 'Status changed', what: '6824 Binney Street: Available to Pending' },
+{ when: 'Oct 29, 10:05 AM', who: 'Carlos', initial: 'C', action: 'Hidden', what: '3310 Burt Street hidden after sale (kept on file)' }
+]
+};
+}
+}
+</script>
+</body>
+</html>

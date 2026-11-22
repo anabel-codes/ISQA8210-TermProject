@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CK Real Estate</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main id="main" data-page="home">
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="glow"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+    <div class="sky" id="sky"></div>
+  </div>
+  <div class="wrap hero-in">
+    <a class="pill-badge fade-up" href="index.html#listings" style="animation-delay:.05s"><b>Featured</b><span id="heroBadge">This month's pick</span><i data-ic="arrow"></i></a>
+    <h1 id="h1">Find the <em>right home</em> in Omaha. Buy or sell with Carlos.</h1>
+    <p class="sub fade-up" style="animation-delay:.7s">Browse Carlos Kosala's listings in Benson, Downtown, Happy Hollow and Rockbrook. Filter by home type, neighborhood and price, and send the office a question about any house that catches your eye.</p>
+    <form class="search fade-up" id="searchForm" role="search" style="animation-delay:.85s" novalidate>
+      <div class="fld cs" id="fHood" data-label="Neighborhood" data-value="all"></div>
+      <div class="fld cs" id="fType" data-label="Home type" data-value="all"></div>
+      <div class="fld cs" id="fMax" data-label="Price range" data-value="0"></div>
+      <button class="btn btn-dark go" type="submit"><i data-ic="search"></i>Show homes</button>
+    </form>
+    <div class="chips fade-up" style="animation-delay:1s">
+      <span>Popular:</span>
+      <button class="chip" data-type="Ranch"><i data-ic="home"></i>Ranch</button>
+      <button class="chip" data-type="Tudor"><i data-ic="home"></i>Tudor</button>
+      <button class="chip" data-type="Condominium"><i data-ic="building"></i>Condo</button>
+      <button class="chip" data-hood="Benson"><i data-ic="pin"></i>Benson</button>
+      <button class="chip" data-hood="Happy Hollow"><i data-ic="pin"></i>Happy Hollow</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec tight" id="featured" aria-label="Featured home">
+  <div class="wrap"><div class="fh rv" id="fhBox"></div></div>
+</section>
+
+<section class="sec" id="listings">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">For sale</p><h2 class="title hl" data-split>Homes for sale right now</h2><p class="lead">Each listing has the full address, the price and four photos. Sold homes come off this page.</p></div>
+      <div class="tabs" role="tablist" aria-label="Filter homes by type" data-tabs="sale"></div>
+    </div>
+    <div class="count-row"><p id="saleCount" aria-live="polite"></p><button class="link" data-clear hidden>Clear search</button></div>
+    <div class="grid" id="saleGrid"></div>
+  </div>
+</section>
+
+<section class="sec alt" id="cities">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">Neighborhoods</p><h2 class="title hl" data-split>Pick a neighborhood, then find your house</h2><p class="lead">Select one to see every home Carlos has listed there.</p></div>
+    <div class="rail" id="rail" tabindex="0" aria-label="Neighborhoods"></div>
+    <div class="rail-ctl">
+      <div class="bar"><i id="barThumb"></i></div>
+      <div class="arrows"><button class="icon-btn rev" id="railPrev" aria-label="Previous neighborhoods"><i data-ic="arrow"></i></button><button class="icon-btn" id="railNext" aria-label="Next neighborhoods"><i data-ic="arrow"></i></button></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap about">
+    <div class="about-art rv">
+      <div class="a1" id="aboutA"></div><div class="a2" id="aboutB"></div>
+      <div class="stamp" aria-hidden="true"><svg class="ring" viewBox="0 0 100 100"><defs><path id="ringP" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text><textPath href="#ringP">CK Real Estate · Omaha, Nebraska ·</textPath></text></svg><span><b>CK</b>Omaha</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">About Carlos</p>
+      <h2 class="title hl" data-split>One broker who knows these streets</h2>
+      <p class="lead">CK Real Estate is Carlos Kosala's brokerage. He lists homes in four Omaha neighborhoods and works with each buyer himself, from the first showing to closing day.</p>
+      <div class="feats" data-stagger>
+        <div class="feat"><div class="fi"><i data-ic="image"></i></div><div><h3>Four photos on every listing</h3><p>Carlos or Janet adds each home with the address, price, details and four photos.</p></div></div>
+        <div class="feat"><div class="fi"><i data-ic="mail"></i></div><div><h3>Questions go straight to the office</h3><p>Ask about a house from its page. Your message lands in the CK inbox and a person writes back.</p></div></div>
+        <div class="feat"><div class="fi"><i data-ic="users"></i></div><div><h3>The same people the whole way</h3><p>You talk to Carlos or Janet every time, so you never have to explain things twice.</p></div></div>
+      </div>
+      <a class="btn btn-accent" href="about.html">More about Carlos <i data-ic="arrow" class="mv"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-label="CK Real Estate at a glance">
+  <div class="wrap stats" data-counts>
+    <div class="stat rv"><b data-count="4">4</b><p>Omaha neighborhoods: Benson, Downtown, Happy Hollow and Rockbrook</p></div>
+    <div class="stat rv"><b data-count="4">4</b><p>Photos on every listing, so you can see the house before you visit</p></div>
+    <div class="stat rv"><b data-count="50" data-pre="$" data-suf="k">$50k</b><p>Price bands, so you can search by range instead of guessing a number</p></div>
+  </div>
+</section>
+
+<section class="sec alt" id="process">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">How it works</p><h2 class="title hl" data-split>From first look to closing day</h2></div>
+    <ol class="steps" id="steps">
+      <li class="steps-line" aria-hidden="true"><i></i></li>
+      <li class="step rv"><span class="step-n">1</span><span class="step-ic"><i data-ic="search"></i></span><h3>Browse the homes</h3><p>Filter by home type, neighborhood and price range. Open any listing to see all four photos and the details.</p></li>
+      <li class="step rv"><span class="step-n">2</span><span class="step-ic"><i data-ic="chat"></i></span><h3>Ask about a house</h3><p>Send a question from the listing page and say when you could see it. The message goes to the CK office by email.</p></li>
+      <li class="step rv"><span class="step-n">3</span><span class="step-ic"><i data-ic="pen"></i></span><h3>Work with Carlos</h3><p>He shows you the house, helps you put together an offer and stays with you until you have the keys.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="insights">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Local area</p><h2 class="title hl" data-split>What's around the house</h2><p class="lead">Places Carlos recommends, grouped the way buyers usually ask about them.</p></div><a class="btn btn-ghost" href="local.html">See the full page <i data-ic="arrow" class="mv"></i></a></div>
+    <div class="posts" id="posts" data-stagger></div>
+  </div>
+</section>
+
+<section class="sec tight" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta rv">
+      <div><h2>Have a question about a listing?</h2><p>Send a message and Carlos or Janet will write back.</p></div>
+      <div class="acts"><a class="btn btn-light lg" href="contact.html"><i data-ic="chat"></i>Contact the office</a><a class="btn btn-outline-light lg" href="index.html#listings">Browse homes</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="site-footer"></div>
+<script src="app.js"></script>
+</body>
+</html>

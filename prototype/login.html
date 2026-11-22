@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log in | CK Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main" data-page="login">
+<div class="auth">
+  <div class="auth-form">
+    <div class="auth-card">
+      <h1>Log in</h1>
+      <p>Enter your username and password.</p>
+      <form class="form plain" id="loginForm" novalidate>
+        <label>Username<span class="in-ic"><i data-ic="user"></i><input id="lgUser" name="username" type="text" required autocomplete="username" placeholder="Your username"></span></label>
+        <label>Password<span class="in-ic pw"><i data-ic="lock"></i><input id="lgPw" name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="Your password"><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><i data-ic="eye"></i></button></span></label>
+        <div class="auth-row">
+          <span></span>
+          <button type="button" class="link" id="forgotBtn" aria-expanded="false" aria-controls="resetPanel">Forgot password?</button>
+        </div>
+        <div class="reset-panel" id="resetPanel"><div><div class="reset-in">
+          <b>Reset your password</b>
+          <label>Email address<span class="in-ic"><i data-ic="mail"></i><input id="rEmail" type="email" autocomplete="email" placeholder="Your email address"></span></label>
+          <button type="button" class="btn btn-dark sm" id="resetSend" style="align-self:flex-start">Send reset link</button>
+        </div></div></div>
+        <button class="btn btn-accent lg block" type="submit"><i data-ic="login"></i>Log in</button>
+      </form>
+    </div>
+  </div>
+  <div class="auth-art" id="authArt" aria-hidden="true"></div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script src="app.js"></script>
+</body>
+</html>

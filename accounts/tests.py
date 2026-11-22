@@ -1,0 +1,179 @@
+"""US-01 Administrator Log In and US-02 Administrator Log Out."""
+
+from io import StringIO
+from unittest.mock import patch
+
+from django.contrib.auth.models import Group, User
+from django.core.management import call_command
+from django.core.management.base import CommandError
+from django.test import Client, TestCase
+from django.urls import reverse
+from django.utils.html import strip_tags
+
+from reports.models import AuditLog
+
+LOGIN = reverse("accounts:login")
+LOGOUT = reverse("accounts:logout")
+ADMIN_HOME = reverse("listings_admin:list")
+DASHBOARD = reverse("listings_admin:dashboard")
+
+
+class AdminAccountsMixin:
+    @classmethod
+    def setUpTestData(cls):
+        group = Group.objects.create(name="Administrators")
+        cls.carlos = User.objects.create_user("carlos", password="Test-pass-123", first_name="Carlos")
+        cls.janet = User.objects.create_user("janet", password="Test-pass-456", first_name="Janet")
+        cls.carlos.groups.add(group)
+        cls.janet.groups.add(group)
+
+
+class US01LoginTests(AdminAccountsMixin, TestCase):
+    def test_ac1_valid_credentials_reach_the_admin_area(self):
+        response = self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        self.assertRedirects(response, DASHBOARD)
+        self.assertEqual(int(self.client.session["_auth_user_id"]), self.janet.pk)
+
+    def test_ac1_login_is_recorded_with_who_and_when(self):
+        self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        row = AuditLog.objects.get(action="login")
+        self.assertEqual(row.administrator, self.janet)
+        self.assertIsNotNone(row.date_time)
+
+    def test_ac2_failed_login_is_not_recorded(self):
+        self.client.post(LOGIN, {"username": "janet", "password": "wrong"})
+        self.assertFalse(AuditLog.objects.filter(action="login").exists())
+
+    def test_login_page_does_not_advertise_the_admin_area(self):
+        html = self.client.get(LOGIN).content.decode()
+        visible = strip_tags(html.split("<body>", 1)[1].split("<script", 1)[0])
+        self.assertNotIn("admin", visible.lower())
+
+    def test_ac2_invalid_credentials_show_an_error_and_open_nothing(self):
+        response = self.client.post(LOGIN, {"username": "janet", "password": "wrong"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "don't match")
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_ac3_anonymous_admin_page_redirects_to_login(self):
+        response = self.client.get(ADMIN_HOME)
+        self.assertRedirects(response, f"{LOGIN}?next={ADMIN_HOME}")
+
+    def test_carlos_and_janet_are_separate_users_in_one_group(self):
+        self.assertNotEqual(self.carlos.pk, self.janet.pk)
+        self.assertEqual(
+            list(self.carlos.groups.values_list("name", flat=True)),
+            list(self.janet.groups.values_list("name", flat=True)),
+        )
+
+    def test_passwords_are_stored_hashed(self):
+        self.assertTrue(self.janet.password.startswith("pbkdf2_sha256$"))
+
+
+class US02LogoutTests(AdminAccountsMixin, TestCase):
+    def setUp(self):
+        self.client.login(username="carlos", password="Test-pass-123")
+
+    def test_ac1_logout_ends_session_and_returns_to_login(self):
+        response = self.client.post(LOGOUT)
+        self.assertRedirects(response, LOGIN)
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_ac1_logout_is_recorded(self):
+        self.client.post(LOGOUT)
+        self.assertEqual(AuditLog.objects.get(action="logout").administrator, self.carlos)
+
+    def test_every_admin_page_needs_login_and_is_never_cached(self):
+        for url in (DASHBOARD, ADMIN_HOME, reverse("listings_admin:create")):
+            with self.subTest(url=url):
+                self.assertIn("no-store", self.client.get(url).headers.get("Cache-Control", ""))
+        self.client.post(LOGOUT)
+        for url in (DASHBOARD, ADMIN_HOME, reverse("listings_admin:create")):
+            with self.subTest(url=url, logged_in=False):
+                self.assertRedirects(self.client.get(url), f"{LOGIN}?next={url}")
+
+    def test_side_menu_log_out_is_a_post_form(self):
+        html = self.client.get(DASHBOARD).content.decode()
+        self.assertIn(f'method="post" action="{LOGOUT}"', html)
+
+    def test_ac2_after_logout_admin_page_redirects_to_login(self):
+        self.client.post(LOGOUT)
+        response = self.client.get(ADMIN_HOME)
+        self.assertRedirects(response, f"{LOGIN}?next={ADMIN_HOME}")
+
+    def test_ac3_admin_pages_are_not_cached_for_the_back_button(self):
+        response = self.client.get(ADMIN_HOME)
+        cache_control = response.headers.get("Cache-Control", "")
+        self.assertIn("no-store", cache_control)
+
+    def test_logout_needs_post(self):
+        response = self.client.get(LOGOUT)
+        self.assertEqual(response.status_code, 405)
+
+
+class AdministratorAccessTests(AdminAccountsMixin, TestCase):
+    def test_regular_user_cannot_log_in_to_management(self):
+        User.objects.create_user("visitor", password="Visitor-test-123")
+        response = self.client.post(LOGIN, {"username": "visitor", "password": "Visitor-test-123"})
+        self.assertContains(response, "don't match")
+        self.assertNotIn("_auth_user_id", self.client.session)
+        self.assertFalse(AuditLog.objects.filter(action="login").exists())
+
+    def test_existing_regular_session_cannot_open_or_post_to_admin_pages(self):
+        visitor = User.objects.create_user("visitor", password="Visitor-test-123")
+        self.client.force_login(visitor)
+        for url in (DASHBOARD, ADMIN_HOME, reverse("listings_admin:create")):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url).status_code, 403)
+                self.assertEqual(self.client.post(url, {}).status_code, 403)
+
+    def test_inactive_administrator_cannot_log_in(self):
+        self.janet.is_active = False
+        self.janet.save(update_fields=["is_active"])
+        self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_team_superuser_can_use_management(self):
+        User.objects.create_superuser("team", password="Team-test-123")
+        response = self.client.post(LOGIN, {"username": "team", "password": "Team-test-123"})
+        self.assertRedirects(response, DASHBOARD)
+
+    def test_logout_and_create_require_csrf_tokens(self):
+        client = Client(enforce_csrf_checks=True)
+        client.force_login(self.janet)
+        for url in (LOGOUT, reverse("listings_admin:create")):
+            with self.subTest(url=url):
+                self.assertEqual(client.post(url, {}).status_code, 403)
+
+    def test_both_logout_controls_are_post_forms_without_javascript(self):
+        self.client.post(LOGIN, {"username": "janet", "password": "Test-pass-456"})
+        html = self.client.get(DASHBOARD).content.decode()
+        self.assertEqual(html.count(f'method="post" action="{LOGOUT}"'), 2)
+
+
+class InteractiveAdminSetupTests(TestCase):
+    def test_prompts_create_separate_administrators_with_hashed_passwords(self):
+        with patch("accounts.management.commands.create_admins.getpass", side_effect=[
+            "Private-C-test-9281", "Private-C-test-9281", "Private-J-test-3619", "Private-J-test-3619",
+        ]):
+            call_command("create_admins", interactive=True, stdout=StringIO())
+        for username, password in (("carlos", "Private-C-test-9281"), ("janet", "Private-J-test-3619")):
+            user = User.objects.get(username=username)
+            self.assertTrue(user.check_password(password))
+            self.assertTrue(user.groups.filter(name="Administrators").exists())
+        with patch("accounts.management.commands.create_admins.getpass") as prompt:
+            call_command("create_admins", interactive=True, stdout=StringIO())
+            prompt.assert_not_called()
+        self.assertTrue(User.objects.get(username="carlos").check_password("Private-C-test-9281"))
+
+    def test_mismatched_password_does_not_create_account(self):
+        with patch("accounts.management.commands.create_admins.getpass", side_effect=["first", "different"]):
+            with self.assertRaises(CommandError):
+                call_command("create_admins", interactive=True, stdout=StringIO())
+        self.assertFalse(User.objects.exists())
+
+    def test_weak_password_does_not_create_account(self):
+        with patch("accounts.management.commands.create_admins.getpass", return_value="123"):
+            with self.assertRaises(CommandError):
+                call_command("create_admins", interactive=True, stdout=StringIO())
+        self.assertFalse(User.objects.exists())

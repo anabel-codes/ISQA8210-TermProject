@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load ck humanize %}
+{% block page %}home{% endblock %}
+{% block content %}
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    {% include "partials/estate_photo.html" with eager=True banner=True sizes="100vw" %}
+  </div>
+  <div class="wrap hero-in">
+    {% if featured %}<a class="pill-badge fade-up" href="#featured" style="animation-delay:.05s"><b>Featured</b><span>{{ featured.street_address }}, {{ featured.neighborhood }}</span>{% icon 'arrow' %}</a>{% endif %}
+    <h1 id="h1">Find the <em>right home</em> in Omaha. Buy or sell with Carlos.</h1>
+    <p class="sub fade-up" style="animation-delay:.7s">Browse Carlos Kosala's listings in Benson, Downtown, Happy Hollow and Rockbrook. Filter by home type, neighborhood and price, and find the house that fits.</p>
+    {% include "partials/search_form.html" with extra_class=" fade-up" delay=".85s" %}
+    <div class="chips fade-up" style="animation-delay:1s">
+      <span>Popular:</span>
+      <button class="chip" type="button" data-type="Ranch">{% icon 'home' %}Ranch</button>
+      <button class="chip" type="button" data-type="Tudor">{% icon 'home' %}Tudor</button>
+      <button class="chip" type="button" data-type="Condominium">{% icon 'building' %}Condo</button>
+      <button class="chip" type="button" data-hood="Benson">{% icon 'pin' %}Benson</button>
+      <button class="chip" type="button" data-hood="Happy Hollow">{% icon 'pin' %}Happy Hollow</button>
+    </div>
+  </div>
+</section>
+
+{% if featured %}
+<section class="sec tight" id="featured" aria-label="Featured home">
+  <div class="wrap"><div class="fh rv">
+    <div class="fh-art">{% if featured.cover_photo %}<img src="{{ featured.cover_photo.image_file.url }}" alt="{{ featured.cover_photo.alternative_text }}" loading="lazy">{% else %}{% include "partials/estate_photo.html" %}<span class="photo-note">Illustrative stock photo. Property photos pending.</span>{% endif %}<span class="fh-flag">{% icon 'star' %}Featured this week</span></div>
+    <div class="fh-tx"><p class="eyebrow">Featured home</p><h2 class="title">{{ featured.street_address }}</h2><p class="addr">{% icon 'pin' %}<span>{{ featured.street_address }}, {{ featured.neighborhood }}, {{ featured.city }}, {{ featured.state }} {{ featured.zip_code }}</span></p>
+      <div class="pd-tags" style="margin-top:14px"><span class="tag dark">{{ featured.current_status }}</span><span class="tag">{% icon featured.property_type|type_icon %}{{ featured.property_type }}</span><span class="tag">{% icon 'pin' %}{{ featured.neighborhood }}</span></div>
+      <b class="fh-price">{{ featured.price|money }}</b>
+      <ul class="specs"><li>{% icon 'bed' %}{{ featured.bedrooms }} bed{{ featured.bedrooms|pluralize }}</li><li>{% icon 'bath' %}{{ featured.bathrooms|baths }} baths</li><li>{% icon 'area' %}{{ featured.square_feet|intcomma }} sqft</li></ul>
+      <div class="lead">{{ featured.description|safe|truncatewords_html:45 }}</div>
+      <div class="fh-acts"><a class="btn btn-ghost" href="{% url 'public:listing_list' %}">See every listing</a></div></div>
+  </div></div>
+</section>
+{% endif %}
+
+<section class="sec" id="listings">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">For sale</p><h2 class="title hl" data-split>Homes for sale right now</h2><p class="lead">Each listing has the full address, the price and the details buyers ask about first.</p></div>
+      <div class="tabs" role="tablist" aria-label="Filter homes by type" data-tabs="sale"><span class="tab-ink" aria-hidden="true"></span>
+        <button class="tab" role="tab" data-type="all" aria-selected="true">{% icon 'grid' %}All</button>
+        {% for t in types %}<button class="tab" role="tab" data-type="{{ t.name }}" aria-selected="false">{% icon t|type_icon %}{{ t.name }}</button>{% endfor %}
+      </div>
+    </div>
+    <div class="count-row"><p id="saleCount" aria-live="polite" data-all="{{ total }} home{{ total|pluralize }} for sale">{{ total }} home{{ total|pluralize }} for sale</p>{% if total > listings|length %}<a class="link" href="{% url 'public:listing_list' %}">See all {{ total }}</a>{% endif %}</div>
+    <div class="grid" id="saleGrid">
+      {% for l in listings %}{% include "partials/listing_card.html" %}{% endfor %}
+    </div>
+    <div class="empty" id="tabEmpty"{% if listings %} hidden{% endif %}><div class="ei">{% icon 'search' %}</div><h3>{% if listings %}No homes of that type right now{% else %}No homes listed yet{% endif %}</h3><p>New listings show up here the day Carlos adds them.</p></div>
+  </div>
+</section>
+
+<section class="sec alt" id="cities">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">Neighborhoods</p><h2 class="title hl" data-split>Pick a neighborhood, then find your house</h2><p class="lead">Select one to see every home Carlos has listed there.</p></div>
+    <div class="rail" id="rail" tabindex="0" aria-label="Neighborhoods">
+      {% for h in hood_cards %}<a class="city" href="{% url 'public:listing_list' %}?hood={{ h.name|urlencode }}" data-stock-neighborhood="{{ h.name }}" aria-label="{{ h.name }}, {{ h.n }} home{{ h.n|pluralize }}. Illustrative stock photography.">{% include "partials/estate_photo.html" with secondary=True sizes="300px" %}<span class="city-meta"><small>{{ h.area }}</small><h3>{{ h.name }}</h3><p>{{ h.n }} home{{ h.n|pluralize }} for sale</p></span><span class="go">{% icon 'arrowUR' %}</span></a>{% endfor %}
+    </div>
+    <div class="rail-ctl">
+      <div class="bar"><i id="barThumb"></i></div>
+      <div class="arrows"><button class="icon-btn rev" id="railPrev" aria-label="Previous neighborhoods">{% icon 'arrow' %}</button><button class="icon-btn" id="railNext" aria-label="Next neighborhoods">{% icon 'arrow' %}</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap about">
+    <div class="about-art rv">
+      <div class="a1">{% include "partials/estate_photo.html" %}</div><div class="a2">{% include "partials/estate_photo.html" with secondary=True %}</div>
+      <div class="stamp" aria-hidden="true"><svg class="ring" viewBox="0 0 100 100"><defs><path id="ringP" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text><textPath href="#ringP">CK Real Estate · Omaha, Nebraska ·</textPath></text></svg><span><b>CK</b>Omaha</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">About Carlos</p>
+      <h2 class="title hl" data-split>One broker who knows these streets</h2>
+      <p class="lead">CK Real Estate is Carlos Kosala's brokerage. He lists homes in four Omaha neighborhoods and works with each buyer himself, from the first showing to closing day.</p>
+      <div class="feats" data-stagger>
+        <div class="feat"><div class="fi">{% icon 'image' %}</div><div><h3>Four photos on every listing</h3><p>Carlos or Janet adds each home with the address, price, details and four photos.</p></div></div>
+        <div class="feat"><div class="fi">{% icon 'mail' %}</div><div><h3>Questions go straight to the office</h3><p>Your message lands in the CK inbox and a person writes back.</p></div></div>
+        <div class="feat"><div class="fi">{% icon 'users' %}</div><div><h3>The same people the whole way</h3><p>You talk to Carlos or Janet every time, so you never have to explain things twice.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-label="CK Real Estate at a glance">
+  <div class="wrap stats" data-counts>
+    <div class="stat rv"><b data-count="{{ hood_cards|length }}">{{ hood_cards|length }}</b><p>Omaha neighborhoods: Benson, Downtown, Happy Hollow and Rockbrook</p></div>
+    <div class="stat rv"><b data-count="4">4</b><p>Photos on every listing, so you can see the house before you visit</p></div>
+    <div class="stat rv"><b data-count="50" data-pre="$" data-suf="k">$50k</b><p>Price bands, so you can search by range instead of guessing a number</p></div>
+  </div>
+</section>
+
+<section class="sec alt" id="process">
+  <div class="wrap">
+    <div class="sec-head center"><p class="eyebrow">How it works</p><h2 class="title hl" data-split>From first look to closing day</h2></div>
+    <ol class="steps" id="steps">
+      <li class="steps-line" aria-hidden="true"><i></i></li>
+      <li class="step rv"><span class="step-n">1</span><span class="step-ic">{% icon 'search' %}</span><h3>Browse the homes</h3><p>Filter by home type, neighborhood and price range to see what fits.</p></li>
+      <li class="step rv"><span class="step-n">2</span><span class="step-ic">{% icon 'chat' %}</span><h3>Ask about a house</h3><p>Tell the office which home caught your eye and when you could see it.</p></li>
+      <li class="step rv"><span class="step-n">3</span><span class="step-ic">{% icon 'pen' %}</span><h3>Work with Carlos</h3><p>He shows you the house, helps you put together an offer and stays with you until you have the keys.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec tight" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta rv">
+      <div><h2>Have a question about a listing?</h2><p>Write to the office and Carlos or Janet will get back to you.</p></div>
+      <div class="acts">{% if "@" in office.email %}<a class="btn btn-light lg" href="mailto:{{ office.email }}">{% icon 'chat' %}Email the office</a>{% endif %}<a class="btn btn-outline-light lg" href="{% url 'public:listing_list' %}">Browse homes</a></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

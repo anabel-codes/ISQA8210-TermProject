@@ -1,0 +1,27 @@
+/* Feedback uses the same card, type, border and focus tokens as the management pages. */
+:root{--notice-success:#246448;--notice-error:#9B1831;--notice-warning:#845000;--notice-info:#345B73}
+:root[data-mode="dark"]{--notice-success:#91D7B1;--notice-error:#FFA2B0;--notice-warning:#F2C278;--notice-info:#A1CBE5}
+.admin-toasts{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:1100;width:min(420px,calc(100% - 32px));display:grid;gap:10px;pointer-events:none;max-height:70dvh;overflow:auto}
+.admin-toast{--notice:var(--notice-info);display:grid;grid-template-columns:30px minmax(0,1fr) 36px;gap:10px;align-items:start;padding:16px 10px 16px 16px;background:var(--card);color:var(--fg);border:1px solid var(--line-2);border-left:4px solid var(--notice);border-radius:12px;box-shadow:var(--shadow);pointer-events:auto;animation:notice-in .22s ease-out}
+.admin-toast--success{--notice:var(--notice-success)}.admin-toast--error{--notice:var(--notice-error)}.admin-toast--warning{--notice:var(--notice-warning)}
+.admin-toast--danger{--notice:var(--notice-error)}
+.admin-toast-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.admin-toast-countdown{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.admin-toast-track{grid-column:1/-1;height:3px;overflow:hidden;border-radius:3px;background:color-mix(in srgb,var(--notice) 15%,transparent)}
+.admin-toast-progress{display:block;height:100%;background:var(--notice);transform-origin:left;animation:notice-countdown linear forwards}
+@keyframes notice-countdown{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.admin-toast-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--notice);background:color-mix(in srgb,var(--notice) 12%,var(--card));font-weight:800}
+.admin-toast strong{display:block;font-weight:700;font-size:.92rem}.admin-toast p{margin:4px 0 0;font-size:.88rem;line-height:1.5;overflow-wrap:anywhere;color:var(--muted)}
+.admin-toast-close{width:44px;height:44px;margin:-8px -4px 0 0;display:grid;place-items:center;font-size:1.4rem;color:var(--muted);border-radius:50%}
+.admin-toast-close:hover{background:var(--card-2);color:var(--fg)}
+.server-notices{display:grid;gap:10px;margin-bottom:18px}.server-notice{padding:14px 16px;border:1px solid var(--line-2);border-radius:12px;background:var(--card);color:var(--fg)}
+.js-feedback .server-notices{display:none}
+div.swal2-popup.ck-confirm{font-family:var(--font-body);border-radius:var(--r);background:var(--card);color:var(--fg);border:1px solid var(--line-2);box-shadow:var(--shadow);padding:24px;width:min(480px,calc(100vw - 32px))}
+.ck-confirm .ck-confirm-title{font-family:var(--font-display);font-size:1.65rem;color:var(--fg);padding:0 12px}
+.ck-confirm .ck-confirm-text{color:var(--muted);font-size:1rem;margin-top:14px;line-height:1.6}
+.ck-confirm .swal2-actions{gap:12px;flex-wrap:wrap}.ck-confirm .pbtn{border-radius:12px;min-height:44px}
+.ck-confirm .swal2-icon.swal2-warning{color:var(--notice-warning);border-color:var(--notice-warning)}
+.ck-confirm .swal2-icon.swal2-question{color:var(--accent-text);border-color:var(--accent-text)}
+@keyframes notice-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.admin-toast,.admin-toast-progress{animation:none}}
+@media print{.admin-toasts{display:none!important}}
