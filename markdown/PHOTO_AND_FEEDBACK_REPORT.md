@@ -2,6 +2,14 @@
 
 November 21, 2026
 
+I used `gigson2` for testing and confirmed that the project worked there.
+I have handed the implementation and deployment instructions to Ethan Vincent
+for the project's PythonAnywhere account, `ejvincent10`. All live-site checks
+in this implementation report refer to the test environment. On November 22,
+2026, I also verified that the project's public home and login pages served CK
+Real Estate successfully. Ethan owns the deployed commit record and protected
+workflow verification; see [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
+
 I later replaced the night scenes with an edited version of the Kent Rebman
 neighborhood photograph supplied by the owner. I changed the twilight sky to
 navy and added warm window lighting. I also widened the daytime banner framing
@@ -57,8 +65,9 @@ passed. I collected the new static assets there and passed the Django system
 check. I versioned the changed page scripts so returning browsers fetch this
 update instead of reusing the previous illustration or notification code.
 The earlier Sprint 2 acceptance record remains in [SPRINT2_STATUS.md](SPRINT2_STATUS.md).
-Team review of [PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7)
-and the merge to main remain team actions.
+[PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7) has since
+been merged into main as `f9eb1a4`. Ethan owns deployment of the merged project
+release to `ejvincent10`.
 
 I applied the [Humanizer skill](https://github.com/blader/humanizer/blob/main/SKILL.md),
 version 4.0.0, to this report and the update's commit and review notes. The
