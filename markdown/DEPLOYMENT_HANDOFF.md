@@ -11,14 +11,16 @@ the team's PythonAnywhere account, `ejvincent10`.
 | Environment | Account | Status / owner |
 | --- | --- | --- |
 | Testing | gigson2 | Testing completed and confirmed by Twumasi Adomako |
-| Project deployment | ejvincent10 | Handed to Ethan Vincent; setup and verification pending |
+| Project deployment | ejvincent10 | Public home/login verified November 22; Ethan owns the release record and protected workflow verification |
 
 The tested application commit is `f126e06` on `twumasi-development`.
 [PR #7](https://github.com/anabel-codes/ISQA8210-TermProject/pull/7) has been merged
 into `main` as `f9eb1a4`, which includes the tested application commit. Ethan can
-deploy that merged release. The intended project URL is
-`https://ejvincent10.pythonanywhere.com/`; this handoff does not claim that the
-project account is already running the app.
+deploy that merged release. The project URL is
+`https://ejvincent10.pythonanywhere.com/`. On November 22, 2026, I verified that
+its public home and login pages returned HTTP 200 and served CK Real Estate.
+I have not established the deployed commit or tested authenticated writes on
+that account. Those release checks remain with Ethan.
 
 ## Work included in the handoff
 
@@ -67,5 +69,5 @@ contribution records or peer evaluations.
    project account. Record the deployed commit, URL and results in the status
    document once that verification is complete.
 
-I have recorded the handoff in the repository. Ethan's deployment confirmation
-remains outstanding.
+I have recorded the handoff and public-site check in the repository. Ethan's
+deployed commit record and protected workflow verification remain outstanding.

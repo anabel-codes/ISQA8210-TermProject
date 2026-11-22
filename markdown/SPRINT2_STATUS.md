@@ -12,7 +12,9 @@ The current local suite has 62 passing tests, with nine additional JavaScript
 timer tests. I used `gigson2` for testing, and I have confirmed that the project
 worked in that environment. I have handed the implementation and deployment
 instructions to Ethan Vincent, who owns deployment to the project's account,
-`ejvincent10`. That deployment remains pending Ethan's setup and verification.
+`ejvincent10`. On November 22, 2026, I verified that the project's public home
+and login pages returned HTTP 200 and served CK Real Estate. Ethan owns the
+deployed commit record and protected workflow verification on that account.
 See [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
 
 | Area | Implemented evidence | Verification / remaining work |
@@ -22,7 +24,7 @@ See [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
 | HTTP/API layer | GET/POST login, POST logout, protected GET/POST new listing, protected dashboard/table, public GET home/listings | Session authentication and CSRF apply to writes. No standalone JSON API is specified by the blueprint; do not claim one exists. |
 | Database | Cole's SQLite reference merged; runtime Django migrations implement its entities with built-in Django authentication | See DATABASE_MAPPING.md. No pending migrations. Do not import the reference SQL into the migrated app database. |
 | Data | Repeatable lookup seed: 5 types, 4 neighborhoods, 3 statuses, 20 price bands; private admin seed; ownership and audit timestamps | Live database counts match. Owner created Carlos and Janet with private prompts; Janet successfully logged in. Live database starts with zero listings. |
-| Deployment | PythonAnywhere WSGI template and repeatable preparation script; private configuration is created on the target account | Testing completed at https://gigson2.pythonanywhere.com/ from twumasi-development, application commit f126e06. I confirmed the project worked and handed deployment to Ethan Vincent for ejvincent10. PR #7 is merged into main as f9eb1a4; project deployment remains pending Ethan's verification. |
+| Deployment | PythonAnywhere WSGI template and repeatable preparation script; private configuration is created on the target account | Testing completed at https://gigson2.pythonanywhere.com/ from twumasi-development, application commit f126e06. PR #7 is merged into main as f9eb1a4. The ejvincent10 public home and login pages were verified on November 22; Ethan owns the release record and protected workflow checks. |
 
 ## Required endpoints
 
@@ -54,8 +56,8 @@ test database. Final local tests passed after the frontend copy corrections.
 ## Verification in the gigson2 test environment
 
 I completed my own PythonAnywhere testing and confirmed that the project worked.
-The checks below describe the test account; they do not verify the project
-account `ejvincent10`.
+The checks below describe the test account. The later public-page check on
+`ejvincent10` does not establish its deployed commit or verify protected writes.
 
 - Janet reached the dashboard after the owner signed in privately.
 - The protected add form loaded its actual lookup options and rich-text controls.

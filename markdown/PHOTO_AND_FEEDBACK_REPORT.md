@@ -5,8 +5,10 @@ November 21, 2026
 I used `gigson2` for testing and confirmed that the project worked there.
 I have handed the implementation and deployment instructions to Ethan Vincent
 for the project's PythonAnywhere account, `ejvincent10`. All live-site checks
-in this report refer to the test environment. Ethan's project deployment remains
-pending his setup and verification; see [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
+in this implementation report refer to the test environment. On November 22,
+2026, I also verified that the project's public home and login pages served CK
+Real Estate successfully. Ethan owns the deployed commit record and protected
+workflow verification; see [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md).
 
 I later replaced the night scenes with an edited version of the Kent Rebman
 neighborhood photograph supplied by the owner. I changed the twilight sky to

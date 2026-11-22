@@ -1,8 +1,10 @@
 # PythonAnywhere deployment
 
 Ethan Vincent owns deployment to the project's PythonAnywhere account,
-`ejvincent10`. The intended project URL is `https://ejvincent10.pythonanywhere.com/`.
-Deployment to that account is pending Ethan's setup and verification.
+`ejvincent10`, at `https://ejvincent10.pythonanywhere.com/`.
+On November 22, 2026, I verified that the public home and login pages returned
+HTTP 200 and served CK Real Estate. Ethan remains responsible for recording the
+deployed commit and completing protected workflow verification on that account.
 
 I used `gigson2.pythonanywhere.com` as a temporary testing environment on
 Python 3.13. I completed the recorded checks there, and I confirmed in my own
